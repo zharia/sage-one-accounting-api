@@ -1,0 +1,36 @@
+{
+  "id": "POST-BankAccountOpeningBalance-Save",
+  "service": "BankAccountOpeningBalance",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/BankAccountOpeningBalance/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-BankAccountOpeningBalance-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "BankAccountId": 1,
+    "BankAccount_CurrencyId": 1,
+    "BankAccount_ExchangeRate": 1,
+    "ID": 2,
+    "Balance": 3,
+    "Reason": "sample string 4",
+    "Date": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "BankAccountId": 1,
+    "BankAccount_CurrencyId": 1,
+    "BankAccount_ExchangeRate": 1,
+    "ID": 2,
+    "Balance": 3,
+    "Reason": "sample string 4",
+    "Date": "2026-11-21"
+  }
+}

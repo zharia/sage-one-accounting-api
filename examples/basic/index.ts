@@ -37,4 +37,3 @@ export async function runBasicExample(): Promise<void> {
   void activeAccounts;
   void taxTypes;
 }
-

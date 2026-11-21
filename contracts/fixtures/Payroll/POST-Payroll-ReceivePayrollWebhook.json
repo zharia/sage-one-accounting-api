@@ -1,0 +1,20 @@
+{
+  "id": "POST-Payroll-ReceivePayrollWebhook",
+  "service": "Payroll",
+  "operation": "ReceivePayrollWebhook",
+  "method": "POST",
+  "route": "/Payroll/ReceivePayrollWebhook",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-Payroll-ReceivePayrollWebhook",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "experimental",
+  "authenticationRequired": false,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {},
+  "responseContentType": "application/json",
+  "responseSample": null
+}

@@ -1,0 +1,35 @@
+{
+  "id": "GET-City-Get",
+  "service": "City",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/City/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-City-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "CountryId": 2,
+        "Name": "sample string 3"
+      },
+      {
+        "ID": 1,
+        "CountryId": 2,
+        "Name": "sample string 3"
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "GET-ProcessBankAndCreditCardMapping-Get",
+  "service": "ProcessBankAndCreditCardMapping",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/ProcessBankAndCreditCardMapping/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-ProcessBankAndCreditCardMapping-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "LinkTypeId": 2,
+        "LinkId": 3,
+        "TaxTypeId": 4,
+        "SearchString": "sample string 5",
+        "Payee": "sample string 6"
+      },
+      {
+        "ID": 1,
+        "LinkTypeId": 2,
+        "LinkId": 3,
+        "TaxTypeId": 4,
+        "SearchString": "sample string 5",
+        "Payee": "sample string 6"
+      }
+    ]
+  }
+}

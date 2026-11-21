@@ -1,0 +1,82 @@
+{
+  "id": "POST-Asset-Save",
+  "service": "Asset",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/Asset/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-Asset-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "Description": "sample string 1",
+    "Category": {
+      "Description": "sample string 1",
+      "ID": 2,
+      "Modified": "2026-11-21",
+      "Created": "2026-11-21"
+    },
+    "Location": {
+      "ID": 1,
+      "Description": "sample string 2"
+    },
+    "DatePurchased": "2026-11-21",
+    "SerialNumber": "sample string 3",
+    "BoughtFrom": "sample string 4",
+    "PurchasePrice": 1,
+    "CurrentValue": 1,
+    "ReplacementValue": 1,
+    "TextField1": "sample string 5",
+    "TextField2": "sample string 6",
+    "TextField3": "sample string 7",
+    "NumericField1": 1,
+    "NumericField2": 1,
+    "NumericField3": 1,
+    "YesNoField1": true,
+    "YesNoField2": true,
+    "YesNoField3": true,
+    "DateField1": "2026-11-21",
+    "DateField2": "2026-11-21",
+    "DateField3": "2026-11-21",
+    "ID": 11
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "Description": "sample string 1",
+    "Category": {
+      "Description": "sample string 1",
+      "ID": 2,
+      "Modified": "2026-11-21",
+      "Created": "2026-11-21"
+    },
+    "Location": {
+      "ID": 1,
+      "Description": "sample string 2"
+    },
+    "DatePurchased": "2026-11-21",
+    "SerialNumber": "sample string 3",
+    "BoughtFrom": "sample string 4",
+    "PurchasePrice": 1,
+    "CurrentValue": 1,
+    "ReplacementValue": 1,
+    "TextField1": "sample string 5",
+    "TextField2": "sample string 6",
+    "TextField3": "sample string 7",
+    "NumericField1": 1,
+    "NumericField2": 1,
+    "NumericField3": 1,
+    "YesNoField1": true,
+    "YesNoField2": true,
+    "YesNoField3": true,
+    "DateField1": "2026-11-21",
+    "DateField2": "2026-11-21",
+    "DateField3": "2026-11-21",
+    "ID": 11
+  }
+}

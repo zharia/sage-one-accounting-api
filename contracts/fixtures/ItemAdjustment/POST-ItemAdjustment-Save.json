@@ -1,0 +1,38 @@
+{
+  "id": "POST-ItemAdjustment-Save",
+  "service": "ItemAdjustment",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/ItemAdjustment/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-ItemAdjustment-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "Date": "2026-11-21",
+    "ItemId": 3,
+    "AverageCost": 4,
+    "Quantity": 5,
+    "Reason": "sample string 6",
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "Date": "2026-11-21",
+    "ItemId": 3,
+    "AverageCost": 4,
+    "Quantity": 5,
+    "Reason": "sample string 6",
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21"
+  }
+}

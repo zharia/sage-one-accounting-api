@@ -1,0 +1,45 @@
+{
+  "id": "GET-DocumentUserDefinedFields-GetEntries",
+  "service": "DocumentUserDefinedFields",
+  "operation": "GetEntries",
+  "method": "GET",
+  "route": "/DocumentUserDefinedFields/GetEntries",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DocumentUserDefinedFields-GetEntries",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "DocumentHeaderId": 2,
+        "TextField1": "sample string 3",
+        "TextField2": "sample string 4",
+        "TextField3": "sample string 5",
+        "DateField1": "2026-11-21",
+        "DateField2": "2026-11-21",
+        "DateField3": "2026-11-21"
+      },
+      {
+        "ID": 1,
+        "DocumentHeaderId": 2,
+        "TextField1": "sample string 3",
+        "TextField2": "sample string 4",
+        "TextField3": "sample string 5",
+        "DateField1": "2026-11-21",
+        "DateField2": "2026-11-21",
+        "DateField3": "2026-11-21"
+      }
+    ]
+  }
+}

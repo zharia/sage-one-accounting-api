@@ -1,0 +1,20 @@
+{
+  "id": "POST-Localization-Get",
+  "service": "Localization",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/Localization/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-Localization-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "experimental",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": 1,
+  "responseContentType": "application/json",
+  "responseSample": null
+}

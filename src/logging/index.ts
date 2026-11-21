@@ -159,4 +159,3 @@ export function createPinoLogger(level: LogLevel = "warn"): SageLogger {
 
   return new RedactingLogger(adapter, level);
 }
-

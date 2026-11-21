@@ -1,0 +1,74 @@
+{
+  "id": "GET-ExchangeRates-Get_date_currencyIds",
+  "service": "ExchangeRates",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/ExchangeRates/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-ExchangeRates-Get_date_currencyIds",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "date",
+      "type": "nullable date",
+      "required": false
+    },
+    {
+      "name": "currencyIds",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "IsBaseCurrency": true,
+        "BaseCurrencyCode": "sample string 2",
+        "CurrencyCode": "sample string 3",
+        "CurrencyDescription": "sample string 4",
+        "CurrencySymbol": "sample string 5",
+        "HasActivity": true,
+        "IsFutureRate": true,
+        "RateInverse": 0.08333333333333333,
+        "OriginalRateInverse": 0.07692307692307693,
+        "GroupId": "9407c78c-95a9-47dc-88f7-94cda85387fa",
+        "RateDate": "2026-11-21",
+        "ExchangeRateId": 10,
+        "CurrencyId": 11,
+        "Rate": 12,
+        "OriginalRate": 13,
+        "HasManualRate": true,
+        "Note": "sample string 15"
+      },
+      {
+        "IsBaseCurrency": true,
+        "BaseCurrencyCode": "sample string 2",
+        "CurrencyCode": "sample string 3",
+        "CurrencyDescription": "sample string 4",
+        "CurrencySymbol": "sample string 5",
+        "HasActivity": true,
+        "IsFutureRate": true,
+        "RateInverse": 0.08333333333333333,
+        "OriginalRateInverse": 0.07692307692307693,
+        "GroupId": "9407c78c-95a9-47dc-88f7-94cda85387fa",
+        "RateDate": "2026-11-21",
+        "ExchangeRateId": 10,
+        "CurrencyId": 11,
+        "Rate": 12,
+        "OriginalRate": 13,
+        "HasManualRate": true,
+        "Note": "sample string 15"
+      }
+    ]
+  }
+}

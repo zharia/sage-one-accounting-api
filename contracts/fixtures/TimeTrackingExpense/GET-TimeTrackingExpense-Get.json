@@ -1,0 +1,51 @@
+{
+  "id": "GET-TimeTrackingExpense-Get",
+  "service": "TimeTrackingExpense",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/TimeTrackingExpense/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TimeTrackingExpense-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "TimeTrackingProjectId": 2,
+        "DocumentHeaderId": 3,
+        "BillingMethod": 0,
+        "Date": "2026-11-21",
+        "Payee": "sample string 5",
+        "Description": "sample string 6",
+        "Expense": 7,
+        "Recharge": 8,
+        "MarkupPercentage": 9.1,
+        "IsBilled": true
+      },
+      {
+        "ID": 1,
+        "TimeTrackingProjectId": 2,
+        "DocumentHeaderId": 3,
+        "BillingMethod": 0,
+        "Date": "2026-11-21",
+        "Payee": "sample string 5",
+        "Description": "sample string 6",
+        "Expense": 7,
+        "Recharge": 8,
+        "MarkupPercentage": 9.1,
+        "IsBilled": true
+      }
+    ]
+  }
+}

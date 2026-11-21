@@ -1,0 +1,35 @@
+{
+  "id": "GET-DocumentNumber-Get",
+  "service": "DocumentNumber",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/DocumentNumber/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DocumentNumber-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "DocumentTypeId": 2,
+        "NextDocumentNumber": "sample string 3"
+      },
+      {
+        "ID": 1,
+        "DocumentTypeId": 2,
+        "NextDocumentNumber": "sample string 3"
+      }
+    ]
+  }
+}

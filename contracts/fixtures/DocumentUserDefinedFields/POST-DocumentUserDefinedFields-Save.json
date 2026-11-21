@@ -1,0 +1,38 @@
+{
+  "id": "POST-DocumentUserDefinedFields-Save",
+  "service": "DocumentUserDefinedFields",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/DocumentUserDefinedFields/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-DocumentUserDefinedFields-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "DocumentHeaderId": 2,
+    "TextField1": "sample string 3",
+    "TextField2": "sample string 4",
+    "TextField3": "sample string 5",
+    "DateField1": "2026-11-21",
+    "DateField2": "2026-11-21",
+    "DateField3": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "DocumentHeaderId": 2,
+    "TextField1": "sample string 3",
+    "TextField2": "sample string 4",
+    "TextField3": "sample string 5",
+    "DateField1": "2026-11-21",
+    "DateField2": "2026-11-21",
+    "DateField3": "2026-11-21"
+  }
+}

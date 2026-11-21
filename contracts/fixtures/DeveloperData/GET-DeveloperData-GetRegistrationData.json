@@ -1,0 +1,33 @@
+{
+  "id": "GET-DeveloperData-GetRegistrationData",
+  "service": "DeveloperData",
+  "operation": "GetRegistrationData",
+  "method": "GET",
+  "route": "/DeveloperData/GetRegistrationData",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DeveloperData-GetRegistrationData",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Key": "sample string 1",
+      "Data": "sample string 2",
+      "Created": "2026-11-21",
+      "Modified": "2026-11-21"
+    },
+    {
+      "Key": "sample string 1",
+      "Data": "sample string 2",
+      "Created": "2026-11-21",
+      "Modified": "2026-11-21"
+    }
+  ]
+}

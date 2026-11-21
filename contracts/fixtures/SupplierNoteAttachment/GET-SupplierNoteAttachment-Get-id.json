@@ -1,0 +1,39 @@
+{
+  "id": "GET-SupplierNoteAttachment-Get-id",
+  "service": "SupplierNoteAttachment",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/SupplierNoteAttachment/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-SupplierNoteAttachment-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "e7ee94da-8819-4e80-822b-8c7f55a50d8a",
+      "Data": "QEA="
+    },
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "e7ee94da-8819-4e80-822b-8c7f55a50d8a",
+      "Data": "QEA="
+    }
+  ]
+}

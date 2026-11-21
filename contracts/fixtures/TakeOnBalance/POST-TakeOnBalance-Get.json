@@ -1,0 +1,112 @@
+{
+  "id": "POST-TakeOnBalance-Get",
+  "service": "TakeOnBalance",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/TakeOnBalance/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TakeOnBalance-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": "2026-11-21",
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "TakeOnAccountGroups": [
+      {
+        "TakeOnAccountBalances": [
+          {
+            "ID": 1,
+            "Name": "sample string 2",
+            "GroupKey": 3,
+            "Category": {
+              "Comment": "sample string 1",
+              "Order": 6,
+              "Description": "sample string 7",
+              "ID": 8,
+              "Modified": "2026-11-21",
+              "Created": "2026-11-21"
+            },
+            "AccountType": 1,
+            "LinkId": 1,
+            "Debit": 1,
+            "Credit": 1,
+            "EntryUrl": "sample string 4"
+          },
+          {
+            "ID": 1,
+            "Name": "sample string 2",
+            "GroupKey": 3,
+            "Category": {
+              "Comment": "sample string 1",
+              "Order": 6,
+              "Description": "sample string 7",
+              "ID": 8,
+              "Modified": "2026-11-21",
+              "Created": "2026-11-21"
+            },
+            "AccountType": 1,
+            "LinkId": 1,
+            "Debit": 1,
+            "Credit": 1,
+            "EntryUrl": "sample string 4"
+          }
+        ],
+        "Order": 1,
+        "AddUrl": "sample string 2",
+        "Name": "sample string 3"
+      },
+      {
+        "TakeOnAccountBalances": [
+          {
+            "ID": 1,
+            "Name": "sample string 2",
+            "GroupKey": 3,
+            "Category": {
+              "Comment": "sample string 1",
+              "Order": 6,
+              "Description": "sample string 7",
+              "ID": 8,
+              "Modified": "2026-11-21",
+              "Created": "2026-11-21"
+            },
+            "AccountType": 1,
+            "LinkId": 1,
+            "Debit": 1,
+            "Credit": 1,
+            "EntryUrl": "sample string 4"
+          },
+          {
+            "ID": 1,
+            "Name": "sample string 2",
+            "GroupKey": 3,
+            "Category": {
+              "Comment": "sample string 1",
+              "Order": 6,
+              "Description": "sample string 7",
+              "ID": 8,
+              "Modified": "2026-11-21",
+              "Created": "2026-11-21"
+            },
+            "AccountType": 1,
+            "LinkId": 1,
+            "Debit": 1,
+            "Credit": 1,
+            "EntryUrl": "sample string 4"
+          }
+        ],
+        "Order": 1,
+        "AddUrl": "sample string 2",
+        "Name": "sample string 3"
+      }
+    ],
+    "TakeOnDate": "2026-11-21",
+    "TakeOnSuspenseAcountBalance": 1
+  }
+}

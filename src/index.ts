@@ -1,9 +1,10 @@
 /**
  * Public entry point for `@bytemoney/sage-one`.
  *
- * Exports the primary `SageOneClient`, domain services, wire schemas and types,
- * authentication interfaces, error hierarchy, OData query builder, pagination
- * iterators, decimal conversion utilities, and branded domain identifiers.
+ * Exports the primary `SageOneClient`, all 162 domain services (622 operations),
+ * wire schemas and types, authentication interfaces, error hierarchy, OData query
+ * builder, pagination iterators, decimal conversion utilities, and branded domain
+ * identifiers.
  */
 
 export const SAGE_API_VERSION = "2.0.0" as const;
@@ -17,12 +18,19 @@ export * from "./common/index.js";
 export * from "./config/index.js";
 export * from "./domains/accounting/index.js";
 export * from "./domains/administration/index.js";
+export * from "./domains/assets/index.js";
+export * from "./domains/banking/index.js";
 export * from "./domains/company/index.js";
+export * from "./domains/crm/index.js";
 export * from "./domains/customers/index.js";
 export * from "./domains/executor.js";
 export * from "./domains/inventory/index.js";
+export * from "./domains/purchases/index.js";
+export * from "./domains/reporting/index.js";
+export * from "./domains/sales/index.js";
 export * from "./domains/suppliers/index.js";
 export * from "./domains/taxation/index.js";
+export * from "./domains/time-tracking/index.js";
 export * from "./errors/index.js";
 export * from "./logging/index.js";
 export * from "./transport/index.js";

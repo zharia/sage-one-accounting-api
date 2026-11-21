@@ -1,0 +1,26 @@
+{
+  "id": "DELETE-SalesOrderAttachment-DeleteAll-id",
+  "service": "SalesOrderAttachment",
+  "operation": "DeleteAll",
+  "method": "DELETE",
+  "route": "/SalesOrderAttachment/DeleteAll/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/DELETE-SalesOrderAttachment-DeleteAll-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": null,
+  "responseSample": null
+}

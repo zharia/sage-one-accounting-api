@@ -1,0 +1,36 @@
+{
+  "id": "POST-EmailSignatureTemplate-Save",
+  "service": "EmailSignatureTemplate",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/EmailSignatureTemplate/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-EmailSignatureTemplate-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "EmailTemplateTypeId": 3,
+    "EmailTemplateTypeDescription": "Recurring Invoice",
+    "Name": "sample string 5",
+    "Subject": "sample string 6",
+    "Template": "sample string 7"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "EmailTemplateTypeId": 3,
+    "EmailTemplateTypeDescription": "Recurring Invoice",
+    "Name": "sample string 5",
+    "Subject": "sample string 6",
+    "Template": "sample string 7"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "POST-DocumentHeaderNote-Save",
+  "service": "DocumentHeaderNote",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/DocumentHeaderNote/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-DocumentHeaderNote-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "DocumentHeaderId": 3,
+    "NoteTypeId": 4,
+    "UserId": 5,
+    "Username": "sample string 6",
+    "Created": "2026-11-21",
+    "ActionDate": "2026-11-21",
+    "Note": "sample string 8",
+    "Completed": true
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "DocumentHeaderId": 3,
+    "NoteTypeId": 4,
+    "UserId": 5,
+    "Username": "sample string 6",
+    "Created": "2026-11-21",
+    "ActionDate": "2026-11-21",
+    "Note": "sample string 8",
+    "Completed": true
+  }
+}

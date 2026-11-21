@@ -1,0 +1,39 @@
+{
+  "id": "GET-PurchaseOrderAttachment-Get-id",
+  "service": "PurchaseOrderAttachment",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/PurchaseOrderAttachment/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-PurchaseOrderAttachment-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "1c55759d-cc4c-45f4-9cbb-85b32ecefa11",
+      "Data": "QEA="
+    },
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "1c55759d-cc4c-45f4-9cbb-85b32ecefa11",
+      "Data": "QEA="
+    }
+  ]
+}

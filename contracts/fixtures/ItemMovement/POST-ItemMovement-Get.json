@@ -1,0 +1,54 @@
+{
+  "id": "POST-ItemMovement-Get",
+  "service": "ItemMovement",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/ItemMovement/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-ItemMovement-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "FromItem": "sample string 1",
+    "ToItem": "sample string 2",
+    "FromCategory": "sample string 3",
+    "ToCategory": "sample string 4",
+    "IncludeActive": true,
+    "IncludeInactive": true,
+    "IncludePhysical": true,
+    "IncludeService": true,
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "ID": 1,
+      "Date": "2026-11-21",
+      "Reference": "sample string 3",
+      "Quantity": 1,
+      "DocumentTypeId": 4,
+      "Name": "sample string 5",
+      "DocumentNumber": "sample string 6",
+      "ItemCode": "sample string 7",
+      "ItemDescription": "sample string 8"
+    },
+    {
+      "ID": 1,
+      "Date": "2026-11-21",
+      "Reference": "sample string 3",
+      "Quantity": 1,
+      "DocumentTypeId": 4,
+      "Name": "sample string 5",
+      "DocumentNumber": "sample string 6",
+      "ItemCode": "sample string 7",
+      "ItemDescription": "sample string 8"
+    }
+  ]
+}

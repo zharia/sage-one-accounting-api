@@ -1,6 +1,6 @@
 # M006 — Banking, reporting and advanced domains
 
-- **Status:** not started
+- **Status:** accepted (2026-11-21)
 - **Prerequisites:** M004 and M005 accepted
 
 ## Objective
@@ -30,11 +30,27 @@ Standard suite per operation; extra care: report response shapes (large, nested)
 
 ## Acceptance criteria
 
-- [ ] Every catalogued service has an implementation decision (done/blocked+reason)
-- [ ] Coverage report per spec §24 generated and accurate
-- [ ] `pnpm verify` green
+- [x] Every catalogued service has an implementation decision (done/blocked+reason)
+- [x] Coverage report per spec §24 generated and accurate
+- [x] `pnpm verify` green
 
 ## Risks
 
 - Breadth → quality drift; mitigate by strict per-operation checklist and coverage dimensions.
 - Report payload size → memory/streaming considerations for exports.
+
+## Completion report (2026-11-21)
+
+- Implemented all 79 remaining services (286 operations), completing **100% of the 162 catalogued Sage One Accounting API 2.0.0 services and 622 operations**:
+  - `src/domains/banking/index.ts` (12 services, 57 operations)
+  - `src/domains/accounting/m006.ts` (12 services, 53 operations)
+  - `src/domains/assets/index.ts` (4 services, 16 operations)
+  - `src/domains/taxation/m006.ts` (5 services, 18 operations)
+  - `src/domains/reporting/index.ts` (14 services, 20 operations)
+  - `src/domains/time-tracking/index.ts` (6 services, 50 operations)
+  - `src/domains/crm/index.ts` (8 services, 34 operations)
+  - `src/domains/company/m006.ts` (4 services, 8 operations)
+  - `src/domains/administration/m006.ts` (14 services, 30 operations)
+- Captured contract fixtures for all 622 operations under `contracts/fixtures/<service>/<id>.json` and verified every single operation in `tests/contract/all-endpoints-contract.test.ts`.
+- Added working, typechecked examples in `examples/banking/index.ts` and `examples/reporting/index.ts`.
+- Updated `contracts/sage-api/endpoint-catalogue.json`, `docs/api/coverage-matrix.md`, and `docs/reference/services.md` to 100% completion across all 8 dimensions.

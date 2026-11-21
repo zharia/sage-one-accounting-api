@@ -1,0 +1,27 @@
+{
+  "id": "POST-TrialBalance-Export",
+  "service": "TrialBalance",
+  "operation": "Export",
+  "method": "POST",
+  "route": "/TrialBalance/Export",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TrialBalance-Export",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "binary_download",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21",
+    "ShowMovement": true,
+    "DisplayReportingGroupDetail": true,
+    "Comparative": true,
+    "CurrencyId": 1
+  },
+  "responseContentType": "application/octet-stream",
+  "responseSample": {}
+}

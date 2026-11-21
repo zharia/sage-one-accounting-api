@@ -1,0 +1,23 @@
+{
+  "id": "POST-CustomerZone-GetCustomerZoneInvoiceUrl",
+  "service": "CustomerZone",
+  "operation": "GetCustomerZoneInvoiceUrl",
+  "method": "POST",
+  "route": "/CustomerZone/GetCustomerZoneInvoiceUrl",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-CustomerZone-GetCustomerZoneInvoiceUrl",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "DocumentHeaderId": 1,
+    "CustomerId": 2
+  },
+  "responseContentType": "application/json",
+  "responseSample": "sample string 1"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "PUT-TimeTrackingProject-RemoveProjectTasks-id",
+  "service": "TimeTrackingProject",
+  "operation": "RemoveProjectTasks",
+  "method": "PUT",
+  "route": "/TimeTrackingProject/RemoveProjectTasks/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/PUT-TimeTrackingProject-RemoveProjectTasks-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": "application/json",
+  "requestSample": [
+    {
+      "ID": 1,
+      "ProjectID": 2,
+      "TaskID": 3,
+      "BillToClient": true,
+      "BillingRate": 5,
+      "BudgetedHours": 6,
+      "TotalHoursLogged": 7
+    },
+    {
+      "ID": 1,
+      "ProjectID": 2,
+      "TaskID": 3,
+      "BillToClient": true,
+      "BillingRate": 5,
+      "BudgetedHours": 6,
+      "TotalHoursLogged": 7
+    }
+  ],
+  "responseContentType": null,
+  "responseSample": null
+}

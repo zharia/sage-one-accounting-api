@@ -1,0 +1,74 @@
+{
+  "id": "POST-BankImportMapping-SaveBatch",
+  "service": "BankImportMapping",
+  "operation": "SaveBatch",
+  "method": "POST",
+  "route": "/BankImportMapping/SaveBatch",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-BankImportMapping-SaveBatch",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": [
+    {
+      "ID": 1,
+      "LinkTypeId": 2,
+      "LinkId": 3,
+      "TaxTypeId": 4,
+      "SearchString": "sample string 5",
+      "Priority": true,
+      "DisplayDescription": "sample string 7",
+      "Payee": "sample string 8",
+      "AnalysisCategoryId1": 1,
+      "AnalysisCategoryId2": 1,
+      "AnalysisCategoryId3": 1
+    },
+    {
+      "ID": 1,
+      "LinkTypeId": 2,
+      "LinkId": 3,
+      "TaxTypeId": 4,
+      "SearchString": "sample string 5",
+      "Priority": true,
+      "DisplayDescription": "sample string 7",
+      "Payee": "sample string 8",
+      "AnalysisCategoryId1": 1,
+      "AnalysisCategoryId2": 1,
+      "AnalysisCategoryId3": 1
+    }
+  ],
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "ID": 1,
+      "LinkTypeId": 2,
+      "LinkId": 3,
+      "TaxTypeId": 4,
+      "SearchString": "sample string 5",
+      "Priority": true,
+      "DisplayDescription": "sample string 7",
+      "Payee": "sample string 8",
+      "AnalysisCategoryId1": 1,
+      "AnalysisCategoryId2": 1,
+      "AnalysisCategoryId3": 1
+    },
+    {
+      "ID": 1,
+      "LinkTypeId": 2,
+      "LinkId": 3,
+      "TaxTypeId": 4,
+      "SearchString": "sample string 5",
+      "Priority": true,
+      "DisplayDescription": "sample string 7",
+      "Payee": "sample string 8",
+      "AnalysisCategoryId1": 1,
+      "AnalysisCategoryId2": 1,
+      "AnalysisCategoryId3": 1
+    }
+  ]
+}

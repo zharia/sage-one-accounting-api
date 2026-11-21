@@ -1,0 +1,56 @@
+{
+  "id": "GET-DocumentHistory-Get_documentHeaderId_documentTypeId",
+  "service": "DocumentHistory",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/DocumentHistory/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DocumentHistory-Get_documentHeaderId_documentTypeId",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "documentHeaderId",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "documentTypeId",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "DocumentHistoryId": 1,
+        "CompanyId": 2,
+        "DocumentHeaderId": 3,
+        "Date": "2026-11-21",
+        "UserId": 5,
+        "Username": "sample string 6",
+        "Change": "sample string 7",
+        "Detail": "sample string 8"
+      },
+      {
+        "DocumentHistoryId": 1,
+        "CompanyId": 2,
+        "DocumentHeaderId": 3,
+        "Date": "2026-11-21",
+        "UserId": 5,
+        "Username": "sample string 6",
+        "Change": "sample string 7",
+        "Detail": "sample string 8"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "GET-TimeTrackingProject-GetProjectSummary-id_methodId",
+  "service": "TimeTrackingProject",
+  "operation": "GetProjectSummary",
+  "method": "GET",
+  "route": "/TimeTrackingProject/GetProjectSummary/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TimeTrackingProject-GetProjectSummary-id_methodId",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "methodId",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "BillableHours": 1,
+      "NonBillableHours": 2,
+      "DayPart": 3,
+      "MonthWeekPart": 4,
+      "YearPart": 5,
+      "Date": "2026-11-21"
+    },
+    {
+      "BillableHours": 1,
+      "NonBillableHours": 2,
+      "DayPart": 3,
+      "MonthWeekPart": 4,
+      "YearPart": 5,
+      "Date": "2026-11-21"
+    }
+  ]
+}

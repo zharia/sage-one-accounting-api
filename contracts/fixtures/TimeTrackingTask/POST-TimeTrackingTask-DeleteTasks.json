@@ -1,0 +1,79 @@
+{
+  "id": "POST-TimeTrackingTask-DeleteTasks",
+  "service": "TimeTrackingTask",
+  "operation": "DeleteTasks",
+  "method": "POST",
+  "route": "/TimeTrackingTask/DeleteTasks",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TimeTrackingTask-DeleteTasks",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": [
+    {
+      "ID": 1,
+      "Name": "sample string 2",
+      "Description": "sample string 3",
+      "BillingRate": 4,
+      "BillToClient": true,
+      "DefaultTask": true,
+      "Active": true,
+      "ProjectTasks": [
+        {
+          "ID": 1,
+          "ProjectID": 2,
+          "TaskID": 3,
+          "BillToClient": true,
+          "BillingRate": 5,
+          "BudgetedHours": 6,
+          "TotalHoursLogged": 7
+        },
+        {
+          "ID": 1,
+          "ProjectID": 2,
+          "TaskID": 3,
+          "BillToClient": true,
+          "BillingRate": 5,
+          "BudgetedHours": 6,
+          "TotalHoursLogged": 7
+        }
+      ]
+    },
+    {
+      "ID": 1,
+      "Name": "sample string 2",
+      "Description": "sample string 3",
+      "BillingRate": 4,
+      "BillToClient": true,
+      "DefaultTask": true,
+      "Active": true,
+      "ProjectTasks": [
+        {
+          "ID": 1,
+          "ProjectID": 2,
+          "TaskID": 3,
+          "BillToClient": true,
+          "BillingRate": 5,
+          "BudgetedHours": 6,
+          "TotalHoursLogged": 7
+        },
+        {
+          "ID": 1,
+          "ProjectID": 2,
+          "TaskID": 3,
+          "BillToClient": true,
+          "BillingRate": 5,
+          "BudgetedHours": 6,
+          "TotalHoursLogged": 7
+        }
+      ]
+    }
+  ],
+  "responseContentType": null,
+  "responseSample": null
+}

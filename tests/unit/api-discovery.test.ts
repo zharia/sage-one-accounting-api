@@ -222,4 +222,3 @@ describe("API discovery parser & diffing", () => {
     expect(manifest.sources.length).toBeGreaterThanOrEqual(3);
   });
 });
-

@@ -1,0 +1,45 @@
+{
+  "id": "GET-AccountantNote-Get-id",
+  "service": "AccountantNote",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/AccountantNote/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-AccountantNote-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "Subject": "sample string 2",
+    "EntryDate": "2026-11-21",
+    "ActionDate": "2026-11-21",
+    "Status": 1,
+    "Note": "sample string 3",
+    "HasAttachments": true,
+    "UserId": 4,
+    "CompanyId": 5,
+    "ToAccountant": "sample string 6",
+    "StatusText": "Due Today",
+    "CreatedByUserId": 1,
+    "CreatedBy": "sample string 7",
+    "LastModified": "sample string 8",
+    "CategoryId": 1,
+    "Category": "Meeting",
+    "DocumentHeaderId": 1,
+    "IsOwner": true
+  }
+}

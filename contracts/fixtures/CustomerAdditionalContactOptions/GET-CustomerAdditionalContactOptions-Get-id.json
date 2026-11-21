@@ -1,0 +1,30 @@
+{
+  "id": "GET-CustomerAdditionalContactOptions-Get-id",
+  "service": "CustomerAdditionalContactOptions",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/CustomerAdditionalContactOptions/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-CustomerAdditionalContactOptions-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "CustomerAdditionalContactDetailId": 3
+  }
+}

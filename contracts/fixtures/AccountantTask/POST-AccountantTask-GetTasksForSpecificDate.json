@@ -1,0 +1,64 @@
+{
+  "id": "POST-AccountantTask-GetTasksForSpecificDate",
+  "service": "AccountantTask",
+  "operation": "GetTasksForSpecificDate",
+  "method": "POST",
+  "route": "/AccountantTask/GetTasksForSpecificDate",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-AccountantTask-GetTasksForSpecificDate",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "Date": "2026-11-21",
+    "CompanyId": 1
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "AccountantTaskRecurrenceId": 1,
+        "CompanyId": 2,
+        "CompanyName": "sample string 3",
+        "UserId": 4,
+        "Name": "sample string 5",
+        "Notes": "sample string 6",
+        "StatusType": 7,
+        "ReminderType": 8,
+        "ReminderDaysBefore": 1,
+        "AutomaticallyChangeStatusWhenStart": true,
+        "NotificationDate": "2026-11-21",
+        "Notified": true,
+        "StartDate": "2026-11-21",
+        "EndDate": "2026-11-21",
+        "Duration": 1,
+        "ID": 13
+      },
+      {
+        "AccountantTaskRecurrenceId": 1,
+        "CompanyId": 2,
+        "CompanyName": "sample string 3",
+        "UserId": 4,
+        "Name": "sample string 5",
+        "Notes": "sample string 6",
+        "StatusType": 7,
+        "ReminderType": 8,
+        "ReminderDaysBefore": 1,
+        "AutomaticallyChangeStatusWhenStart": true,
+        "NotificationDate": "2026-11-21",
+        "Notified": true,
+        "StartDate": "2026-11-21",
+        "EndDate": "2026-11-21",
+        "Duration": 1,
+        "ID": 13
+      }
+    ]
+  }
+}

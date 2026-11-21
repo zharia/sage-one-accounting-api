@@ -1,0 +1,34 @@
+{
+  "id": "GET-EmailSignatureTemplate-GetPopulatedSignatureByDocumentId-id",
+  "service": "EmailSignatureTemplate",
+  "operation": "GetPopulatedSignatureByDocumentId",
+  "method": "GET",
+  "route": "/EmailSignatureTemplate/GetPopulatedSignatureByDocumentId/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-EmailSignatureTemplate-GetPopulatedSignatureByDocumentId-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "CompanyId": 2,
+    "EmailTemplateTypeId": 3,
+    "EmailTemplateTypeDescription": "Recurring Invoice",
+    "Name": "sample string 5",
+    "Subject": "sample string 6",
+    "Template": "sample string 7"
+  }
+}

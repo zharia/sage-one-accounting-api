@@ -1,0 +1,49 @@
+{
+  "id": "GET-DocumentHeaderNote-Get",
+  "service": "DocumentHeaderNote",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/DocumentHeaderNote/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DocumentHeaderNote-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "CompanyId": 2,
+        "DocumentHeaderId": 3,
+        "NoteTypeId": 4,
+        "UserId": 5,
+        "Username": "sample string 6",
+        "Created": "2026-11-21",
+        "ActionDate": "2026-11-21",
+        "Note": "sample string 8",
+        "Completed": true
+      },
+      {
+        "ID": 1,
+        "CompanyId": 2,
+        "DocumentHeaderId": 3,
+        "NoteTypeId": 4,
+        "UserId": 5,
+        "Username": "sample string 6",
+        "Created": "2026-11-21",
+        "ActionDate": "2026-11-21",
+        "Note": "sample string 8",
+        "Completed": true
+      }
+    ]
+  }
+}

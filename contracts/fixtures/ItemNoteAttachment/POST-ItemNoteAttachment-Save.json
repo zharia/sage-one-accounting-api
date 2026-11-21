@@ -1,0 +1,33 @@
+{
+  "id": "POST-ItemNoteAttachment-Save",
+  "service": "ItemNoteAttachment",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/ItemNoteAttachment/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-ItemNoteAttachment-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "multipart_upload",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "multipart/form-data",
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "e0f1435d-3e76-43a5-ae3a-d2e457aa0466",
+      "Data": "QEA="
+    },
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "e0f1435d-3e76-43a5-ae3a-d2e457aa0466",
+      "Data": "QEA="
+    }
+  ]
+}

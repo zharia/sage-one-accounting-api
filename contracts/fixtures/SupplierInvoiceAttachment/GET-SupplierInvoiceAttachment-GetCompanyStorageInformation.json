@@ -1,0 +1,23 @@
+{
+  "id": "GET-SupplierInvoiceAttachment-GetCompanyStorageInformation",
+  "service": "SupplierInvoiceAttachment",
+  "operation": "GetCompanyStorageInformation",
+  "method": "GET",
+  "route": "/SupplierInvoiceAttachment/GetCompanyStorageInformation",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-SupplierInvoiceAttachment-GetCompanyStorageInformation",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "SizeUsed": 1,
+    "MaxSizeAllowed": 2
+  }
+}
