@@ -6,6 +6,7 @@ export default defineConfig({
       "tests/unit/**/*.test.ts",
       "tests/integration/**/*.test.ts",
       "tests/contract/**/*.test.ts",
+      "tests/property/**/*.test.ts",
     ],
     exclude: ["tests/live/**", "node_modules/**", "dist/**"],
     environment: "node",
@@ -18,6 +19,12 @@ export default defineConfig({
       include: ["src/**/*.ts"],
       exclude: ["src/**/*.d.ts", "src/internal/**"],
       reportsDirectory: "coverage",
+      thresholds: {
+        statements: 85,
+        branches: 70,
+        functions: 85,
+        lines: 85,
+      },
     },
     // Live tests are opt-in: pnpm test:live
     env: {

@@ -1,13 +1,30 @@
 /**
  * Public entry point for `@bytemoney/sage-one`.
  *
- * M001 foundation: only contract metadata is exported. Core client,
- * domain services and error hierarchy arrive in M003 (see milestones/).
+ * Exports the primary `SageOneClient`, domain services, wire schemas and types,
+ * authentication interfaces, error hierarchy, OData query builder, pagination
+ * iterators, decimal conversion utilities, and branded domain identifiers.
  */
 
-/** Sage One Accounting API version targeted by this SDK. */
 export const SAGE_API_VERSION = "2.0.0" as const;
 
-/** Documentation source for the API contract. */
 export const SAGE_API_DOCUMENTATION_URL =
   "https://accounting.sageone.co.za/api/2.0.0/help" as const;
+
+export * from "./auth/index.js";
+export * from "./client/index.js";
+export * from "./common/index.js";
+export * from "./config/index.js";
+export * from "./domains/accounting/index.js";
+export * from "./domains/administration/index.js";
+export * from "./domains/company/index.js";
+export * from "./domains/customers/index.js";
+export * from "./domains/executor.js";
+export * from "./domains/inventory/index.js";
+export * from "./domains/suppliers/index.js";
+export * from "./domains/taxation/index.js";
+export * from "./errors/index.js";
+export * from "./logging/index.js";
+export * from "./transport/index.js";
+export * from "./types/index.js";
+export * from "./validation/index.js";

@@ -1,0 +1,135 @@
+{
+  "id": "GET-AccountBalance-GetAccountBudgets",
+  "service": "AccountBalance",
+  "operation": "GetAccountBudgets",
+  "method": "GET",
+  "route": "/AccountBalance/GetAccountBudgets",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-AccountBalance-GetAccountBudgets",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "AccountBalances": [
+          {
+            "ID": 1,
+            "Type": 1,
+            "Date": "2026-11-21",
+            "Description": "sample string 3",
+            "CategoryId": 4,
+            "CategoryDescription": "sample string 5",
+            "AnalysisCategoryId": 1,
+            "AnalysisCategoryDescription": "sample string 6",
+            "Debit": 1,
+            "Credit": 1,
+            "Total": 1,
+            "BudgetItemPeriods": [
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              },
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              }
+            ]
+          },
+          {
+            "ID": 1,
+            "Type": 1,
+            "Date": "2026-11-21",
+            "Description": "sample string 3",
+            "CategoryId": 4,
+            "CategoryDescription": "sample string 5",
+            "AnalysisCategoryId": 1,
+            "AnalysisCategoryDescription": "sample string 6",
+            "Debit": 1,
+            "Credit": 1,
+            "Total": 1,
+            "BudgetItemPeriods": [
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              },
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ID": 1,
+        "AccountBalances": [
+          {
+            "ID": 1,
+            "Type": 1,
+            "Date": "2026-11-21",
+            "Description": "sample string 3",
+            "CategoryId": 4,
+            "CategoryDescription": "sample string 5",
+            "AnalysisCategoryId": 1,
+            "AnalysisCategoryDescription": "sample string 6",
+            "Debit": 1,
+            "Credit": 1,
+            "Total": 1,
+            "BudgetItemPeriods": [
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              },
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              }
+            ]
+          },
+          {
+            "ID": 1,
+            "Type": 1,
+            "Date": "2026-11-21",
+            "Description": "sample string 3",
+            "CategoryId": 4,
+            "CategoryDescription": "sample string 5",
+            "AnalysisCategoryId": 1,
+            "AnalysisCategoryDescription": "sample string 6",
+            "Debit": 1,
+            "Credit": 1,
+            "Total": 1,
+            "BudgetItemPeriods": [
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              },
+              {
+                "ID": 1,
+                "Date": "2026-11-21",
+                "Total": 3
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

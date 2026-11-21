@@ -1,0 +1,234 @@
+{
+  "id": "GET-Item-Get-id",
+  "service": "Item",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/Item/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-Item-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "Description": "sample string 1",
+    "Category": {
+      "Description": "sample string 1",
+      "ID": 2,
+      "Modified": "2026-11-21",
+      "Created": "2026-11-21"
+    },
+    "Code": "sample string 2",
+    "Active": true,
+    "PriceInclusive": 4,
+    "PriceExclusive": 5,
+    "Physical": true,
+    "TaxTypeIdSales": 1,
+    "TaxTypeSales": {
+      "ID": 1,
+      "Name": "sample string 2",
+      "Percentage": 3.1,
+      "IsDefault": true,
+      "HasActivity": true,
+      "IsManualTax": true,
+      "Active": true,
+      "Created": "2026-11-21",
+      "Modified": "2026-11-21",
+      "TaxTypeDefaultUID": "76af16db-e385-49aa-8f58-67bc90be3713",
+      "CompanyId": 9
+    },
+    "TaxTypeIdPurchases": 1,
+    "TaxTypePurchases": {
+      "ID": 1,
+      "Name": "sample string 2",
+      "Percentage": 3.1,
+      "IsDefault": true,
+      "HasActivity": true,
+      "IsManualTax": true,
+      "Active": true,
+      "Created": "2026-11-21",
+      "Modified": "2026-11-21",
+      "TaxTypeDefaultUID": "76af16db-e385-49aa-8f58-67bc90be3713",
+      "CompanyId": 9
+    },
+    "LastCost": 7,
+    "AverageCost": 8,
+    "QuantityOnHand": 1,
+    "HasAttachments": true,
+    "HasActivity": true,
+    "Unit": "sample string 10",
+    "ItemReportingGroupId_Sales": 1,
+    "ItemReportingGroupSales": {
+      "ID": 2,
+      "Name": "sample string 3",
+      "ItemReportingGroupTypeId": 4,
+      "ItemReportingGroupType": "sample string 5",
+      "ReportingGroupId": 1,
+      "AccountCategoryId": 1,
+      "AccountCategory": {
+        "Comment": "sample string 1",
+        "Order": 6,
+        "Description": "sample string 7",
+        "ID": 8,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21"
+      }
+    },
+    "ItemReportingGroupId_Purchases": 1,
+    "ItemReportingGroupPurchases": {
+      "ID": 2,
+      "Name": "sample string 3",
+      "ItemReportingGroupTypeId": 4,
+      "ItemReportingGroupType": "sample string 5",
+      "ReportingGroupId": 1,
+      "AccountCategoryId": 1,
+      "AccountCategory": {
+        "Comment": "sample string 1",
+        "Order": 6,
+        "Description": "sample string 7",
+        "ID": 8,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21"
+      }
+    },
+    "ItemReportingGroupId_Inventory": 1,
+    "ItemReportingGroupInventory": {
+      "ID": 2,
+      "Name": "sample string 3",
+      "ItemReportingGroupTypeId": 4,
+      "ItemReportingGroupType": "sample string 5",
+      "ReportingGroupId": 1,
+      "AccountCategoryId": 1,
+      "AccountCategory": {
+        "Comment": "sample string 1",
+        "Order": 6,
+        "Description": "sample string 7",
+        "ID": 8,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21"
+      }
+    },
+    "ItemReportingGroupId_ItemAdjustments": 1,
+    "AccountId_ServiceItemRecovery": 1,
+    "ItemReportingGroupItemAdjustments": {
+      "ID": 2,
+      "Name": "sample string 3",
+      "ItemReportingGroupTypeId": 4,
+      "ItemReportingGroupType": "sample string 5",
+      "ReportingGroupId": 1,
+      "AccountCategoryId": 1,
+      "AccountCategory": {
+        "Comment": "sample string 1",
+        "Order": 6,
+        "Description": "sample string 7",
+        "ID": 8,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21"
+      }
+    },
+    "AccountServiceItemRecovery": {
+      "Name": "sample string 2",
+      "Category": {
+        "Comment": "sample string 1",
+        "Order": 6,
+        "Description": "sample string 7",
+        "ID": 8,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21"
+      },
+      "Active": true,
+      "Balance": 4,
+      "Description": "sample string 5",
+      "ReportingGroupId": 1,
+      "UnallocatedAccount": true,
+      "IsTaxLocked": true,
+      "Modified": "2026-11-21",
+      "Created": "2026-11-21",
+      "AccountType": 9,
+      "HasActivity": true,
+      "DefaultTaxTypeId": 1,
+      "DefaultTaxType": {
+        "ID": 1,
+        "Name": "sample string 2",
+        "Percentage": 3.1,
+        "IsDefault": true,
+        "HasActivity": true,
+        "IsManualTax": true,
+        "Active": true,
+        "Created": "2026-11-21",
+        "Modified": "2026-11-21",
+        "TaxTypeDefaultUID": "76af16db-e385-49aa-8f58-67bc90be3713",
+        "CompanyId": 9
+      },
+      "ID": 11
+    },
+    "TextUserField1": "sample string 12",
+    "TextUserField2": "sample string 13",
+    "TextUserField3": "sample string 14",
+    "NumericUserField1": 1,
+    "NumericUserField2": 1,
+    "NumericUserField3": 1,
+    "DateUserField1": "2026-11-21",
+    "DateUserField2": "2026-11-21",
+    "DateUserField3": "2026-11-21",
+    "YesNoUserField1": true,
+    "YesNoUserField2": true,
+    "YesNoUserField3": true,
+    "Modified": "2026-11-21",
+    "Created": "2026-11-21",
+    "MajorIndustryCodeId": 1,
+    "GPPercentage": 1,
+    "GPAmount": 1,
+    "ItemReportingGroupPurchasesName": "sample string 16",
+    "ItemReportingGroupSalesName": "sample string 3",
+    "ItemReportingGroupInventoryName": "sample string 18",
+    "ItemReportingGroupItemAdjustmentsName": "sample string 19",
+    "AccountServiceItemRecoveryName": "sample string 20",
+    "Attachments": [
+      {
+        "Name": "sample string 1",
+        "Size": 2,
+        "AttachmentUID": "db250ac7-6ec0-4bee-b401-e7afb380f2dd",
+        "Data": "QEA="
+      },
+      {
+        "Name": "sample string 1",
+        "Size": 2,
+        "AttachmentUID": "db250ac7-6ec0-4bee-b401-e7afb380f2dd",
+        "Data": "QEA="
+      }
+    ],
+    "PrescribedGoods": true,
+    "QuantityReserved": 1,
+    "HasSpecialCountryTaxActivity": true,
+    "ID": 23,
+    "AdditionalItemPrices": [
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "PriceInclusive": 3,
+        "PriceExclusive": 4,
+        "AdditionalPriceListId": 5
+      },
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "PriceInclusive": 3,
+        "PriceExclusive": 4,
+        "AdditionalPriceListId": 5
+      }
+    ]
+  }
+}

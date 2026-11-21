@@ -3,21 +3,20 @@
 Spec §26. Dependencies are strict — a milestone starts only when its prerequisites are accepted.
 
 ```text
-M001 Project foundation          ← current
+M001 Project foundation          (accepted 2026-11-21)
    │
    ▼
-M002 Sage API discovery          (catalogue, auth verification, contract snapshots)
+M002 Sage API discovery          (accepted 2026-11-21 — 162 services, 622 endpoints catalogued)
    │
    ▼
-M003 Core SDK infrastructure     (client, config, transport, auth impl, logging, errors, validation, shared types)
+M003 Core SDK infrastructure     (accepted 2026-11-21 — client, config, transport, auth, logging, errors, validation, types)
    │
    ├──────────────────┐
    ▼                  ▼
-M004 Foundational    M005 Commercial transactions
+M004 Foundational    M005 Commercial transactions          ← next
 accounting domains   (invoices, quotes, orders, receipts,
-(accounts, company,   payments, allocations, attachments)
-customers, suppliers,
-tax types, items)
+(accepted 2026-11-21  payments, allocations, attachments)
+ 24 services, 89 ops)
    │                  │
    └────────┬─────────┘
             ▼
@@ -40,8 +39,11 @@ M007 Production readiness        (100% coverage, docs, package verification, rel
 
 ## Current status
 
-- **M001: in progress (session checklist in `PROGRESS.md` at repo root)**
-- M002–M007: not started
+- **M001 (Project foundation): accepted (2026-11-21)**
+- **M002 (Sage API discovery): accepted (2026-11-21)**
+- **M003 (Core SDK infrastructure): accepted (2026-11-21)**
+- **M004 (Foundational accounting domains): accepted (2026-11-21)**
+- M005–M007: not started
 
 ## Risk register (top)
 

@@ -2,7 +2,7 @@
 
 Strongly typed TypeScript SDK for the **Sage One Accounting API** (South Africa, API `2.0.0`).
 
-> **Status: pre-alpha (M001 — project foundation).** The API contract discovery (M002) and core SDK (M003) have not landed yet. Do not use in production.
+> **Status: alpha (M001–M004 complete).** Project foundation (M001), full 622-endpoint API contract discovery (M002), core SDK infrastructure (M003), and foundational accounting domains (M004 — 24 services, 89 operations) are implemented and verified. Commercial transactions (M005) and banking/reporting/advanced domains (M006) are next.
 
 - **Documentation source:** https://accounting.sageone.co.za/api/2.0.0/help
 - **Repository:** https://github.com/zharia/sage-one-typescript
@@ -46,20 +46,24 @@ Common commands:
 
 See [`docs/development/`](./docs/development/environment-setup.md) for details.
 
-## Usage (planned shape)
+## Usage
 
 ```typescript
-import { SageOneClient } from "@bytemoney/sage-one";
+import { type Account, odata, SageOneClient } from "@bytemoney/sage-one";
 
 const sage = new SageOneClient({
-  credentials: { username: process.env.SAGE_USERNAME!, password: process.env.SAGE_PASSWORD! },
+  credentials: {
+    username: process.env.SAGE_USERNAME!,
+    password: process.env.SAGE_PASSWORD!,
+  },
+  apiKey: process.env.SAGE_API_KEY!,
   companyId: 12345,
 });
 
-const accounts = await sage.accounts.list();
+const accounts = await sage.accounts.list({
+  odata: odata<Account>().filter("Active", "eq", true).orderBy("Name", "asc").top(50),
+});
 ```
-
-The interface above is illustrative; final signatures follow the discovered Sage API contract (M002).
 
 ## Project layout
 

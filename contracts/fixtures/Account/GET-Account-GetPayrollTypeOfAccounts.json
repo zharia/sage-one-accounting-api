@@ -1,0 +1,97 @@
+{
+  "id": "GET-Account-GetPayrollTypeOfAccounts",
+  "service": "Account",
+  "operation": "GetPayrollTypeOfAccounts",
+  "method": "GET",
+  "route": "/Account/GetPayrollTypeOfAccounts",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-Account-GetPayrollTypeOfAccounts",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "Name": "sample string 2",
+        "Category": {
+          "Comment": "sample string 1",
+          "Order": 6,
+          "Description": "sample string 7",
+          "ID": 8,
+          "Modified": "2026-11-21",
+          "Created": "2026-11-21"
+        },
+        "Active": true,
+        "Balance": 4,
+        "Description": "sample string 5",
+        "ReportingGroupId": 1,
+        "UnallocatedAccount": true,
+        "IsTaxLocked": true,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21",
+        "AccountType": 9,
+        "HasActivity": true,
+        "DefaultTaxTypeId": 1,
+        "DefaultTaxType": {
+          "ID": 1,
+          "Name": "sample string 2",
+          "Percentage": 3.1,
+          "IsDefault": true,
+          "HasActivity": true,
+          "IsManualTax": true,
+          "Active": true,
+          "Created": "2026-11-21",
+          "Modified": "2026-11-21",
+          "TaxTypeDefaultUID": "65afacea-242e-42fa-86cd-47a57b795748",
+          "CompanyId": 9
+        },
+        "ID": 11
+      },
+      {
+        "Name": "sample string 2",
+        "Category": {
+          "Comment": "sample string 1",
+          "Order": 6,
+          "Description": "sample string 7",
+          "ID": 8,
+          "Modified": "2026-11-21",
+          "Created": "2026-11-21"
+        },
+        "Active": true,
+        "Balance": 4,
+        "Description": "sample string 5",
+        "ReportingGroupId": 1,
+        "UnallocatedAccount": true,
+        "IsTaxLocked": true,
+        "Modified": "2026-11-21",
+        "Created": "2026-11-21",
+        "AccountType": 9,
+        "HasActivity": true,
+        "DefaultTaxTypeId": 1,
+        "DefaultTaxType": {
+          "ID": 1,
+          "Name": "sample string 2",
+          "Percentage": 3.1,
+          "IsDefault": true,
+          "HasActivity": true,
+          "IsManualTax": true,
+          "Active": true,
+          "Created": "2026-11-21",
+          "Modified": "2026-11-21",
+          "TaxTypeDefaultUID": "65afacea-242e-42fa-86cd-47a57b795748",
+          "CompanyId": 9
+        },
+        "ID": 11
+      }
+    ]
+  }
+}

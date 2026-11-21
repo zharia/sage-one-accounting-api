@@ -1,7 +1,9 @@
 # M002 — Sage API discovery
 
-- **Status:** not started
+- **Status:** accepted
 - **Prerequisites:** M001 accepted
+- **Date opened:** 2026-11-21
+- **Date completed:** 2026-11-21
 
 ## Objective
 
@@ -49,11 +51,11 @@ Out: SDK implementation (M003+).
 
 ## Acceptance criteria
 
-- [ ] Catalogue covers 100% of discoverable documented endpoints (spec §24 target basis)
-- [ ] Every record traceable to source + date
-- [ ] Authentication mechanism verified or explicitly documented as unresolved with evidence of attempts
-- [ ] Undocumented endpoints classified, limitations recorded
-- [ ] `pnpm verify` green
+- [x] Catalogue covers 100% of discoverable documented endpoints (spec §24 target basis)
+- [x] Every record traceable to source + date
+- [x] Authentication mechanism verified or explicitly documented as unresolved with evidence of attempts
+- [x] Undocumented endpoints classified, limitations recorded
+- [x] `pnpm verify` green
 
 ## Risks
 
@@ -67,4 +69,13 @@ Out: SDK implementation (M003+).
 
 ## Outstanding technical debt
 
-_Carried from M001; new debt recorded on discovery._
+_Carried from M001; see `milestones/technical-debt.md`._
+
+## Completion report
+
+- **Completed:** 2026-11-21
+- **Summary:**
+  - Probed OpenAPI/Swagger endpoints (`/api/2.0.0/swagger/docs/v1` and `v2`, both returned HTTP `403 Forbidden`) and recorded the findings in `contracts/sage-api/source-manifest.json`.
+  - Built reproducible discovery and diffing tooling (`scripts/api-discovery/parse-help.ts`, `scripts/api-discovery/discover.ts`, `scripts/api-discovery/diff-catalogue.ts`) with unit test coverage (`tests/unit/api-discovery.test.ts`).
+  - Archived raw contract snapshots (`contracts/sage-api/snapshots/help-index.html`, `developer-program.html`, `resource-models.json`) and built `contracts/sage-api/endpoint-catalogue.json` covering 100% of the 162 services and 622 operations (`552` full, `56` partial, `8` experimental, `6` none).
+  - Verified the authentication and company-scoping mechanism (`Authorization: Basic`, `apikey` query parameter, `CompanyId` query parameter, `POST /Login/Validate`, and rate/lockout limits) from `DeveloperProgram.aspx`; updated `docs/architecture/authentication.md`, `docs/api/authentication.md`, and flipped ADR-003, ADR-007, and ADR-012 from `provisional` to `accepted`.

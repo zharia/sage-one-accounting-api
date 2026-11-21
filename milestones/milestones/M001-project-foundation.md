@@ -1,7 +1,8 @@
 # M001 — Project foundation
 
-- **Status:** in progress
+- **Status:** accepted
 - **Date opened:** 2026-11-21
+- **Date completed:** 2026-11-21
 
 ## Objective
 
@@ -52,14 +53,14 @@ All deliverable docs listed above exist with real content (not empty stubs); sca
 
 ## Acceptance criteria
 
-- [ ] `nix develop` works on Arch Linux (no NixOS) with pinned Node/pnpm
-- [ ] `pnpm verify` passes end-to-end locally
-- [ ] `nix flake check` passes
-- [ ] CI workflows present and equivalent to local verify
-- [ ] Spec §3 layout present (refinements documented)
-- [ ] All root docs + docs tree + ADRs + milestones exist
-- [ ] No secrets, no `.env` committed
-- [ ] Initial commit on `main`
+- [x] `nix develop` works on Arch Linux (no NixOS) with pinned Node/pnpm
+- [x] `pnpm verify` passes end-to-end locally
+- [x] `nix flake check` passes
+- [x] CI workflows present and equivalent to local verify
+- [x] Spec §3 layout present (refinements documented)
+- [x] All root docs + docs tree + ADRs + milestones exist
+- [x] No secrets, no `.env` committed
+- [x] Initial commit on `main`
 
 ## Risks
 
@@ -72,8 +73,10 @@ All deliverable docs listed above exist with real content (not empty stubs); sca
 
 ## Outstanding technical debt
 
-See `milestones/technical-debt.md` (TD-001..TD-007 raised at M001).
+See `milestones/technical-debt.md` (TD-001..TD-006 carried forward; TD-007 repaid at M001 completion).
 
 ## Completion report
 
-_Appended when accepted._
+- **Completed:** 2026-11-21
+- **Summary:** All repository scaffolding, TypeScript strict configuration, pnpm workspace + lockfile, Nix Flakes environment, root/architecture/API/development/integration/reference/agent documentation, ADRs 001–015, GitHub Actions CI/release/security/documentation workflows, and `scripts/verification/verify.sh` are in place.
+- **Verification:** `pnpm verify` (10/10 steps) passed end-to-end; `PROGRESS.md` folded into milestone status (TD-007 repaid).

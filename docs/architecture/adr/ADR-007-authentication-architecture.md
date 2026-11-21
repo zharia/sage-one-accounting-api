@@ -1,45 +1,48 @@
 # ADR-007: Authentication architecture
 
-- **Status:** provisional — mechanism unverified; discovery due in M002
+- **Status:** accepted
 - **Date:** 2026-11-21
 
 ## Context
 
-The published `Login/Validate` endpoint (username/password → boolean) does not reveal how subsequent requests authenticate (spec §9). Sage may use headers, tokens, cookies, session IDs, or an application signing scheme.
+In M001 the authentication mechanism for requests after `POST /Login/Validate` was unverified. During M002 discovery we archived and inspected the official Sage One Developer Program documentation (`https://accounting.sageone.co.za/Marketing/DeveloperProgram.aspx`, archived at `contracts/sage-api/snapshots/developer-program.html`) and the `/api/2.0.0/help` endpoint specifications.
 
 ## Problem
 
-Design an authentication layer that can absorb the verified mechanism without reshaping the transport or public API, while forbidding invented behaviour.
+Implement the verified Sage One authentication and company-scoping mechanism behind the pluggable `SageAuthenticator` interface without exposing secrets in logs or errors.
+
+## Verified findings (M002)
+
+1. **HTTP Basic Authentication:** Every authenticated API call uses standard HTTP Basic authentication (`Authorization: Basic base64(username:password)`).
+2. **Application API Key (`apikey`):** All API calls include the developer `apikey` query parameter (`?apikey={guid}`) issued by Sage One.
+3. **Company Context (`CompanyId`):** All company-scoped calls pass the `CompanyId` (or `companyid`) query parameter (`&CompanyId=12345`).
+4. **Credential Verification (`POST /Login/Validate`):** Accepts `{ Username, Password }` in the JSON body (without requiring an existing `Authorization` header) and returns a JSON boolean (`true`/`false`).
+5. **Rate & Lockout Limits:** 100 requests/minute per user per company (1-hour IP block on HTTP 429), 5,000 requests/day, and 20 failed login attempts/hour (24-hour username block on HTTP 429).
 
 ## Options considered
 
-1. Username/password sent on every request (HTTP Basic or similar).
-2. Login → token/session, cached with renewal.
-3. Cookie session managed by the HTTP client.
-4. Custom signing scheme (if Sage documents one).
-5. Pluggable `SageAuthenticator` interface with the concrete mechanism as the first implementation.
+1. Hard-code Basic Auth and query parameters directly in the transport layer.
+2. Keep the `SageAuthenticator` interface (`authenticate` + `apply`) and provide `BasicAndApiKeyAuthenticator` as the default verified implementation with single-flight concurrency on `authenticate()`.
 
 ## Decision
 
-Option 5: fix the **interface** now, defer the **mechanism**. `SageAuthenticator` exposes `authenticate(context)` and `apply(request)`; transport delegates all credential application to it. Requirements: no hard-coded/logged credentials, no secrets in errors, single-flight concurrency safety, renewal support if needed, application-supplied configuration (no implicit env reads), custom implementations injectable. Never invent OAuth (spec §9).
+Option 2. `SageAuthenticator` remains the transport boundary; `BasicAndApiKeyAuthenticator` implements HTTP Basic header injection, `apikey` and `CompanyId` query parameter injection, and single-flight `POST /Login/Validate` verification via `client.verifyAuthentication()`.
 
 ## Rationale
 
-- Transport, client and error mapping can be built and tested (M003) before the mechanism is known, using a fake authenticator.
-- All open questions stay concentrated in `docs/architecture/authentication.md`.
-- Spec mandates a dedicated interface (§9) and forbids fabricating behaviour (§6.1, §28).
+- Preserves clean separation between transport and authentication (`docs/architecture/module-boundaries.md`).
+- Allows custom authenticators (e.g., proxy token injectors or test doubles) while providing the verified Sage One mechanism out of the box.
+- Single-flight concurrency prevents duplicate `Login/Validate` calls from burning the 20/hour failed-login quota.
 
 ## Consequences
 
-- M002 must answer: header/token/session format, lifetime, renewal, company context conveyance, required application headers, whether Login mutates server state.
-- On completion: update `docs/architecture/authentication.md`, flip this ADR to `accepted`, implement the verified authenticator, add live auth verification.
-- Until then, no claim of "working authentication" anywhere in docs or code.
+- `SageOneClient` accepts `credentials: { username, password }`, `apiKey`, and `companyId` (or a custom `authenticator`).
+- `RedactingLogger` and error sanitization strip `Authorization` headers, `apikey` query parameters, and passwords from all logs and error messages.
 
 ## Rejected alternatives
 
-- Picking Basic/token now: risks building the wrong cache/renewal model and implies unverified claims.
-- Per-request credential injection by consumers: pushes security-sensitive logic into application code, invites logging mistakes.
+- Option 1: Couples transport to credential structure and prevents custom authenticator injection.
 
 ## References
 
-Spec §9; `docs/architecture/authentication.md`.
+Spec §9; `docs/architecture/authentication.md`; `docs/api/authentication.md`.
