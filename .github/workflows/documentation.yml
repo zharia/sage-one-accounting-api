@@ -1,0 +1,38 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    name: Documentation checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Install dependencies (frozen lockfile)
+        run: nix develop --command pnpm install --frozen-lockfile
+
+      - name: Required documentation presence
+        run: |
+          required="README.md CONTRIBUTING.md SECURITY.md CHANGELOG.md LICENSE NOTICE SUPPORT.md AGENTS.md
+          docs/architecture/overview.md docs/api/README.md docs/development/environment-setup.md
+          docs/decisions/decision-index.md milestones/README.md milestones/roadmap.md"
+          missing=0
+          for doc in $required; do
+            if [ ! -f "$doc" ]; then echo "MISSING: $doc"; missing=1; fi
+          done
+          exit $missing
+
+      # TypeDoc build lands with M003 (see milestones/M003).
+      - name: API reference build (placeholder until M003)
+        run: echo "TypeDoc wiring tracked in milestones/milestones/M003-core-sdk.md"

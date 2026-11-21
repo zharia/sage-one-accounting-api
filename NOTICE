@@ -1,0 +1,29 @@
+@bytemoney/sage-one
+Copyright 2026 ByteMoney
+
+This product includes software developed for the Sage One Accounting
+TypeScript SDK project.
+
+---
+
+THIRD-PARTY NOTICES
+
+This product depends on third-party packages. Their respective licenses
+and copyright notices apply and are recorded in pnpm-lock.yaml and the
+installed package metadata. Key runtime dependencies:
+
+- zod — MIT License — Copyright (c) 2022 Colin McDonnell
+- pino — MIT License — Copyright (c) Pino contributors
+
+Development dependencies (not distributed with this package) are subject
+to their own licenses, including but not limited to TypeScript, Vitest,
+ESLint, Prettier, MSW and fast-check.
+
+---
+
+BRAND NOTIFICATIONS
+
+"Sage", "Sage One" and related marks are trademarks of The Sage Group
+plc or its licensors. This project is not affiliated with, endorsed by,
+or sponsored by The Sage Group. Use of Sage branding in documentation
+is descriptive and subject to final review of Sage trademark guidelines.

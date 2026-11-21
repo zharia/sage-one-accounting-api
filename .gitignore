@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+logs/
+
+# Test output
+coverage/
+coverage_raw/
+.vitest/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Nix result
+result
+result-*
+.direnv/
+.corepack/
+.local-bin/
+
+# Pack artifacts
+*.tgz

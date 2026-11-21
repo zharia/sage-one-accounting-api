@@ -1,0 +1,80 @@
+{
+  "name": "@bytemoney/sage-one",
+  "version": "0.1.0",
+  "description": "Strongly typed TypeScript SDK for the Sage One Accounting API (South Africa, API 2.0.0)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@11.26.0",
+  "keywords": [
+    "sage",
+    "sage-one",
+    "accounting",
+    "sdk",
+    "typescript",
+    "api-client",
+    "odata"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zharia/sage-one-typescript.git"
+  },
+  "homepage": "https://github.com/zharia/sage-one-typescript#readme",
+  "bugs": {
+    "url": "https://github.com/zharia/sage-one-typescript/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist coverage *.tsbuildinfo",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "verify": "bash scripts/verification/verify.sh",
+    "attw": "attw --pack . --profile esm-only",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "dependencies": {
+    "pino": "10.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@changesets/cli": "2.29.8",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "26.6.6",
+    "@vitest/coverage-v8": "5.1.1",
+    "eslint": "10.15.0",
+    "fast-check": "4.10.3",
+    "msw": "3.0.7",
+    "prettier": "3.10.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.73.0",
+    "vitest": "5.1.1"
+  }
+}
