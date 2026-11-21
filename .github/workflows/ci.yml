@@ -18,7 +18,7 @@ jobs:
     name: Verify (Nix environment)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
@@ -44,7 +44,7 @@ jobs:
         # Minimum supported (24) and current LTS (26).
         node-version: [24, 26]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v6
         # version comes from package.json packageManager field
