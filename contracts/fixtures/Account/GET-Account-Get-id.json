@@ -1,0 +1,61 @@
+{
+  "id": "GET-Account-Get-id",
+  "service": "Account",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/Account/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-Account-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "Name": "sample string 2",
+    "Category": {
+      "Comment": "sample string 1",
+      "Order": 6,
+      "Description": "sample string 7",
+      "ID": 8,
+      "Modified": "2026-11-21",
+      "Created": "2026-11-21"
+    },
+    "Active": true,
+    "Balance": 4,
+    "Description": "sample string 5",
+    "ReportingGroupId": 1,
+    "UnallocatedAccount": true,
+    "IsTaxLocked": true,
+    "Modified": "2026-11-21",
+    "Created": "2026-11-21",
+    "AccountType": 9,
+    "HasActivity": true,
+    "DefaultTaxTypeId": 1,
+    "DefaultTaxType": {
+      "ID": 1,
+      "Name": "sample string 2",
+      "Percentage": 3.1,
+      "IsDefault": true,
+      "HasActivity": true,
+      "IsManualTax": true,
+      "Active": true,
+      "Created": "2026-11-21",
+      "Modified": "2026-11-21",
+      "TaxTypeDefaultUID": "058f1b3d-99b7-4bb2-b6b0-3323489a1f8e",
+      "CompanyId": 9
+    },
+    "ID": 11
+  }
+}

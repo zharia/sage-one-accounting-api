@@ -1,27 +1,24 @@
-# Authentication (API) — PROVISIONAL
+# Authentication (API)
 
-> Mirrors `docs/architecture/authentication.md`. **Mechanism unverified.** Discovery is milestone M002's first priority.
+> Verified in M002 from `https://accounting.sageone.co.za/Marketing/DeveloperProgram.aspx` and `/api/2.0.0/help`. See also `docs/architecture/authentication.md` and ADR-007.
 
-## Known from documentation
+## Request Requirements
 
-- A `Login/Validate`-style endpoint accepts username/password and returns a boolean.
-- That is all that is established. How subsequent requests authenticate is **unknown**.
+| Component | Location | Format | Required |
+|---|---|---|---|
+| User credentials | Header `Authorization` | `Basic <base64(username:password)>` | Yes (153 of 162 services) |
+| Developer API key | Query parameter `apikey` | `{guid}` | Yes |
+| Company ID | Query parameter `CompanyId` | Positive integer | Yes (all company-scoped resources) |
 
-## Unknown (must verify)
+## Services Not Requiring Basic Auth Header
 
-- Auth header name/format, token issuance, token lifetime, renewal
-- Session handling (cookie / header / session id)
-- Company context conveyance (`CompanyId`)
-- Required application headers
-- Any signing scheme
-- Whether login mutates server state
+In the `/api/2.0.0/help` specification, 9 services omit the `"This service requires authentication"` requirement on the index page:
 
-## SDK behaviour until verified
+- `Login` (`POST /Login/Validate` — validates credentials in request body)
+- `CoreEvents`, `CoreTokens`, `Payroll`, `SageIdUser`, `SupportLoginAudit`, `Test`
 
-- Authentication is behind `SageAuthenticator` (ADR-007); a fake implementation is used in tests.
-- No documentation or code may assert a concrete mechanism.
-- Credentials are supplied by the application; never logged, never persisted, never embedded in errors.
+## Rate Limits (HTTP 429)
 
-## Update procedure
-
-When M002 verifies the mechanism: record evidence (sanitized request/response samples + date), update this file and `docs/architecture/authentication.md`, flip ADR-007 to `accepted`, implement the authenticator, add contract + live tests.
+- **100 requests per minute** per user per company (1-hour IP block if exceeded).
+- **20 failed login attempts per hour** (24-hour username block if exceeded).
+- **5,000 requests per day** per Accounting account.

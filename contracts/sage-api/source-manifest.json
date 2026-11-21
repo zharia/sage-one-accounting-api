@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "apiVersion": "2.0.0",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "openApiProbe": {
+    "available": false,
+    "testedEndpoints": [
+      {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/swagger/docs/v1",
+        "status": 403
+      },
+      {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/swagger/docs/v2",
+        "status": 403
+      }
+    ],
+    "note": "Swagger endpoints return HTTP 403 Forbidden; ASP.NET Web API Help Pages at /api/2.0.0/help are the authoritative public contract source."
+  },
+  "sources": [
+    {
+      "id": "help-index",
+      "url": "https://accounting.sageone.co.za/api/2.0.0/help",
+      "retrievedAt": "2026-11-21T12:50:00Z",
+      "method": "GET",
+      "status": 200,
+      "sha256": "4b4d724b1cf7a5e9cfeb7c77e3186b0cb0670f07f450cc05fc1f9617ed8bda55",
+      "snapshotPath": "contracts/sage-api/snapshots/help-index.html"
+    },
+    {
+      "id": "developer-program",
+      "url": "https://accounting.sageone.co.za/Marketing/DeveloperProgram.aspx",
+      "retrievedAt": "2026-11-21T12:50:00Z",
+      "method": "GET",
+      "status": 200,
+      "sha256": "e54b4827ee497dcf9d83f98038a63329fb6d2c98319d25a6c8c68d09eff2fe5e",
+      "snapshotPath": "contracts/sage-api/snapshots/developer-program.html"
+    },
+    {
+      "id": "endpoint-detail-pages",
+      "urlPattern": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/{id}",
+      "retrievedAt": "2026-11-21T12:50:00Z",
+      "method": "GET",
+      "pageCount": 622,
+      "catalogueSha256": "4920d512a00f1ed45cf33f5fb3876e6f863c9d2c3f955796dd202f1b65c592ac",
+      "cataloguePath": "contracts/sage-api/endpoint-catalogue.json"
+    }
+  ]
+}

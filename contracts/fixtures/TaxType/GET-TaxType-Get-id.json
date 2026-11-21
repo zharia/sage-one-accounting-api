@@ -1,0 +1,38 @@
+{
+  "id": "GET-TaxType-Get-id",
+  "service": "TaxType",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/TaxType/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TaxType-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "Name": "sample string 2",
+    "Percentage": 3.1,
+    "IsDefault": true,
+    "HasActivity": true,
+    "IsManualTax": true,
+    "Active": true,
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21",
+    "TaxTypeDefaultUID": "ce72c8b8-5b24-4762-bb22-af880ca66616",
+    "CompanyId": 9
+  }
+}

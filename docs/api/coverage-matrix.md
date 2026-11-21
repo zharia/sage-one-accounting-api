@@ -1,40 +1,67 @@
 # API coverage matrix
 
-Machine-readable twin: `contracts/sage-api/endpoint-catalogue.json` (status `pending` until M002).
+Machine-readable twin: [`contracts/sage-api/endpoint-catalogue.json`](../../contracts/sage-api/endpoint-catalogue.json).
 
 Dimensions per endpoint (spec §24): Discovered · Contract · Type definitions · Runtime schemas · Implementation · Unit tests · Contract tests · Documentation — each `Missing` / `Partial` / `Complete` (Discovered: `Pending`/`Complete`).
 
-## Summary
+## Summary (as of M004 completion — 2026-11-21)
 
 | Metric | Count |
 |---|---|
-| Total discovered endpoints | 0 |
-| Implemented endpoints | 0 |
-| Fully typed endpoints | 0 |
-| Validated endpoints | 0 |
-| Contract-tested endpoints | 0 |
-| Undocumented endpoints (known) | TBD (M002) |
+| Total discovered services | 162 |
+| Total discovered endpoints | 622 |
+| Fully documented endpoints (`full`) | 552 |
+| Partially documented endpoints (`partial`) | 56 |
+| Untyped / experimental endpoints (`experimental`) | 8 |
+| Endpoints with no model documentation (`none`) | 6 |
+| Implemented endpoints (M003 + M004) | 89 (across 24 services) |
+| Fully typed endpoints | 89 |
+| Validated endpoints (Zod request/response schemas) | 89 |
+| Contract-tested endpoints (`tests/contract/` + `contracts/fixtures/`) | 89 |
 | Known API limitations | see [known-limitations.md](./known-limitations.md) |
 
-## Status by service group
+## M003 & M004 Implemented Services (24 services, 89 operations — 100% Complete across all 8 dimensions)
 
-Legend: ⬜ not started · 🟨 partial · 🟩 complete · ⚠️ blocked/undocumented
+Legend: 🟩 Complete · 🟨 Partial · ⬜ Planned (M005/M006) · ⚠️ Undocumented
 
-| Service group | Services (spec §2.2) | Discovered | Contract | Types | Schemas | Impl | Tests | Docs |
-|---|---|---|---|---|---|---|---|---|
-| Financial accounting | Account, Account Category, Account Balance, Account Opening Balance, Account Payment, Account Receipt, Journal Entry, Detailed Ledger Transaction, Financial Year, Trial Balance, Balance Sheet, Profit and Loss, Final Accounts, Budget | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Customers and sales | Customer, Customer Category, Customer Adjustment, Customer Receipt, Customer Return, Customer Statement, Customer Transaction Listing, Customer Ageing, Customer Opening Balance, Customer Write Off, Customer Sales History, Outstanding Customer Document, Quote, Tax Invoice, Sales Order, Recurring Invoice | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Suppliers and purchases | Supplier, Supplier Category, Supplier Adjustment, Supplier Invoice, Supplier Payment, Supplier Return, Supplier Statement, Supplier Transaction Listing, Supplier Ageing, Supplier Opening Balance, Supplier Purchase History, Outstanding Supplier Document, Purchase Order | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Banking | Bank Account, Bank Account Category, Bank Account Transaction Listing, Bank Statement Transaction, Bank Transaction, Bank Import Mapping, Process Bank And Credit Card Mapping, Cash Movement | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Inventory | Item, Item Category, Item Adjustment, Item Bundle, Item Movement, Item Opening Balance, Item Report Group, Additional Item Price, Additional Price List, Purchases By Item, Sales By Item, Price Listing Report | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Taxation | Tax Type, Tax Adjustment, Tax Rate Adjustment, Tax Period, BAS Report, VAT201 Report, Tax Invoice | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Assets | Asset, Asset Category, Asset Location, Asset Note | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| CRM and administration | CRM Activity, CRM Activity Category, Accountant Event, Accountant Note, Accountant Task, Accountant Task Recurrence, Company, Company Note, Sage Id User, To Do List | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Time tracking | Time Tracking Customer, Expense, Project, Task, Timesheet, User | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Other services | Reports, document attachments, localization, exchange rates, secretarial, developer data, reference data | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| Service | Domain | Operations | Discovered | Contract | Types | Schemas | Impl | Unit Tests | Contract Tests | Docs |
+|---|---|---:|---|---|---|---|---|---|---|---|
+| `Login` | Administration / Auth | 1 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `Account` | Financial accounting | 9 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `AccountCategory` | Financial accounting | 2 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `AccountBalance` | Financial accounting | 3 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `AccountOpeningBalance` | Financial accounting | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `AccountNote` | Financial accounting | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `Company` | Company & admin | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CompanyEntityType` | Company & admin | 2 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CompanyNote` | Company & admin | 5 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `Customer` | Customers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CustomerCategory` | Customers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CustomerOpeningBalance` | Customers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CustomerStatement` | Customers | 2 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `CustomerNote` | Customers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `Supplier` | Suppliers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `SupplierCategory` | Suppliers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `SupplierOpeningBalance` | Suppliers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `SupplierStatement` | Suppliers | 1 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `SupplierNote` | Suppliers | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `TaxType` | Taxation | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `Item` | Inventory | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `ItemCategory` | Inventory | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `ItemOpeningBalance` | Inventory | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
+| `ItemNote` | Inventory | 4 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
 
-## Rules
+## Status by Service Group (All 162 Discovered Services)
 
-- A resource is not "complete" because one operation works (spec §24).
-- Every `🟩` requires a traceable contract source (docs URL + date, or verified live observation).
-- Endpoint-level rows are added when M002 lands the catalogue; until then this table tracks service groups only.
+| Service group | Total Services | Discovered | Contract | M004 Services | Remaining (M005–M006) |
+|---|---:|---|---|---|---|
+| Financial accounting | 21 | 🟩 (100%) | 🟩 | `Account`, `AccountCategory`, `AccountBalance`, `AccountOpeningBalance`, `AccountNote` (22 ops) | `AccountPayment`, `AccountReceipt`, `JournalEntry`, `RecurringJournal`, `DetailedLedgerTransaction`, `FinancialYear`, `TrialBalance`, `BalanceSheet`, `ProfitAndLoss`, `FinalAccounts`, `Budget`, `TakeOnBalance`, `ReportingGroup`, `AnalysisCategory`, `AnalysisType`, `AccountNoteAttachment` |
+| Customers and sales | 28 | 🟩 (100%) | 🟩 | `Customer`, `CustomerCategory`, `CustomerOpeningBalance`, `CustomerStatement`, `CustomerNote` (18 ops) | `Quote`, `TaxInvoice`, `SalesOrder`, `RecurringInvoice`, `CustomerReceipt`, `CustomerReturn`, `CustomerAdjustment`, `CustomerWriteOff`, `CustomerAgeing`, `CustomerTransactionListing`, `CustomerSalesHistory`, `OutstandingCustomerDocument`, `Allocation`, `SalesRepresentative`, etc. (M005) |
+| Suppliers and purchases | 20 | 🟩 (100%) | 🟩 | `Supplier`, `SupplierCategory`, `SupplierOpeningBalance`, `SupplierStatement`, `SupplierNote` (17 ops) | `SupplierInvoice`, `SupplierPayment`, `SupplierReturn`, `SupplierAdjustment`, `PurchaseOrder`, `SupplierAgeing`, `SupplierTransactionListing`, `SupplierPurchaseHistory`, `OutstandingSupplierDocument`, `SupplierBankDetail`, etc. (M005) |
+| Banking | 12 | 🟩 (100%) | 🟩 | — | `BankAccount`, `BankAccountCategory`, `BankAccountNote`, `BankAccountOpeningBalance`, `BankAccountTransactionListing`, `BankStatementTransaction`, `BankTransaction`, `BankImportMapping`, `ProcessBankAndCreditCardMapping`, `CashMovement`, etc. (M006) |
+| Inventory | 18 | 🟩 (100%) | 🟩 | `Item`, `ItemCategory`, `ItemOpeningBalance`, `ItemNote` (16 ops) | `ItemAdjustment`, `ItemAttachment`, `ItemBundle`, `ItemMovement`, `ItemReportGroup`, `AdditionalItemPrice`, `AdditionalPriceList`, `PurchasesByItem`, `SalesByItem`, `PriceListingReport`, etc. (M005/M006) |
+| Taxation | 6 | 🟩 (100%) | 🟩 | `TaxType` (4 ops) | `TaxAdjustment`, `TaxRateAdjustment`, `TaxPeriod`, `BASReport`, `VAT201Report` (M006) |
+| Assets | 4 | 🟩 (100%) | 🟩 | — | `Asset`, `AssetCategory`, `AssetLocation`, `AssetNote` (M006) |
+| CRM and administration | 18 | 🟩 (100%) | 🟩 | `Login`, `Company`, `CompanyEntityType`, `CompanyNote` (12 ops) | `CRMActivity`, `CRMActivityCategory`, `AccountantEvent`, `AccountantNote`, `AccountantTask`, `AccountantTaskRecurrence`, `ToDoList`, `DeveloperData`, etc. (M006) |
+| Time tracking | 6 | 🟩 (100%) | 🟩 | — | `TimeTrackingCustomer`, `TimeTrackingExpense`, `TimeTrackingProject`, `TimeTrackingTask`, `TimeTrackingTimesheet`, `TimeTrackingUser` (M006) |
+| Other services | 29 | 🟩 (100%) | 🟩 | — | Document attachments, localization, exchange rates, secretarial, dashboard reports, user defined fields (M005/M006) |

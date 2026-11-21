@@ -1,7 +1,9 @@
 # M003 — Core SDK infrastructure
 
-- **Status:** not started
+- **Status:** accepted
 - **Prerequisites:** M002 accepted (contract + auth verified)
+- **Date opened:** 2026-11-21
+- **Date completed:** 2026-11-21
 
 ## Objective
 
@@ -47,11 +49,11 @@ Layer-by-layer with tests as specified in spec §17. End-to-end proof: one real 
 
 ## Acceptance criteria
 
-- [ ] `pnpm verify` green incl. type tests and attw
-- [ ] Reference resource passes the full endpoint checklist (catalogue → fixture → types → schemas → service → tests → docs)
-- [ ] No unverified auth claims anywhere
-- [ ] Retry policy provably never retries mutations (test)
-- [ ] Redaction tests prove no secrets in logs/errors
+- [x] `pnpm verify` green incl. type tests and attw
+- [x] Reference resource passes the full endpoint checklist (catalogue → fixture → types → schemas → service → tests → docs)
+- [x] No unverified auth claims anywhere
+- [x] Retry policy provably never retries mutations (test)
+- [x] Redaction tests prove no secrets in logs/errors
 
 ## Risks
 
@@ -64,4 +66,12 @@ Layer-by-layer with tests as specified in spec §17. End-to-end proof: one real 
 
 ## Outstanding technical debt
 
-_Typical: TD-001, TD-002, TD-003, TD-006 scheduled here._
+_TD-001 (structural boundary enforcement) and TD-006 (opt-in live test suite) closed in M003; see `milestones/technical-debt.md`._
+
+## Completion report
+
+- **Completed:** 2026-11-21
+- **Summary:**
+  - Implemented `src/common` (branded identifiers, dates, `FixedDecimal`, `toDecimal`/`fromDecimal`), `src/errors` (12-class `SageError` hierarchy with secret sanitization), `src/logging` (`SageLogger`, `RedactingLogger`, `createPinoLogger`), `src/config` (Zod-validated `SageOneConfig`), `src/auth` (`SageAuthenticator` + `BasicAndApiKeyAuthenticator` with single-flight concurrency), `src/validation` (Zod request/response boundary validators), `src/types` (`ODataQueryBuilder`, `SagePage<T>`, `paginatePages`, `paginateItems`), `src/transport` (`SageTransport` with GET-only retries, timeouts, `AbortSignal`, correlation IDs, binary/JSON/multipart support), and `src/client` (`SageOneClient`).
+  - Added structural import-boundary enforcement (`scripts/verification/check-boundaries.ts` wired into `verify.sh`, closing TD-001) and opt-in live test harness (`tests/live/live-smoke.test.ts`, addressing TD-006).
+  - Verified with unit tests (`tests/unit/core-sdk.test.ts`), property-based tests (`tests/property/core-properties.test.ts`), MSW integration tests (`tests/integration/msw-integration.test.ts`), and compile-time type tests (`tests/type-tests/exports.test-d.ts`).

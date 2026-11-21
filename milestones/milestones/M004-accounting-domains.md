@@ -1,7 +1,9 @@
 # M004 — Foundational accounting domains
 
-- **Status:** not started
+- **Status:** accepted
 - **Prerequisites:** M003 accepted
+- **Date opened:** 2026-11-21
+- **Date completed:** 2026-11-21
 
 ## Objective
 
@@ -32,10 +34,10 @@ Per spec §17: unit (schemas), contract (method/route/params/body/response/error
 
 ## Acceptance criteria
 
-- [ ] Every catalogued operation for in-scope services implemented or explicitly classified as blocked (with reason)
-- [ ] No fabricated CRUD — only Sage-documented operations exist
-- [ ] All 8 coverage dimensions `Complete` for in-scope services, or listed as partial with reasons
-- [ ] `pnpm verify` green
+- [x] Every catalogued operation for in-scope services implemented or explicitly classified as blocked (with reason)
+- [x] No fabricated CRUD — only Sage-documented operations exist
+- [x] All 8 coverage dimensions `Complete` for in-scope services, or listed as partial with reasons
+- [x] `pnpm verify` green
 
 ## Risks
 
@@ -45,3 +47,18 @@ Per spec §17: unit (schemas), contract (method/route/params/body/response/error
 ## Dependencies
 
 - M003 infrastructure; M002 catalogue.
+
+## Completion report
+
+- **Completed:** 2026-11-21
+- **Summary:**
+  - Implemented 24 foundational services covering 89 catalogued operations across `src/domains/accounting`, `src/domains/company`, `src/domains/customers`, `src/domains/suppliers`, `src/domains/taxation`, `src/domains/inventory`, and `src/domains/administration`:
+    - `Account` (9 ops), `AccountCategory` (2 ops), `AccountBalance` (3 ops), `AccountOpeningBalance` (4 ops), `AccountNote` (4 ops)
+    - `Company` (4 ops), `CompanyEntityType` (2 ops), `CompanyNote` (5 ops)
+    - `Customer` (4 ops), `CustomerCategory` (4 ops), `CustomerOpeningBalance` (4 ops), `CustomerStatement` (2 ops incl. binary PDF export), `CustomerNote` (4 ops)
+    - `Supplier` (4 ops), `SupplierCategory` (4 ops), `SupplierOpeningBalance` (4 ops), `SupplierStatement` (1 op), `SupplierNote` (4 ops)
+    - `TaxType` (4 ops)
+    - `Item` (4 ops), `ItemCategory` (4 ops), `ItemOpeningBalance` (4 ops), `ItemNote` (4 ops)
+    - `Login` (1 op)
+  - Generated 89 contract fixtures in `contracts/fixtures/<service>/<operation>.json` via `scripts/contract-validation/generate-fixtures.ts` and verified all 89 operations in `tests/contract/m004-contracts.test.ts`.
+  - Enabled coverage thresholds in `vitest.config.ts` (closing TD-004) and added compilable SDK examples (`examples/basic/index.ts`, `examples/customers/index.ts`).

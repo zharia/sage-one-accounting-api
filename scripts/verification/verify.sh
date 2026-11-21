@@ -12,8 +12,9 @@ step() {
 step "1/10 Formatting verification"
 pnpm format:check
 
-step "2/10 Linting"
+step "2/10 Linting & architectural boundary checks"
 pnpm lint
+node scripts/verification/check-boundaries.ts
 
 step "3/10 Type checking"
 pnpm typecheck

@@ -1,0 +1,38 @@
+{
+  "id": "POST-ItemOpeningBalance-Save",
+  "service": "ItemOpeningBalance",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/ItemOpeningBalance/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-ItemOpeningBalance-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "ItemId": 2,
+    "Reason": "sample string 3",
+    "Date": "2026-11-21",
+    "Quantity": 5,
+    "Cost": 6,
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "ItemId": 2,
+    "Reason": "sample string 3",
+    "Date": "2026-11-21",
+    "Quantity": 5,
+    "Cost": 6,
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21"
+  }
+}

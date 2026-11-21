@@ -1,0 +1,35 @@
+{
+  "id": "GET-CompanyEntityType-Get-id",
+  "service": "CompanyEntityType",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/CompanyEntityType/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-CompanyEntityType-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "CountryId": 2,
+    "Name": "sample string 3",
+    "OwnershipDescription": "sample string 4",
+    "HoldingDescription": "sample string 5",
+    "HoldingUnit": "sample string 6",
+    "Created": "2026-11-21",
+    "CanIssueShares": true
+  }
+}

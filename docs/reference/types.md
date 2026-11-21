@@ -1,24 +1,22 @@
 # Type reference
 
-> TypeDoc API reference wires up in M003 (`docs/reference/` generated output). Until then, the public surface is `src/index.ts`.
+Canonical exports from `src/index.ts`.
 
-## Planned public type groups (spec §19.3)
+## Domain Type Groups
 
-| Group | Examples | Defined in |
+| Group | Exported Types & Utilities | Defined in |
 |---|---|---|
-| Identifiers (branded) | `SageId`, `CompanyId`, `CustomerId`, `SupplierId`, `AccountId`, `TaxTypeId`, `InvoiceId` | `src/types` |
-| Date/time (branded) | `ISODateString`, `ISODateTimeString` | `src/types` |
-| Money & tax | wire amount types, explicit decimal conversion utilities | `src/types` (ADR-012 provisional) |
-| Enums | account types, tax types, document statuses, transaction types, payment methods, currency codes, periods, recurrence | `src/types` (forward-compatible) |
-| Paging | `SagePage<T>` envelope | `src/types` (ADR-011) |
-| Queries | OData builder types | `src/types` (ADR-010) |
-| Config | `SageOneConfig` | `src/config` |
-| Logging | `SageLogger`, `LogLevel` | `src/logging` |
-| Auth | `SageAuthenticator`, `AuthenticationContext`, `AuthenticationResult` | `src/auth` |
-| Errors | full hierarchy | `src/errors` |
-
-## Rules
-
-- No `any` in public declarations (spec §4.6) — enforced by lint + type tests.
-- Wire types (PascalCase) vs SDK convenience types documented side by side where both exist.
-- Branded types construct only via validated parsers; type tests assert distinctness.
+| Branded Identifiers | `SageId`, `CompanyId`, `AccountId`, `AccountCategoryId`, `AccountNoteId`, `AccountOpeningBalanceId`, `BudgetId`, `CompanyEntityTypeId`, `CompanyNoteId`, `CustomerId`, `CustomerCategoryId`, `CustomerNoteId`, `CustomerOpeningBalanceId`, `SupplierId`, `SupplierCategoryId`, `SupplierNoteId`, `SupplierOpeningBalanceId`, `TaxTypeId`, `ItemId`, `ItemCategoryId`, `ItemNoteId`, `ItemOpeningBalanceId`, `InvoiceId`, `SageGuid` + `to*Id()` constructors | `src/common/index.ts` |
+| Branded Dates | `ISODateString`, `ISODateTimeString`, `toISODateString`, `toISODateTimeString` | `src/common/index.ts` |
+| Money & Decimals | `WireMoney`, `FixedDecimal`, `toDecimal`, `fromDecimal` | `src/common/index.ts` (ADR-012) |
+| Paging & OData | `SagePage<T>`, `ODataQueryBuilder<T>`, `ODataQueryParams`, `odata`, `paginatePages`, `paginateItems`, `PaginationOptions`, `PageIterationEnvelope<T>` | `src/types/index.ts` |
+| Accounting Models | `Account`, `AccountSaveRequest`, `AccountCategory`, `AccountBalance`, `BudgetAccountBalance`, `BudgetItemPeriod`, `DateRangeRequest`, `AccountOpeningBalance`, `AccountOpeningBalanceSaveRequest`, `AccountNote`, `AccountNoteSaveRequest` | `src/domains/accounting/index.ts` |
+| Company Models | `Company`, `CompanyLogo`, `CompanyEntityType`, `CompanyNote`, `CompanyNoteSaveRequest` | `src/domains/company/index.ts` |
+| Customer Models | `Customer`, `CustomerSaveRequest`, `CustomerCategory`, `CustomerCategorySaveRequest`, `CustomerOpeningBalance`, `CustomerOpeningBalanceSaveRequest`, `CustomerStatement`, `CustomerStatementLine`, `CustomerStatementRequest`, `CustomerNote`, `CustomerNoteSaveRequest` | `src/domains/customers/index.ts` |
+| Supplier Models | `Supplier`, `SupplierSaveRequest`, `SupplierCategory`, `SupplierCategorySaveRequest`, `SupplierOpeningBalance`, `SupplierOpeningBalanceSaveRequest`, `SupplierStatement`, `SupplierStatementLine`, `SupplierStatementRequest`, `SupplierNote`, `SupplierNoteSaveRequest` | `src/domains/suppliers/index.ts` |
+| Taxation Models | `TaxType`, `TaxTypeSaveRequest` | `src/domains/taxation/index.ts` |
+| Inventory Models | `Item`, `ItemSaveRequest`, `ItemCategory`, `ItemCategorySaveRequest`, `ItemOpeningBalance`, `ItemOpeningBalanceSaveRequest`, `ItemNote`, `ItemNoteSaveRequest`, `ItemReportGroupRef`, `AdditionalItemPriceRef`, `AttachmentRef` | `src/domains/inventory/index.ts` |
+| Administration | `AuthenticationCredentials` | `src/domains/administration/index.ts` |
+| Client & Config | `SageOneClient`, `SageOneClientConfig`, `SageOneConfigInput`, `ResolvedSageOneConfig`, `resolveConfig` | `src/client/index.ts`, `src/config/index.ts` |
+| Auth & Logging | `SageAuthenticator`, `BasicAndApiKeyAuthenticator`, `AuthenticationContext`, `AuthenticationResult`, `SageLogger`, `LogLevel`, `RedactingLogger`, `createPinoLogger` | `src/auth/index.ts`, `src/logging/index.ts` |
+| Errors | `SageError`, `SageConfigurationError`, `SageAuthenticationError`, `SageAuthorizationError`, `SageValidationError`, `SageApiError`, `SageNotFoundError`, `SageConflictError`, `SageRateLimitError`, `SageNetworkError`, `SageTimeoutError`, `SageResponseError` | `src/errors/index.ts` |

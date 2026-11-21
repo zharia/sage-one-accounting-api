@@ -1,26 +1,38 @@
 # Service reference
 
-> One section per implemented service with operations, request/response models, query parameters, auth, pagination and limitations (spec §19.3). Generated from TypeDoc + coverage matrix in M003+.
+Implemented services as of M004 (24 services, 89 operations). All services are exposed as stable properties on `SageOneClient` and use the shared transport and validation pipeline.
 
-**Status: no services implemented yet (M001).** Planned service groups from the client surface (spec §12):
+## Summary of Client Services
 
-```
-sage.accounts          sage.customers        sage.suppliers
-sage.invoices          sage.quotes           sage.salesOrders
-sage.purchaseOrders    sage.bankAccounts     sage.bankTransactions
-sage.journalEntries    sage.taxTypes         sage.taxPeriods
-sage.items             sage.assets           sage.reports
-sage.company
-```
+| Client Property | Service Class | Sage Service | Operations |
+|---|---|---|---:|
+| `sage.login` | `LoginService` | `Login` | `validate` |
+| `sage.accounts` | `AccountsService` | `Account` | `list`, `pages`, `iterate`, `get`, `getPayrollTypeOfAccounts`, `getServiceAccounts`, `getWithSystemAccounts`, `getAccountsByCategoryId`, `getChartOfAccounts`, `save`, `delete` |
+| `sage.accountCategories` | `AccountCategoriesService` | `AccountCategory` | `list`, `get` |
+| `sage.accountBalances` | `AccountBalancesService` | `AccountBalance` | `get`, `getAccountBudgetsById`, `getAccountBudgets` |
+| `sage.accountOpeningBalances` | `AccountOpeningBalancesService` | `AccountOpeningBalance` | `list`, `get`, `getByAccountId`, `save` |
+| `sage.accountNotes` | `AccountNotesService` | `AccountNote` | `list`, `get`, `save`, `delete` |
+| `sage.company` | `CompanyService` | `Company` | `list`, `pages`, `iterate`, `get`, `getUserCompanyCount`, `current` |
+| `sage.companyEntityTypes` | `CompanyEntityTypesService` | `CompanyEntityType` | `list`, `get` |
+| `sage.companyNotes` | `CompanyNotesService` | `CompanyNote` | `list`, `get`, `getCompanyNotes`, `save`, `delete` |
+| `sage.customers` | `CustomersService` | `Customer` | `list`, `pages`, `iterate`, `get`, `save`, `delete` |
+| `sage.customerCategories` | `CustomerCategoriesService` | `CustomerCategory` | `list`, `get`, `save`, `delete` |
+| `sage.customerOpeningBalances` | `CustomerOpeningBalancesService` | `CustomerOpeningBalance` | `list`, `get`, `getByCustomerId`, `save` |
+| `sage.customerStatements` | `CustomerStatementsService` | `CustomerStatement` | `get`, `export` (PDF `ArrayBuffer`) |
+| `sage.customerNotes` | `CustomerNotesService` | `CustomerNote` | `list`, `get`, `save`, `delete` |
+| `sage.suppliers` | `SuppliersService` | `Supplier` | `list`, `pages`, `iterate`, `get`, `save`, `delete` |
+| `sage.supplierCategories` | `SupplierCategoriesService` | `SupplierCategory` | `list`, `get`, `save`, `delete` |
+| `sage.supplierOpeningBalances` | `SupplierOpeningBalancesService` | `SupplierOpeningBalance` | `list`, `get`, `getBySupplierId`, `save` |
+| `sage.supplierStatements` | `SupplierStatementsService` | `SupplierStatement` | `get` |
+| `sage.supplierNotes` | `SupplierNotesService` | `SupplierNote` | `list`, `get`, `save`, `delete` |
+| `sage.taxTypes` | `TaxTypesService` | `TaxType` | `list`, `pages`, `iterate`, `get`, `save`, `delete` |
+| `sage.items` | `ItemsService` | `Item` | `list`, `pages`, `iterate`, `get`, `save`, `delete` |
+| `sage.itemCategories` | `ItemCategoriesService` | `ItemCategory` | `list`, `get`, `save`, `delete` |
+| `sage.itemOpeningBalances` | `ItemOpeningBalancesService` | `ItemOpeningBalance` | `list`, `get`, `getByItemId`, `save` |
+| `sage.itemNotes` | `ItemNotesService` | `ItemNote` | `list`, `get`, `save`, `delete` |
 
-Naming is idiomatic TypeScript while preserving Sage terminology. Each service exposes only operations Sage actually provides — no fabricated CRUD (spec §12).
+## Contract Fidelity & Non-Negotiables
 
-## Per-service template (used when services land)
-
-### `<service>`
-
-- **Sage resource:** …
-- **Contract source:** docs URL + discovery date
-- **Operations:** method · route · request schema · response schema · query params · auth · paging · OData · notes
-- **Limitations:** undocumented behaviour, experimental verification results
-- **Coverage:** matrix row link
+- Only operations documented in `/api/2.0.0/help` are exposed (e.g., `AccountCategory` and `CompanyEntityType` are read-only `list`/`get` because Sage does not expose `Save` or `Delete` on those controllers).
+- Financial mutations (`save`, `delete`) set `isFinancialMutation: true` and are never automatically retried.
+- All list endpoints return `SagePage<T>` (`{ TotalResults, ReturnedResults, Results }`) and support typed OData queries via `options.odata`.
