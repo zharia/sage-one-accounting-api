@@ -1,0 +1,30 @@
+{
+  "id": "GET-DocumentMessage-Get-id",
+  "service": "DocumentMessage",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/DocumentMessage/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-DocumentMessage-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "DocumentTypeId": 2,
+    "Message": "sample string 3"
+  }
+}

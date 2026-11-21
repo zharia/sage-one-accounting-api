@@ -1,0 +1,31 @@
+{
+  "id": "POST-CustomerAdditionalContactOptions-SaveList",
+  "service": "CustomerAdditionalContactOptions",
+  "operation": "SaveList",
+  "method": "POST",
+  "route": "/CustomerAdditionalContactOptions/SaveList",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-CustomerAdditionalContactOptions-SaveList",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "experimental",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": [
+    {
+      "ID": 1,
+      "CompanyId": 2,
+      "CustomerAdditionalContactDetailId": 3
+    },
+    {
+      "ID": 1,
+      "CompanyId": 2,
+      "CustomerAdditionalContactDetailId": 3
+    }
+  ],
+  "responseContentType": "application/json",
+  "responseSample": null
+}

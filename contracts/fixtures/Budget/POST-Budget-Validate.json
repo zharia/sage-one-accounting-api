@@ -1,0 +1,86 @@
+{
+  "id": "POST-Budget-Validate",
+  "service": "Budget",
+  "operation": "Validate",
+  "method": "POST",
+  "route": "/Budget/Validate",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-Budget-Validate",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "Description": "sample string 2",
+    "BudgetItems": [
+      {
+        "ID": 1,
+        "Account": {
+          "ID": 1,
+          "ReportingLevelType": 1,
+          "Name": "sample string 2",
+          "Category": {
+            "Comment": "sample string 1",
+            "Order": 6,
+            "Description": "sample string 7",
+            "ID": 8,
+            "Modified": "2026-11-21",
+            "Created": "2026-11-21"
+          }
+        },
+        "BudgetItemPeriods": [
+          {
+            "ID": 1,
+            "Date": "2026-11-21",
+            "Total": 3
+          },
+          {
+            "ID": 1,
+            "Date": "2026-11-21",
+            "Total": 3
+          }
+        ],
+        "Total": 2,
+        "AccountTypeId": 3
+      },
+      {
+        "ID": 1,
+        "Account": {
+          "ID": 1,
+          "ReportingLevelType": 1,
+          "Name": "sample string 2",
+          "Category": {
+            "Comment": "sample string 1",
+            "Order": 6,
+            "Description": "sample string 7",
+            "ID": 8,
+            "Modified": "2026-11-21",
+            "Created": "2026-11-21"
+          }
+        },
+        "BudgetItemPeriods": [
+          {
+            "ID": 1,
+            "Date": "2026-11-21",
+            "Total": 3
+          },
+          {
+            "ID": 1,
+            "Date": "2026-11-21",
+            "Total": 3
+          }
+        ],
+        "Total": 2,
+        "AccountTypeId": 3
+      }
+    ],
+    "NumberOfPeriods": 3
+  },
+  "responseContentType": null,
+  "responseSample": null
+}

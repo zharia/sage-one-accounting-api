@@ -1,0 +1,26 @@
+{
+  "id": "POST-FinalAccounts-LinkToFinalAccountsOnlineByCompanyId_companyId",
+  "service": "FinalAccounts",
+  "operation": "LinkToFinalAccountsOnlineByCompanyId",
+  "method": "POST",
+  "route": "/FinalAccounts/LinkToFinalAccountsOnlineByCompanyId",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-FinalAccounts-LinkToFinalAccountsOnlineByCompanyId_companyId",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "companyId",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": "http://webapihelppage1.com"
+}

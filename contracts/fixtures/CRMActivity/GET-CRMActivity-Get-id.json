@@ -1,0 +1,53 @@
+{
+  "id": "GET-CRMActivity-Get-id",
+  "service": "CRMActivity",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/CRMActivity/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-CRMActivity-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "UserId": 1,
+    "Username": "sample string 2",
+    "CRMActivityTypeId": 1,
+    "Type": "sample string 3",
+    "Priority": 4,
+    "Category": "sample string 5",
+    "CRMActivityCategoryId": 1,
+    "CRMPriorityId": 1,
+    "Outline": "sample string 6",
+    "Body": "sample string 7",
+    "ActionDate": "2026-11-21",
+    "Reference": "sample string 8",
+    "LinkId": 1,
+    "Modified": "2026-11-21",
+    "Created": "2026-11-21",
+    "CRMActivityNotes": [
+      {
+        "ID": 1,
+        "Subject": "sample string 2"
+      },
+      {
+        "ID": 1,
+        "Subject": "sample string 2"
+      }
+    ]
+  }
+}

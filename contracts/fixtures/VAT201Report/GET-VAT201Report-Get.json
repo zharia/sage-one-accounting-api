@@ -1,0 +1,47 @@
+{
+  "id": "GET-VAT201Report-Get",
+  "service": "VAT201Report",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/VAT201Report/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-VAT201Report-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21",
+    "IncludeAdjustments": true,
+    "OffsetCredits": true,
+    "TaxPeriodId": 1
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "VatCode": "sample string 1",
+        "VatCodeDescription": "sample string 2",
+        "Total": 3,
+        "Vat": 4,
+        "VatType": "sample string 5",
+        "SortInd": 6
+      },
+      {
+        "VatCode": "sample string 1",
+        "VatCodeDescription": "sample string 2",
+        "Total": 3,
+        "Vat": 4,
+        "VatType": "sample string 5",
+        "SortInd": 6
+      }
+    ]
+  }
+}

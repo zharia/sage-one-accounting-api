@@ -1,0 +1,32 @@
+{
+  "id": "POST-TimeTrackingExpense-Save",
+  "service": "TimeTrackingExpense",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/TimeTrackingExpense/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TimeTrackingExpense-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "TimeTrackingProjectId": 2,
+    "DocumentHeaderId": 3,
+    "BillingMethod": 0,
+    "Date": "2026-11-21",
+    "Payee": "sample string 5",
+    "Description": "sample string 6",
+    "Expense": 7,
+    "Recharge": 8,
+    "MarkupPercentage": 9.1,
+    "IsBilled": true
+  },
+  "responseContentType": "application/json",
+  "responseSample": null
+}

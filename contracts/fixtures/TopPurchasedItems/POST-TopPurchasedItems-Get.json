@@ -1,0 +1,44 @@
+{
+  "id": "POST-TopPurchasedItems-Get",
+  "service": "TopPurchasedItems",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/TopPurchasedItems/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TopPurchasedItems-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "IncludeOption": true,
+    "ViewTop": 2,
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ItemId": 1,
+        "Description": "sample string 2",
+        "Exclusive": 3,
+        "Total": 4,
+        "Quantity": 5
+      },
+      {
+        "ItemId": 1,
+        "Description": "sample string 2",
+        "Exclusive": 3,
+        "Total": 4,
+        "Quantity": 5
+      }
+    ]
+  }
+}

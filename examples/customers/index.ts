@@ -70,4 +70,3 @@ export async function runCustomersExample(): Promise<void> {
   void totalReceivables;
   void statements;
 }
-

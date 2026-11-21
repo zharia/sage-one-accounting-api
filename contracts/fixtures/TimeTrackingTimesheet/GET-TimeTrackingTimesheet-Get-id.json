@@ -1,0 +1,130 @@
+{
+  "id": "GET-TimeTrackingTimesheet-Get-id",
+  "service": "TimeTrackingTimesheet",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/TimeTrackingTimesheet/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TimeTrackingTimesheet-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "TimeTrackingUserId": 2,
+    "TimeTrackingProjectId": 3,
+    "TimeTrackingTaskId": 4,
+    "TimeTrackingCustomerId": 5,
+    "Date": "2026-11-21",
+    "Hours": 7,
+    "Comments": "sample string 8",
+    "SystemGenerated": true,
+    "BilledAmount": 10,
+    "BilledHours": 11,
+    "WrittenOffHours": 12,
+    "WrittenOffAmount": 13,
+    "WeeklyEntries": [
+      {
+        "ID": 1,
+        "TimesheetIDs": [
+          1,
+          2
+        ],
+        "Date": "2026-11-21",
+        "Hours": 3,
+        "Comments": "sample string 4",
+        "SystemGenerated": true,
+        "SystemGeneratedHours": 6,
+        "BilledHours": 7,
+        "WrittenOffHours": 8,
+        "WrittenOffAmount": 9,
+        "ConsolidatedEntries": 10,
+        "Locked": true,
+        "LockedPartially": true,
+        "BillableHours": 13,
+        "BillableAmount": 14
+      },
+      {
+        "ID": 1,
+        "TimesheetIDs": [
+          1,
+          2
+        ],
+        "Date": "2026-11-21",
+        "Hours": 3,
+        "Comments": "sample string 4",
+        "SystemGenerated": true,
+        "SystemGeneratedHours": 6,
+        "BilledHours": 7,
+        "WrittenOffHours": 8,
+        "WrittenOffAmount": 9,
+        "ConsolidatedEntries": 10,
+        "Locked": true,
+        "LockedPartially": true,
+        "BillableHours": 13,
+        "BillableAmount": 14
+      }
+    ],
+    "MonthlyEntries": [
+      {
+        "ID": 1,
+        "TimesheetIDs": [
+          1,
+          2
+        ],
+        "Date": "2026-11-21",
+        "Hours": 3,
+        "Comments": "sample string 4",
+        "SystemGenerated": true,
+        "SystemGeneratedHours": 6,
+        "BilledHours": 7,
+        "WrittenOffHours": 8,
+        "WrittenOffAmount": 9,
+        "ConsolidatedEntries": 10,
+        "Locked": true,
+        "LockedPartially": true,
+        "BillableHours": 13,
+        "BillableAmount": 14
+      },
+      {
+        "ID": 1,
+        "TimesheetIDs": [
+          1,
+          2
+        ],
+        "Date": "2026-11-21",
+        "Hours": 3,
+        "Comments": "sample string 4",
+        "SystemGenerated": true,
+        "SystemGeneratedHours": 6,
+        "BilledHours": 7,
+        "WrittenOffHours": 8,
+        "WrittenOffAmount": 9,
+        "ConsolidatedEntries": 10,
+        "Locked": true,
+        "LockedPartially": true,
+        "BillableHours": 13,
+        "BillableAmount": 14
+      }
+    ],
+    "Locked": true,
+    "LockedPartially": true,
+    "BillableHours": 16,
+    "BillableAmount": 17,
+    "$SaveAndToggle": true,
+    "$TrackingCode": "sample string 19"
+  }
+}

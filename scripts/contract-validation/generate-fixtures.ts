@@ -72,11 +72,6 @@ async function generateFixtures(): Promise<void> {
   const updatedEndpoints: EndpointCatalogueRecord[] = [];
 
   for (const ep of catalogue.endpoints) {
-    if (!IMPLEMENTED_M004_SERVICES.has(ep.service)) {
-      updatedEndpoints.push(ep);
-      continue;
-    }
-
     const serviceDir = resolve(FIXTURES_ROOT, ep.service);
     await mkdir(serviceDir, { recursive: true });
 

@@ -1,0 +1,26 @@
+{
+  "id": "GET-TaxInvoiceAttachment-Download-id",
+  "service": "TaxInvoiceAttachment",
+  "operation": "Download",
+  "method": "GET",
+  "route": "/TaxInvoiceAttachment/Download/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TaxInvoiceAttachment-Download-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "binary_download",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "globally unique identifier",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/octet-stream",
+  "responseSample": null
+}

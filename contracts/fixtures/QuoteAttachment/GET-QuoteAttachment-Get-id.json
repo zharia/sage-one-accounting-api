@@ -1,0 +1,39 @@
+{
+  "id": "GET-QuoteAttachment-Get-id",
+  "service": "QuoteAttachment",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/QuoteAttachment/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-QuoteAttachment-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "c8c9bcb7-1a7f-4800-bafe-f41c5b66627c",
+      "Data": "QEA="
+    },
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "c8c9bcb7-1a7f-4800-bafe-f41c5b66627c",
+      "Data": "QEA="
+    }
+  ]
+}

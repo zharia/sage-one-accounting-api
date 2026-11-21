@@ -1,0 +1,43 @@
+{
+  "id": "GET-SupplierBankDetail-Get",
+  "service": "SupplierBankDetail",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/SupplierBankDetail/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-SupplierBankDetail-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "SupplierId": 2,
+        "BankAccountHolder": "sample string 3",
+        "BankAccountNumber": "sample string 4",
+        "BankName": "sample string 5",
+        "BankBranchCode": "sample string 6",
+        "BankAccountType": 1
+      },
+      {
+        "ID": 1,
+        "SupplierId": 2,
+        "BankAccountHolder": "sample string 3",
+        "BankAccountNumber": "sample string 4",
+        "BankName": "sample string 5",
+        "BankBranchCode": "sample string 6",
+        "BankAccountType": 1
+      }
+    ]
+  }
+}

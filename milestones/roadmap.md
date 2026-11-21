@@ -13,18 +13,18 @@ M003 Core SDK infrastructure     (accepted 2026-11-21 — client, config, transp
    │
    ├──────────────────┐
    ▼                  ▼
-M004 Foundational    M005 Commercial transactions          ← next
-accounting domains   (invoices, quotes, orders, receipts,
-(accepted 2026-11-21  payments, allocations, attachments)
- 24 services, 89 ops)
+M004 Foundational    M005 Commercial transactions
+accounting domains   (accepted 2026-11-21 — 59 services, 247 ops:
+(accepted 2026-11-21  invoices, quotes, orders, receipts,
+ 24 services, 89 ops) payments, allocations, attachments)
    │                  │
    └────────┬─────────┘
             ▼
 M006 Banking, reporting, advanced domains
-(banking, journals, assets, taxation, reporting, time tracking, CRM, remaining)
+(accepted 2026-11-21 — 79 services, 286 ops; 100% of 162 services / 622 endpoints complete)
             │
             ▼
-M007 Production readiness        (100% coverage, docs, package verification, release automation, 1.0)
+M007 Production readiness        (100% coverage, docs, package verification, release automation, 1.0) ← next
 ```
 
 ## Release progression
@@ -43,7 +43,9 @@ M007 Production readiness        (100% coverage, docs, package verification, rel
 - **M002 (Sage API discovery): accepted (2026-11-21)**
 - **M003 (Core SDK infrastructure): accepted (2026-11-21)**
 - **M004 (Foundational accounting domains): accepted (2026-11-21)**
-- M005–M007: not started
+- **M005 (Commercial transactions): accepted (2026-11-21)**
+- **M006 (Banking, reporting, and advanced domains): accepted (2026-11-21)**
+- M007: next
 
 ## Risk register (top)
 
@@ -51,5 +53,5 @@ M007 Production readiness        (100% coverage, docs, package verification, rel
 |---|---|---|
 | Authentication mechanism differs from assumptions | M002 | Interface-first design (ADR-007); no claims until verified |
 | No machine-readable Sage spec → scraping fragile | M002 | Archive snapshots, scripted retrieval, diffing; classify undocumented gaps |
-| Decimal/wire format surprises | M002→M012 (ADR-012) | Provisional ADR; round-trip property tests |
+| Decimal/wire format surprises | M002→M012 (ADR-012) | Accepted ADR-012; round-trip property tests |
 | Scope creep before foundation is solid | all | Hard dependency order; acceptance criteria per milestone |

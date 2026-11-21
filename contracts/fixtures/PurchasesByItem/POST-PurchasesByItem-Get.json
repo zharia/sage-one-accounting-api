@@ -1,0 +1,72 @@
+{
+  "id": "POST-PurchasesByItem-Get",
+  "service": "PurchasesByItem",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/PurchasesByItem/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-PurchasesByItem-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "AnalysisCategoryId1": 1,
+    "AnalysisCategoryId2": 1,
+    "AnalysisCategoryId3": 1,
+    "ReportGroupAccount": "sample string 1",
+    "IncludeReturns": true,
+    "Limit": 3,
+    "FromItem": "sample string 4",
+    "ToItem": "sample string 5",
+    "FromCategory": "sample string 6",
+    "ToCategory": "sample string 7",
+    "IncludeService": true,
+    "IncludePhysical": true,
+    "IncludeActive": true,
+    "IncludeInactive": true,
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "TransactionID": 2,
+        "DocumentTypeId": 3,
+        "DocumentNumber": "sample string 4",
+        "SupplierName": "sample string 5",
+        "ItemCode": "sample string 6",
+        "ItemDescription": "sample string 7",
+        "ItemCodeAndDescription": "sample string 8",
+        "UnitPriceExclusive": 9,
+        "Quantity": 10,
+        "TotalPurchases": 11,
+        "Date": "2026-11-21T00:00:00Z",
+        "PriceExclusive": 13
+      },
+      {
+        "ID": 1,
+        "TransactionID": 2,
+        "DocumentTypeId": 3,
+        "DocumentNumber": "sample string 4",
+        "SupplierName": "sample string 5",
+        "ItemCode": "sample string 6",
+        "ItemDescription": "sample string 7",
+        "ItemCodeAndDescription": "sample string 8",
+        "UnitPriceExclusive": 9,
+        "Quantity": 10,
+        "TotalPurchases": 11,
+        "Date": "2026-11-21T00:00:00Z",
+        "PriceExclusive": 13
+      }
+    ]
+  }
+}

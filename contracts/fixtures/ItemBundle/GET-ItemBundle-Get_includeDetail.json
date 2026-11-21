@@ -1,0 +1,97 @@
+{
+  "id": "GET-ItemBundle-Get_includeDetail",
+  "service": "ItemBundle",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/ItemBundle/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-ItemBundle-Get_includeDetail",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "includeDetail",
+      "type": "bool",
+      "required": false
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "Active": true,
+        "BundleCode": "sample string 3",
+        "Description": "sample string 4",
+        "ItemBundleItems": [
+          {
+            "ID": 1,
+            "ItemId": 2,
+            "Code": "sample string 3",
+            "Description": "sample string 4",
+            "Quantity": 6,
+            "AverageCost": 7,
+            "BundleCode": "sample string 8",
+            "BundleDescription": "sample string 9",
+            "PriceListCostExclusive": 10,
+            "PriceListCostInclusive": 11
+          },
+          {
+            "ID": 1,
+            "ItemId": 2,
+            "Code": "sample string 3",
+            "Description": "sample string 4",
+            "Quantity": 6,
+            "AverageCost": 7,
+            "BundleCode": "sample string 8",
+            "BundleDescription": "sample string 9",
+            "PriceListCostExclusive": 10,
+            "PriceListCostInclusive": 11
+          }
+        ],
+        "CodeAndDescription": "sample string 3 - sample string 4"
+      },
+      {
+        "ID": 1,
+        "Active": true,
+        "BundleCode": "sample string 3",
+        "Description": "sample string 4",
+        "ItemBundleItems": [
+          {
+            "ID": 1,
+            "ItemId": 2,
+            "Code": "sample string 3",
+            "Description": "sample string 4",
+            "Quantity": 6,
+            "AverageCost": 7,
+            "BundleCode": "sample string 8",
+            "BundleDescription": "sample string 9",
+            "PriceListCostExclusive": 10,
+            "PriceListCostInclusive": 11
+          },
+          {
+            "ID": 1,
+            "ItemId": 2,
+            "Code": "sample string 3",
+            "Description": "sample string 4",
+            "Quantity": 6,
+            "AverageCost": 7,
+            "BundleCode": "sample string 8",
+            "BundleDescription": "sample string 9",
+            "PriceListCostExclusive": 10,
+            "PriceListCostInclusive": 11
+          }
+        ],
+        "CodeAndDescription": "sample string 3 - sample string 4"
+      }
+    ]
+  }
+}

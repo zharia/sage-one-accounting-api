@@ -31,4 +31,3 @@ describe.skipIf(!liveEnabled)("Opt-in Live Sage One API Integration Suite (spec 
     expect(companies.TotalResults).toBeGreaterThanOrEqual(0);
   });
 });
-

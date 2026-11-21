@@ -1,0 +1,26 @@
+{
+  "id": "POST-FinalAccounts-Delete_accountId",
+  "service": "FinalAccounts",
+  "operation": "Delete",
+  "method": "POST",
+  "route": "/FinalAccounts/Delete",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-FinalAccounts-Delete_accountId",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "accountId",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": null,
+  "responseSample": null
+}

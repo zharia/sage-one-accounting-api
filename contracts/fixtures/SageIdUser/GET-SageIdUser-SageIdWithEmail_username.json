@@ -1,0 +1,28 @@
+{
+  "id": "GET-SageIdUser-SageIdWithEmail_username",
+  "service": "SageIdUser",
+  "operation": "SageIdWithEmail",
+  "method": "GET",
+  "route": "/SageIdUser/SageIdWithEmail",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-SageIdUser-SageIdWithEmail_username",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": false,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "username",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "UserInSageId": true
+  }
+}

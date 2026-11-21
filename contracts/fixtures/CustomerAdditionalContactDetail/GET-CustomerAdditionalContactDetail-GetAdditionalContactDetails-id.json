@@ -1,0 +1,55 @@
+{
+  "id": "GET-CustomerAdditionalContactDetail-GetAdditionalContactDetails-id",
+  "service": "CustomerAdditionalContactDetail",
+  "operation": "GetAdditionalContactDetails",
+  "method": "GET",
+  "route": "/CustomerAdditionalContactDetail/GetAdditionalContactDetails/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-CustomerAdditionalContactDetail-GetAdditionalContactDetails-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "ID": 1,
+      "CustomerId": 3,
+      "ContactName": "sample string 4",
+      "Designation": "sample string 5",
+      "Telephone": "sample string 6",
+      "Fax": "sample string 7",
+      "Mobile": "sample string 8",
+      "Email": "sample string 9",
+      "OutstandingInvoices": true,
+      "OverdueInvoices": true,
+      "BusinessBaseHashId": "MAA%3d-pipjsNlYS1g%3d",
+      "IsDirty": true
+    },
+    {
+      "ID": 1,
+      "CustomerId": 3,
+      "ContactName": "sample string 4",
+      "Designation": "sample string 5",
+      "Telephone": "sample string 6",
+      "Fax": "sample string 7",
+      "Mobile": "sample string 8",
+      "Email": "sample string 9",
+      "OutstandingInvoices": true,
+      "OverdueInvoices": true,
+      "BusinessBaseHashId": "MAA%3d-pipjsNlYS1g%3d",
+      "IsDirty": true
+    }
+  ]
+}

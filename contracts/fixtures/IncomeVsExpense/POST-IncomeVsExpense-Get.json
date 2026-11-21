@@ -1,0 +1,49 @@
+{
+  "id": "POST-IncomeVsExpense-Get",
+  "service": "IncomeVsExpense",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/IncomeVsExpense/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-IncomeVsExpense-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "UsePurchases": true,
+    "PeriodGroupingLength": 2,
+    "Comparative": true,
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21",
+    "Periods": [
+      {
+        "IncomeAmount": 1,
+        "ExpenseAmount": 2,
+        "Description": "Nov 26-Nov 26",
+        "StartDate": "2026-11-21",
+        "EndDate": "2026-11-21",
+        "PeriodComparativeType": 0
+      },
+      {
+        "IncomeAmount": 1,
+        "ExpenseAmount": 2,
+        "Description": "Nov 26-Nov 26",
+        "StartDate": "2026-11-21",
+        "EndDate": "2026-11-21",
+        "PeriodComparativeType": 0
+      }
+    ],
+    "IsComparative": true,
+    "UsePurchases": true
+  }
+}

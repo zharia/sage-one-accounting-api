@@ -1,0 +1,67 @@
+{
+  "id": "GET-TimeTrackingProject-GetProjectExpenses-id",
+  "service": "TimeTrackingProject",
+  "operation": "GetProjectExpenses",
+  "method": "GET",
+  "route": "/TimeTrackingProject/GetProjectExpenses/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-TimeTrackingProject-GetProjectExpenses-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Exclusive": 2,
+      "Total": 3,
+      "RechargeDescription": "",
+      "LinkedDocumentHeaderId": 1,
+      "LinkedDocumentTypeId": 1,
+      "LinkedDocumentNumber": "sample string 4",
+      "ID": 5,
+      "TimeTrackingProjectId": 6,
+      "DocumentHeaderId": 7,
+      "BillingMethod": 0,
+      "Date": "2026-11-21",
+      "Payee": "sample string 9",
+      "Description": "sample string 10",
+      "Expense": 11,
+      "Recharge": 12,
+      "MarkupPercentage": 13.1,
+      "IsBilled": true
+    },
+    {
+      "Name": "sample string 1",
+      "Exclusive": 2,
+      "Total": 3,
+      "RechargeDescription": "",
+      "LinkedDocumentHeaderId": 1,
+      "LinkedDocumentTypeId": 1,
+      "LinkedDocumentNumber": "sample string 4",
+      "ID": 5,
+      "TimeTrackingProjectId": 6,
+      "DocumentHeaderId": 7,
+      "BillingMethod": 0,
+      "Date": "2026-11-21",
+      "Payee": "sample string 9",
+      "Description": "sample string 10",
+      "Expense": 11,
+      "Recharge": 12,
+      "MarkupPercentage": 13.1,
+      "IsBilled": true
+    }
+  ]
+}

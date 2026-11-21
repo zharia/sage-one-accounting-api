@@ -2,7 +2,7 @@
 
 Strongly typed TypeScript SDK for the **Sage One Accounting API** (South Africa, API `2.0.0`).
 
-> **Status: alpha (M001–M004 complete).** Project foundation (M001), full 622-endpoint API contract discovery (M002), core SDK infrastructure (M003), and foundational accounting domains (M004 — 24 services, 89 operations) are implemented and verified. Commercial transactions (M005) and banking/reporting/advanced domains (M006) are next.
+> **Status: beta (M001–M006 complete — 100% endpoint coverage).** Project foundation (M001), full 622-endpoint API contract discovery (M002), core SDK infrastructure (M003), foundational accounting domains (M004), commercial transactions (M005), and banking/reporting/advanced domains (M006) are implemented and verified across all **162 services and 622 operations**. Production release readiness (M007) is next.
 
 - **Documentation source:** https://accounting.sageone.co.za/api/2.0.0/help
 - **Repository:** https://github.com/zharia/sage-one-typescript

@@ -1,0 +1,77 @@
+{
+  "id": "POST-PriceListingReport-Get",
+  "service": "PriceListingReport",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/PriceListingReport/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-PriceListingReport-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "FromItem": "sample string 1",
+    "ToItem": "sample string 2",
+    "FromCategory": "sample string 3",
+    "ToCategory": "sample string 4",
+    "PriceListIds": [
+      1,
+      2
+    ],
+    "Exclusive": true,
+    "IncludeServiceItems": true,
+    "IncludePhysicalItems": true,
+    "IncludeActive": true,
+    "IncludeInactive": true
+  },
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "ID": 1,
+      "Code": "sample string 2",
+      "Description": "sample string 3",
+      "CategoryDescription": "sample string 4",
+      "Unit": "sample string 5",
+      "PriceListReportLineItems": [
+        {
+          "AdditionalPriceListID": 1,
+          "UnitPrice": 2,
+          "UnitPriceInclusive": 1,
+          "UnitPriceExclusive": 1
+        },
+        {
+          "AdditionalPriceListID": 1,
+          "UnitPrice": 2,
+          "UnitPriceInclusive": 1,
+          "UnitPriceExclusive": 1
+        }
+      ]
+    },
+    {
+      "ID": 1,
+      "Code": "sample string 2",
+      "Description": "sample string 3",
+      "CategoryDescription": "sample string 4",
+      "Unit": "sample string 5",
+      "PriceListReportLineItems": [
+        {
+          "AdditionalPriceListID": 1,
+          "UnitPrice": 2,
+          "UnitPriceInclusive": 1,
+          "UnitPriceExclusive": 1
+        },
+        {
+          "AdditionalPriceListID": 1,
+          "UnitPrice": 2,
+          "UnitPriceInclusive": 1,
+          "UnitPriceExclusive": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "POST-ItemBundle-Save",
+  "service": "ItemBundle",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/ItemBundle/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-ItemBundle-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "Active": true,
+    "BundleCode": "sample string 3",
+    "Description": "sample string 4",
+    "ItemBundleItems": [
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "Code": "sample string 3",
+        "Description": "sample string 4",
+        "Quantity": 6,
+        "AverageCost": 7,
+        "BundleCode": "sample string 8",
+        "BundleDescription": "sample string 9",
+        "PriceListCostExclusive": 10,
+        "PriceListCostInclusive": 11
+      },
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "Code": "sample string 3",
+        "Description": "sample string 4",
+        "Quantity": 6,
+        "AverageCost": 7,
+        "BundleCode": "sample string 8",
+        "BundleDescription": "sample string 9",
+        "PriceListCostExclusive": 10,
+        "PriceListCostInclusive": 11
+      }
+    ],
+    "CodeAndDescription": "sample string 3 - sample string 4"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "Active": true,
+    "BundleCode": "sample string 3",
+    "Description": "sample string 4",
+    "ItemBundleItems": [
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "Code": "sample string 3",
+        "Description": "sample string 4",
+        "Quantity": 6,
+        "AverageCost": 7,
+        "BundleCode": "sample string 8",
+        "BundleDescription": "sample string 9",
+        "PriceListCostExclusive": 10,
+        "PriceListCostInclusive": 11
+      },
+      {
+        "ID": 1,
+        "ItemId": 2,
+        "Code": "sample string 3",
+        "Description": "sample string 4",
+        "Quantity": 6,
+        "AverageCost": 7,
+        "BundleCode": "sample string 8",
+        "BundleDescription": "sample string 9",
+        "PriceListCostExclusive": 10,
+        "PriceListCostInclusive": 11
+      }
+    ],
+    "CodeAndDescription": "sample string 3 - sample string 4"
+  }
+}

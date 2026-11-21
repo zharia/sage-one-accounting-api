@@ -1,0 +1,20 @@
+{
+  "id": "POST-PurchaseOrderAttachment-Save",
+  "service": "PurchaseOrderAttachment",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/PurchaseOrderAttachment/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-PurchaseOrderAttachment-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "multipart_upload",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "multipart/form-data",
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": null
+}

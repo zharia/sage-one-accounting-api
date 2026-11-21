@@ -1,0 +1,51 @@
+{
+  "id": "GET-BankImportMapping-Get",
+  "service": "BankImportMapping",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/BankImportMapping/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-BankImportMapping-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "LinkTypeId": 2,
+        "LinkId": 3,
+        "TaxTypeId": 4,
+        "SearchString": "sample string 5",
+        "Priority": true,
+        "DisplayDescription": "sample string 7",
+        "Payee": "sample string 8",
+        "AnalysisCategoryId1": 1,
+        "AnalysisCategoryId2": 1,
+        "AnalysisCategoryId3": 1
+      },
+      {
+        "ID": 1,
+        "LinkTypeId": 2,
+        "LinkId": 3,
+        "TaxTypeId": 4,
+        "SearchString": "sample string 5",
+        "Priority": true,
+        "DisplayDescription": "sample string 7",
+        "Payee": "sample string 8",
+        "AnalysisCategoryId1": 1,
+        "AnalysisCategoryId2": 1,
+        "AnalysisCategoryId3": 1
+      }
+    ]
+  }
+}

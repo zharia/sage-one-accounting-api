@@ -1,0 +1,51 @@
+{
+  "id": "POST-SupplierTransactionListing-GetSupplierTransactionListingReportingDetail",
+  "service": "SupplierTransactionListing",
+  "operation": "GetSupplierTransactionListingReportingDetail",
+  "method": "POST",
+  "route": "/SupplierTransactionListing/GetSupplierTransactionListingReportingDetail",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-SupplierTransactionListing-GetSupplierTransactionListingReportingDetail",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "FromSupplier": "sample string 1",
+    "ToSupplier": "sample string 2",
+    "FromCategory": "sample string 3",
+    "ToCategory": "sample string 4",
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21",
+    "IncludeActive": true,
+    "IncludeInactive": true,
+    "TransactionType": "sample string 9",
+    "ShowOpeningBalance": true,
+    "UseForeignCurrency": true
+  },
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "ID": 1,
+      "Name": "sample string 2",
+      "CurrencySymbol": "sample string 3",
+      "OpeningBalanceDate": "2026-11-21T00:00:00Z",
+      "OpeningBalance": 5,
+      "ClosingBalanceDate": "2026-11-21T00:00:00Z",
+      "ClosingBalance": 7
+    },
+    {
+      "ID": 1,
+      "Name": "sample string 2",
+      "CurrencySymbol": "sample string 3",
+      "OpeningBalanceDate": "2026-11-21T00:00:00Z",
+      "OpeningBalance": 5,
+      "ClosingBalanceDate": "2026-11-21T00:00:00Z",
+      "ClosingBalance": 7
+    }
+  ]
+}

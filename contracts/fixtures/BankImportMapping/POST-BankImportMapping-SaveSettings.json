@@ -1,0 +1,23 @@
+{
+  "id": "POST-BankImportMapping-SaveSettings",
+  "service": "BankImportMapping",
+  "operation": "SaveSettings",
+  "method": "POST",
+  "route": "/BankImportMapping/SaveSettings",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-BankImportMapping-SaveSettings",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "BankStatementMatchingOption": 0,
+    "BankStatementMatchingOnNewTransactions": true
+  },
+  "responseContentType": null,
+  "responseSample": null
+}

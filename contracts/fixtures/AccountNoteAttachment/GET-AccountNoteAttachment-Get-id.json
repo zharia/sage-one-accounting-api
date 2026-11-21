@@ -1,0 +1,39 @@
+{
+  "id": "GET-AccountNoteAttachment-Get-id",
+  "service": "AccountNoteAttachment",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/AccountNoteAttachment/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-AccountNoteAttachment-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": [
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "a0f6ab5c-fe82-4069-8e32-f463cf966f01",
+      "Data": "QEA="
+    },
+    {
+      "Name": "sample string 1",
+      "Size": 2,
+      "AttachmentUID": "a0f6ab5c-fe82-4069-8e32-f463cf966f01",
+      "Data": "QEA="
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "GET-BankAccountNote-Get",
+  "service": "BankAccountNote",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/BankAccountNote/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-BankAccountNote-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "AccountId": 1,
+        "UserId": 1,
+        "ID": 2,
+        "Subject": "sample string 3",
+        "EntryDate": "2026-11-21",
+        "ActionDate": "2026-11-21",
+        "Status": true,
+        "Note": "sample string 4",
+        "HasAttachments": true
+      },
+      {
+        "AccountId": 1,
+        "UserId": 1,
+        "ID": 2,
+        "Subject": "sample string 3",
+        "EntryDate": "2026-11-21",
+        "ActionDate": "2026-11-21",
+        "Status": true,
+        "Note": "sample string 4",
+        "HasAttachments": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "GET-EmailSignatureTemplate-Get_includeDefaults",
+  "service": "EmailSignatureTemplate",
+  "operation": "Get",
+  "method": "GET",
+  "route": "/EmailSignatureTemplate/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-EmailSignatureTemplate-Get_includeDefaults",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [
+    {
+      "name": "includeDefaults",
+      "type": "bool",
+      "required": false
+    }
+  ],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "ID": 1,
+        "CompanyId": 2,
+        "EmailTemplateTypeId": 3,
+        "EmailTemplateTypeDescription": "Recurring Invoice",
+        "Name": "sample string 5",
+        "Subject": "sample string 6",
+        "Template": "sample string 7"
+      },
+      {
+        "ID": 1,
+        "CompanyId": 2,
+        "EmailTemplateTypeId": 3,
+        "EmailTemplateTypeDescription": "Recurring Invoice",
+        "Name": "sample string 5",
+        "Subject": "sample string 6",
+        "Template": "sample string 7"
+      }
+    ]
+  }
+}

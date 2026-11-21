@@ -1,0 +1,20 @@
+{
+  "id": "PUT-CoreEvents-Subscribe",
+  "service": "CoreEvents",
+  "operation": "Subscribe",
+  "method": "PUT",
+  "route": "/CoreEvents/Subscribe",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/PUT-CoreEvents-Subscribe",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "partial",
+  "authenticationRequired": false,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": null,
+  "responseSample": null
+}

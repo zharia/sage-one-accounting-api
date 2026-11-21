@@ -1,0 +1,28 @@
+{
+  "id": "POST-DocumentMessage-Save",
+  "service": "DocumentMessage",
+  "operation": "Save",
+  "method": "POST",
+  "route": "/DocumentMessage/Save",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-DocumentMessage-Save",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "DocumentTypeId": 2,
+    "Message": "sample string 3"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "DocumentTypeId": 2,
+    "Message": "sample string 3"
+  }
+}

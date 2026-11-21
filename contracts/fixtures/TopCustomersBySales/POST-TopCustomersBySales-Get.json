@@ -1,0 +1,43 @@
+{
+  "id": "POST-TopCustomersBySales-Get",
+  "service": "TopCustomersBySales",
+  "operation": "Get",
+  "method": "POST",
+  "route": "/TopCustomersBySales/Get",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-TopCustomersBySales-Get",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": true,
+  "pagingBehaviour": "paged_envelope",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "CustomerId": 1,
+    "IncludeCreditNotes": true,
+    "ViewTop": 3,
+    "FromDate": "2026-11-21",
+    "ToDate": "2026-11-21"
+  },
+  "responseContentType": "application/json",
+  "responseSample": {
+    "TotalResults": 1,
+    "ReturnedResults": 2,
+    "Results": [
+      {
+        "CustomerId": 1,
+        "Name": "sample string 2",
+        "Exclusive": 3,
+        "Total": 4
+      },
+      {
+        "CustomerId": 1,
+        "Name": "sample string 2",
+        "Exclusive": 3,
+        "Total": 4
+      }
+    ]
+  }
+}

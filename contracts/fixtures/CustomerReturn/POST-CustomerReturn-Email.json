@@ -1,0 +1,37 @@
+{
+  "id": "POST-CustomerReturn-Email",
+  "service": "CustomerReturn",
+  "operation": "Email",
+  "method": "POST",
+  "route": "/CustomerReturn/Email",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/POST-CustomerReturn-Email",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [],
+  "requestContentType": "application/json",
+  "requestSample": {
+    "ID": 1,
+    "EmailAddress": "sample string 2",
+    "CCAddress": "sample string 3",
+    "BCCAddress": "sample string 4",
+    "Subject": "sample string 5",
+    "Message": "sample string 6",
+    "Attachments": [
+      {
+        "Key": "sample string 1",
+        "Value": "sample string 2"
+      },
+      {
+        "Key": "sample string 1",
+        "Value": "sample string 2"
+      }
+    ]
+  },
+  "responseContentType": null,
+  "responseSample": null
+}

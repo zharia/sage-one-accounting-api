@@ -1,0 +1,37 @@
+{
+  "id": "GET-SalesRepresentative-Get-id",
+  "service": "SalesRepresentative",
+  "operation": "GetById",
+  "method": "GET",
+  "route": "/SalesRepresentative/Get/{id}",
+  "sourceUrl": "https://accounting.sageone.co.za/api/2.0.0/Help/Api/GET-SalesRepresentative-Get-id",
+  "discoveredAt": "2026-11-21T12:50:00Z",
+  "documentationCompleteness": "full",
+  "authenticationRequired": true,
+  "odataSupport": false,
+  "pagingBehaviour": "none",
+  "fileHandling": "none",
+  "queryParameters": [],
+  "pathParameters": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "requestContentType": null,
+  "requestSample": null,
+  "responseContentType": "application/json",
+  "responseSample": {
+    "ID": 1,
+    "FirstName": "sample string 2",
+    "LastName": "sample string 3",
+    "Name": "sample string 2 sample string 3",
+    "Active": true,
+    "Email": "sample string 6",
+    "Mobile": "sample string 7",
+    "Telephone": "sample string 8",
+    "Created": "2026-11-21",
+    "Modified": "2026-11-21"
+  }
+}
