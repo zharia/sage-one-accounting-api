@@ -20,7 +20,9 @@ Live checklist for current session. Updated as work completes.
 - [x] 14. contracts/ skeleton + fixtures dir (README documents pending-M002 state)
 - [x] 15. examples/ skeleton (5 dirs with honest placeholder READMEs) + .env.example + .changeset
 - [x] 16. Run full verification — `pnpm verify` 10/10 green, `nix flake check` green
-- [ ] 17. Initial commit
+- [x] 17. Initial commit — `4cd95ea` on `main`, working tree clean
+
+## M001 status: complete (pending user acceptance)
 
 ## Session notes
 
