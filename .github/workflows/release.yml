@@ -28,7 +28,7 @@ jobs:
         run: nix develop --command pnpm verify
 
       - name: Create release PR or publish
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           publish: nix develop --command pnpm release
           version: nix develop --command pnpm version-packages
