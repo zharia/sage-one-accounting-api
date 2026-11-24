@@ -17,39 +17,141 @@ import {
 import { createSagePageSchema } from "../../validation/index.js";
 import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
+export const AdditionalPriceListSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Description: z.string(),
+    IsDefault: z.boolean().optional(),
+  })
+  .passthrough();
+export type AdditionalPriceList = z.infer<typeof AdditionalPriceListSchema>;
+
 export const AttachmentSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Size: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AttachmentUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Name: z.string(),
+    Size: z.number().int().optional(),
+    AttachmentUID: z.string().optional(),
+    Data: z.string().optional(),
   })
   .passthrough();
 export type Attachment = z.infer<typeof AttachmentSchema>;
 
+export const CommercialDocumentLineSchema = z
+  .object({
+    SelectionId: z.number().int(),
+    TaxTypeId: z.number().int().nullable().optional(),
+    ID: z.number().int().optional(),
+    Description: z.string().optional(),
+    LineType: z
+      .union([z.literal(0), z.literal(1), z.literal(3), z.literal(4), z.literal(5), z.literal(6)])
+      .optional(),
+    Quantity: z.number(),
+    UnitPriceExclusive: z.number().optional(),
+    Unit: z.string().optional(),
+    UnitPriceInclusive: z.number().optional(),
+    TaxPercentage: z.number().optional(),
+    DiscountPercentage: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Discount: z.number().optional(),
+    Tax: z.number().optional(),
+    Total: z.number().optional(),
+    Comments: z.string().optional(),
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    UnitCost: z.number().nullable().optional(), // read-only / system generated
+    UID: z.string().optional(), // read-only / system generated
+  })
+  .passthrough();
+export type CommercialDocumentLine = z.infer<typeof CommercialDocumentLineSchema>;
+
+const CustomerSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string(),
+    Category: z.lazy(() => CustomerCategorySchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    TaxReference: z.string().optional(),
+    ContactName: z.string().optional(),
+    Telephone: z.string().optional(),
+    Fax: z.string().optional(),
+    Mobile: z.string().optional(),
+    Email: z.string().optional(),
+    WebAddress: z.string().optional(),
+    Active: z.boolean().optional(),
+    IsObfuscated: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    CreditLimit: z.number().optional(),
+    CommunicationMethod: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    AutoAllocateToOldestInvoice: z.boolean().nullable().optional(),
+    EnableCustomerZone: z.boolean().optional(),
+    CustomerZoneGuid: z.string().optional(), // read-only / system generated
+    CashSale: z.boolean().nullable().optional(),
+    TextField1: z.string().optional(),
+    TextField2: z.string().optional(),
+    TextField3: z.string().optional(),
+    NumericField1: z.number().nullable().optional(),
+    NumericField2: z.number().nullable().optional(),
+    NumericField3: z.number().nullable().optional(),
+    YesNoField1: z.boolean().optional(),
+    YesNoField2: z.boolean().optional(),
+    YesNoField3: z.boolean().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
+    DefaultPriceListId: z.number().int().nullable().optional(),
+    DefaultPriceList: z.lazy(() => AdditionalPriceListSchema).optional(),
+    DefaultPriceListName: z.string().optional(),
+    AcceptsElectronicInvoices: z.boolean().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    BusinessRegistrationNumber: z.string().optional(),
+    TaxStatusVerified: z.string().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    CurrencySymbol: z.string().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultDiscountPercentage: z.number().nullable().optional(),
+    DefaultTaxTypeId: z.number().int().nullable().optional(),
+    DefaultTaxType: z.lazy(() => TaxTypeSchema).optional(),
+    DueDateMethodId: z.number().int().nullable().optional(),
+    DueDateMethodValue: z.number().int().nullable().optional(),
+    CityId: z.number().int().nullable().optional(),
+    AccountingAgreement: z.boolean().nullable().optional(),
+    HasSpecialCountryTaxActivity: z.boolean().optional(), // read-only / system generated
+    OutstandingInvoices: z.boolean().nullable().optional(),
+    OverdueInvoices: z.boolean().nullable().optional(),
+    OnHold: z.boolean().nullable().optional(),
+    ExcludeFromDebtorsManager: z.boolean().nullable().optional(),
+    SubjectToDRCVat: z.boolean().optional(),
+  })
+  .passthrough();
+
+const CustomerCategorySchema = z
+  .object({
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
 export const DocumentFileAttachmentDeleteRequestModelSchema = z
   .object({
-    FileUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FileUserUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessBaseId: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    FileUID: z.string().optional(),
+    FileUserUID: z.string().optional(),
+    BusinessBaseId: z.string().optional(),
   })
   .passthrough();
 export type DocumentFileAttachmentDeleteRequestModel = z.infer<
@@ -58,841 +160,442 @@ export type DocumentFileAttachmentDeleteRequestModel = z.infer<
 
 export const DocumentHeaderNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NoteTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Username: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Completed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    CompanyId: z.number().int().optional(),
+    DocumentHeaderId: z.number().int().optional(),
+    NoteTypeId: z.number().int().optional(),
+    UserId: z.number().int().optional(),
+    Username: z.string().optional(),
+    Created: z.string().optional(),
+    ActionDate: z.string().nullable().optional(),
+    Note: z.string().optional(),
+    Completed: z.boolean().optional(),
   })
   .passthrough();
 export type DocumentHeaderNote = z.infer<typeof DocumentHeaderNoteSchema>;
 
 export const DocumentHistorySchema = z
   .object({
-    DocumentHistoryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Username: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Change: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Detail: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    DocumentHistoryId: z.number().int().nullable().optional(),
+    CompanyId: z.number().int().nullable().optional(),
+    DocumentHeaderId: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    UserId: z.number().int().nullable().optional(),
+    Username: z.string().nullable().optional(),
+    Change: z.string().nullable().optional(),
+    Detail: z.string().nullable().optional(),
   })
   .passthrough();
 export type DocumentHistory = z.infer<typeof DocumentHistorySchema>;
 
 export const DocumentMessageSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    DocumentTypeId: z.number().int().optional(),
+    Message: z.string().optional(),
   })
   .passthrough();
 export type DocumentMessage = z.infer<typeof DocumentMessageSchema>;
 
 export const DocumentNumberSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NextDocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    DocumentTypeId: z.number().int().optional(),
+    NextDocumentNumber: z.string().optional(),
   })
   .passthrough();
 export type DocumentNumber = z.infer<typeof DocumentNumberSchema>;
 
 export const DocumentUserDefinedFieldSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TextField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    DocumentTypeId: z.number().int().nullable().optional(),
+    TextField1: z.string().nullable().optional(),
+    TextField2: z.string().nullable().optional(),
+    TextField3: z.string().nullable().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
   })
   .passthrough();
 export type DocumentUserDefinedField = z.infer<typeof DocumentUserDefinedFieldSchema>;
 
 export const DocumentUserDefinedFieldsEntrySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TextField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    DocumentHeaderId: z.number().int().optional(),
+    TextField1: z.string().optional(),
+    TextField2: z.string().optional(),
+    TextField3: z.string().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
   })
   .passthrough();
 export type DocumentUserDefinedFieldsEntry = z.infer<typeof DocumentUserDefinedFieldsEntrySchema>;
 
 export const EmailRequestModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EmailAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CCAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BCCAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Attachments: z
-      .array(z.union([z.string(), z.record(z.string(), z.unknown())]))
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    EmailAddress: z.string(),
+    CCAddress: z.string().optional(),
+    BCCAddress: z.string().optional(),
+    Subject: z.string().optional(),
+    Message: z.string().optional(),
+    Attachments: z.array(z.record(z.string(), z.string())).optional(),
   })
   .passthrough();
 export type EmailRequestModel = z.infer<typeof EmailRequestModelSchema>;
 
 export const EmailSignatureTemplateSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EmailTemplateTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EmailTemplateTypeDescription: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Template: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    CompanyId: z.number().int().optional(),
+    EmailTemplateTypeId: z.number().int().optional(),
+    EmailTemplateTypeDescription: z.string().optional(),
+    Name: z.string(),
+    Subject: z.string(),
+    Template: z.string(),
   })
   .passthrough();
 export type EmailSignatureTemplate = z.infer<typeof EmailSignatureTemplateSchema>;
 
 export const EmailTemplatePlaceHolderSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EmailTemplateTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PlaceHolder: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PropertyName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Type: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    EmailTemplateTypeId: z.number().int().nullable().optional(),
+    PlaceHolder: z.string().nullable().optional(),
+    PropertyName: z.string().nullable().optional(),
+    Type: z.string().nullable().optional(),
   })
   .passthrough();
 export type EmailTemplatePlaceHolder = z.infer<typeof EmailTemplatePlaceHolderSchema>;
 
 export const IBigModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 export type IBigModel = z.infer<typeof IBigModelSchema>;
 
 export const QuickEnquiryQuoteSummarySchema = z
   .object({
-    OutstandingCount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    OutstandingTotal: z.union([z.number(), z.string()]).nullable().optional(),
-    TotalForYear: z.union([z.number(), z.string()]).nullable().optional(),
-    ExpiredCount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ExpiredTotal: z.union([z.number(), z.string()]).nullable().optional(),
+    OutstandingCount: z.number().int().optional(),
+    OutstandingTotal: z.number().optional(),
+    TotalForYear: z.number().optional(),
+    ExpiredCount: z.number().int().optional(),
+    ExpiredTotal: z.number().optional(),
   })
   .passthrough();
 export type QuickEnquiryQuoteSummary = z.infer<typeof QuickEnquiryQuoteSummarySchema>;
 
 export const QuoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    ExpiryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AllowOnlineAccept: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Status: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UseForeignCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    Inclusive: z.boolean().optional(),
+    DiscountPercentage: z.number().optional(),
+    TaxReference: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Message: z.string().optional(),
+    Discount: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Rounding: z.number().optional(),
+    Total: z.number().optional(),
+    AmountDue: z.number().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    HasAttachments: z.boolean().optional(), // read-only / system generated
+    HasNotes: z.boolean().nullable().optional(), // read-only / system generated
+    HasAnticipatedDate: z.boolean().nullable().optional(), // read-only / system generated
+    HasSpecialCountryTax: z.boolean().optional(), // read-only / system generated
+    AnticipatedDate: z.string().nullable().optional(), // read-only / system generated
+    ExternalReference: z.string().optional(),
+    UID: z.string().optional(), // read-only / system generated
+    CustomerId: z.number().int(),
+    CustomerName: z.string().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    ExpiryDate: z.string(),
+    AllowOnlineAccept: z.boolean().nullable().optional(),
+    Status: z.string().optional(),
+    UseForeignCurrency: z.boolean().optional(),
+    Lines: z.array(z.lazy(() => CommercialDocumentLineSchema)).optional(),
   })
   .passthrough();
 export type Quote = z.infer<typeof QuoteSchema>;
 
 export const RecurringInvoiceSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    Schedule: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    RecurringProfile: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    Inclusive: z.boolean().optional(),
+    DiscountPercentage: z.number().optional(),
+    TaxReference: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Message: z.string().optional(),
+    Discount: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Rounding: z.number().optional(),
+    Total: z.number().optional(),
+    AmountDue: z.number().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    HasAttachments: z.boolean().optional(), // read-only / system generated
+    HasNotes: z.boolean().nullable().optional(), // read-only / system generated
+    HasAnticipatedDate: z.boolean().nullable().optional(), // read-only / system generated
+    HasSpecialCountryTax: z.boolean().optional(), // read-only / system generated
+    AnticipatedDate: z.string().nullable().optional(), // read-only / system generated
+    ExternalReference: z.string().optional(),
+    UID: z.string().optional(), // read-only / system generated
+    CustomerId: z.number().int(),
+    CustomerName: z.string().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    Schedule: z.lazy(() => ScheduleSchema).optional(),
+    RecurringProfile: z.lazy(() => RecurringProfileSchema).optional(),
+    Lines: z.array(z.lazy(() => CommercialDocumentLineSchema)).optional(),
   })
   .passthrough();
 export type RecurringInvoice = z.infer<typeof RecurringInvoiceSchema>;
 
+export const RecurringProfileSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    AutoCreate: z.boolean(),
+    DueDateMethodId: z.union([
+      z.literal(0),
+      z.literal(1),
+      z.literal(2),
+      z.literal(3),
+      z.literal(4),
+    ]),
+    DueDateMethodValue: z.number().int(),
+    EmailContent: z.string().optional(),
+    CarbonCopySender: z.boolean().nullable().optional(),
+    CarbonCopyEmail: z.string().optional(),
+    EmailSignatureTemplateId: z.number().int().nullable().optional(),
+  })
+  .passthrough();
+export type RecurringProfile = z.infer<typeof RecurringProfileSchema>;
+
 export const SalesOrderSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    DeliveryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AllowOnlineAccept: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Status: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UseForeignCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    FromDocument: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FromDocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    Inclusive: z.boolean().optional(),
+    DiscountPercentage: z.number().optional(),
+    TaxReference: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Message: z.string().optional(),
+    Discount: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Rounding: z.number().optional(),
+    Total: z.number().optional(),
+    AmountDue: z.number().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    HasAttachments: z.boolean().optional(), // read-only / system generated
+    HasNotes: z.boolean().nullable().optional(), // read-only / system generated
+    HasAnticipatedDate: z.boolean().nullable().optional(), // read-only / system generated
+    HasSpecialCountryTax: z.boolean().optional(), // read-only / system generated
+    AnticipatedDate: z.string().nullable().optional(), // read-only / system generated
+    ExternalReference: z.string().optional(),
+    UID: z.string().optional(), // read-only / system generated
+    CustomerId: z.number().int(),
+    CustomerName: z.string().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    DeliveryDate: z.string(),
+    AllowOnlineAccept: z.boolean().nullable().optional(), // read-only / system generated
+    Status: z.string().optional(), // read-only / system generated
+    UseForeignCurrency: z.boolean().optional(),
+    FromDocument: z.string().optional(),
+    FromDocumentId: z.number().int().optional(),
+    FromDocumentTypeId: z.number().int().nullable().optional(),
+    Lines: z.array(z.lazy(() => CommercialDocumentLineSchema)).optional(),
   })
   .passthrough();
 export type SalesOrder = z.infer<typeof SalesOrderSchema>;
 
 export const SalesRepresentativeSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FirstName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    FirstName: z.string(),
+    LastName: z.string().optional(),
+    Name: z.string().optional(), // read-only / system generated
+    Active: z.boolean(),
+    Email: z.string().optional(),
+    Mobile: z.string().optional(),
+    Telephone: z.string().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
   })
   .passthrough();
 export type SalesRepresentative = z.infer<typeof SalesRepresentativeSchema>;
 
 export const SalesRepresentativeNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentativeNoteId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int(),
+    Subject: z.string(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string(),
+    Status: z.boolean().nullable().optional(),
+    Note: z.string().optional(),
+    SalesRepresentativeId: z.number().int().optional(),
+    SalesRepresentativeNoteId: z.number().int().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
   })
   .passthrough();
 export type SalesRepresentativeNote = z.infer<typeof SalesRepresentativeNoteSchema>;
 
+export const ScheduleSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Description: z.string().optional(),
+    ScheduleFrequencyId: z.number().int(),
+    StartDate: z.string(),
+    EndDate: z.string().nullable().optional(),
+    Active: z.boolean().optional(),
+  })
+  .passthrough();
+export type Schedule = z.infer<typeof ScheduleSchema>;
+
 export const StorageInformationSchema = z
   .object({
-    SizeUsed: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MaxSizeAllowed: z.union([z.number().int(), z.string()]).nullable().optional(),
+    SizeUsed: z.number().int().optional(),
+    MaxSizeAllowed: z.number().int().optional(),
   })
   .passthrough();
 export type StorageInformation = z.infer<typeof StorageInformationSchema>;
 
 export const TaxInvoiceSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    DueDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromDocument: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FromDocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Status: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AllowOnlinePayment: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Paid: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    Inclusive: z.boolean().optional(),
+    DiscountPercentage: z.number().optional(),
+    TaxReference: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Message: z.string().optional(),
+    Discount: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Rounding: z.number().optional(),
+    Total: z.number().optional(),
+    AmountDue: z.number().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    HasAttachments: z.boolean().optional(), // read-only / system generated
+    HasNotes: z.boolean().nullable().optional(), // read-only / system generated
+    HasAnticipatedDate: z.boolean().nullable().optional(), // read-only / system generated
+    HasSpecialCountryTax: z.boolean().optional(), // read-only / system generated
+    AnticipatedDate: z.string().nullable().optional(), // read-only / system generated
+    ExternalReference: z.string().optional(),
+    UID: z.string().optional(), // read-only / system generated
+    CustomerId: z.number().int(),
+    CustomerName: z.string().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    DueDate: z.string(),
+    FromDocument: z.string().optional(),
+    FromDocumentId: z.number().int().optional(), // read-only / system generated
+    FromDocumentTypeId: z.number().int().nullable().optional(), // read-only / system generated
+    Status: z.string().optional(), // read-only / system generated
+    AllowOnlinePayment: z.boolean().nullable().optional(),
+    Paid: z.boolean().nullable().optional(), // read-only / system generated
+    Locked: z.boolean().optional(), // read-only / system generated
+    Lines: z.array(z.lazy(() => CommercialDocumentLineSchema)).optional(),
   })
   .passthrough();
 export type TaxInvoice = z.infer<typeof TaxInvoiceSchema>;
+
+const TaxTypeSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    Percentage: z.number().optional(),
+    IsDefault: z.boolean().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    IsManualTax: z.boolean().optional(),
+    Active: z.boolean().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    TaxTypeDefaultUID: z.string().optional(), // read-only / system generated
+    CompanyId: z.number().int().optional(),
+  })
+  .passthrough();
 
 export class QuoteService {
   private readonly executor: SageRequestExecutor;

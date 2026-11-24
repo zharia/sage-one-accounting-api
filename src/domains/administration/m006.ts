@@ -19,227 +19,113 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 export const CitySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CountryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    CountryId: z.number().int().optional(),
+    Name: z.string().optional(),
   })
   .passthrough();
 export type City = z.infer<typeof CitySchema>;
 
 export const CurrencyResponseSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Symbol: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    Code: z.string().nullable().optional(),
+    Description: z.string().nullable().optional(),
+    Symbol: z.string().nullable().optional(),
   })
   .passthrough();
 export type CurrencyResponse = z.infer<typeof CurrencyResponseSchema>;
 
 export const DateFormatSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DisplayAs: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DotNetFormat: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DotNetAltFormats: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    JSFormat: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    JSAltFormats: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    DisplayAs: z.string().optional(),
+    DotNetFormat: z.string().optional(),
+    DotNetAltFormats: z.string().optional(),
+    JSFormat: z.string().optional(),
+    JSAltFormats: z.string().optional(),
   })
   .passthrough();
 export type DateFormat = z.infer<typeof DateFormatSchema>;
 
 export const DeveloperDataSchema = z
   .object({
-    Key: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Key: z.string().optional(),
+    Data: z.string().optional(),
+    Created: z.string().optional(),
+    Modified: z.string().optional(),
   })
   .passthrough();
 export type DeveloperData = z.infer<typeof DeveloperDataSchema>;
 
 export const ExchangeRateResponseSchema = z
   .object({
-    IsBaseCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BaseCurrencyCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencyCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencyDescription: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencySymbol: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasActivity: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IsFutureRate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    RateInverse: z.union([z.number(), z.string()]).nullable().optional(),
-    OriginalRateInverse: z.union([z.number(), z.string()]).nullable().optional(),
-    GroupId: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    RateDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExchangeRateId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Rate: z.union([z.number().int(), z.string()]).nullable().optional(),
-    OriginalRate: z.union([z.number().int(), z.string()]).nullable().optional(),
-    HasManualRate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    IsBaseCurrency: z.boolean().nullable().optional(),
+    BaseCurrencyCode: z.string().nullable().optional(),
+    CurrencyCode: z.string().nullable().optional(),
+    CurrencyDescription: z.string().nullable().optional(),
+    CurrencySymbol: z.string().nullable().optional(),
+    HasActivity: z.boolean().nullable().optional(),
+    IsFutureRate: z.boolean().nullable().optional(),
+    RateInverse: z.number().nullable().optional(),
+    OriginalRateInverse: z.number().nullable().optional(),
+    GroupId: z.string().nullable().optional(),
+    RateDate: z.string().nullable().optional(),
+    ExchangeRateId: z.number().int().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    Rate: z.number().int().nullable().optional(),
+    OriginalRate: z.number().int().nullable().optional(),
+    HasManualRate: z.boolean().nullable().optional(),
+    Note: z.string().nullable().optional(),
   })
   .passthrough();
 export type ExchangeRateResponse = z.infer<typeof ExchangeRateResponseSchema>;
 
 export const ScheduleFrequencySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    Description: z.string().nullable().optional(),
   })
   .passthrough();
 export type ScheduleFrequency = z.infer<typeof ScheduleFrequencySchema>;
 
 export const SupportRequestUrlAuditTrailSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Username: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    SupportRequestUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Title: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Url: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    Username: z.string().optional(),
+    SupportRequestUID: z.string().optional(),
+    CompanyId: z.number().int().optional(),
+    UserId: z.number().int().optional(),
+    Title: z.string().optional(),
+    Url: z.string().optional(),
+    Created: z.string().optional(),
   })
   .passthrough();
 export type SupportRequestUrlAuditTrail = z.infer<typeof SupportRequestUrlAuditTrailSchema>;
 
 export const UserDefinedFieldSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserDefinedType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TextField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumberField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumberField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumberField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BoolField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BoolField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BoolField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    UserDefinedType: z.number().int().nullable().optional(),
+    TextField1: z.string().nullable().optional(),
+    TextField2: z.string().nullable().optional(),
+    TextField3: z.string().nullable().optional(),
+    NumberField1: z.string().nullable().optional(),
+    NumberField2: z.string().nullable().optional(),
+    NumberField3: z.string().nullable().optional(),
+    BoolField1: z.string().nullable().optional(),
+    BoolField2: z.string().nullable().optional(),
+    BoolField3: z.string().nullable().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
   })
   .passthrough();
 export type UserDefinedField = z.infer<typeof UserDefinedFieldSchema>;
 
 export const UserExistanceSchema = z
   .object({
-    UserInSageId: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    UserInSageId: z.boolean().optional(),
   })
   .passthrough();
 export type UserExistance = z.infer<typeof UserExistanceSchema>;

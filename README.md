@@ -43,6 +43,8 @@ Common commands:
 | `pnpm typecheck` | Strict TypeScript check |
 | `pnpm lint` / `pnpm format` | ESLint / Prettier |
 | `pnpm verify` | Full verification suite (§17.7 of the specification) |
+| `pnpm discover:models` | Fetch model/enum help pages missing from `resource-models.json` (resumable; WP008.1) |
+| `pnpm generate:domains` | Regenerate domain modules and client from the endpoint catalogue |
 
 See [`docs/development/`](./docs/development/environment-setup.md) for details.
 

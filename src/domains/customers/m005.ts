@@ -17,339 +17,379 @@ import {
 import { createSagePageSchema } from "../../validation/index.js";
 import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
+const AccountSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    Category: z.lazy(() => AccountCategorySchema).optional(),
+    Active: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    Description: z.string().optional(),
+    ReportingGroupId: z.number().int().nullable().optional(),
+    UnallocatedAccount: z.boolean().optional(), // read-only / system generated
+    IsTaxLocked: z.boolean().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    AccountType: z.number().int().optional(), // read-only / system generated
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultTaxTypeId: z.number().int().nullable().optional(),
+    DefaultTaxType: z.lazy(() => TaxTypeSchema).optional(),
+  })
+  .passthrough();
+
+const AccountCategorySchema = z
+  .object({
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+    Comment: z.string().optional(),
+    Order: z.number().int().optional(),
+  })
+  .passthrough();
+
+const AdditionalPriceListSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Description: z.string(),
+    IsDefault: z.boolean().optional(),
+  })
+  .passthrough();
+
+const AgeingTransactionSchema = z.record(z.string(), z.unknown());
+
 export const AllocatedCustomerDocumentSchema = z
   .object({
-    AllocationId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SourceDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocatedToDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocationTotal: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocationDiscount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z.unknown().optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z.unknown().optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Printed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    AllocationId: z.number().int().nullable().optional(),
+    SourceDocumentId: z.number().int().nullable().optional(),
+    AllocatedToDocumentId: z.number().int().nullable().optional(),
+    AllocationTotal: z.number().int().nullable().optional(),
+    AllocationDiscount: z.number().int().nullable().optional(),
+    CustomerId: z.number().int().nullable().optional(),
+    CustomerName: z.string().nullable().optional(),
+    Customer: z.record(z.string(), z.unknown()).nullable().optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.record(z.string(), z.unknown()).nullable().optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(),
+    Created: z.string().nullable().optional(),
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().int().nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Inclusive: z.boolean().nullable().optional(),
+    DiscountPercentage: z.number().nullable().optional(),
+    TaxReference: z.string().nullable().optional(),
+    DocumentNumber: z.string().nullable().optional(),
+    Reference: z.string().nullable().optional(),
+    Message: z.string().nullable().optional(),
+    Discount: z.number().int().nullable().optional(),
+    Exclusive: z.number().int().nullable().optional(),
+    Tax: z.number().int().nullable().optional(),
+    Rounding: z.number().int().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    AmountDue: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().nullable().optional(),
+    PostalAddress02: z.string().nullable().optional(),
+    PostalAddress03: z.string().nullable().optional(),
+    PostalAddress04: z.string().nullable().optional(),
+    PostalAddress05: z.string().nullable().optional(),
+    DeliveryAddress01: z.string().nullable().optional(),
+    DeliveryAddress02: z.string().nullable().optional(),
+    DeliveryAddress03: z.string().nullable().optional(),
+    DeliveryAddress04: z.string().nullable().optional(),
+    DeliveryAddress05: z.string().nullable().optional(),
+    Printed: z.boolean().nullable().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
+    Editable: z.boolean().nullable().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    HasNotes: z.boolean().nullable().optional(),
+    HasAnticipatedDate: z.boolean().nullable().optional(),
+    HasSpecialCountryTax: z.boolean().nullable().optional(),
+    AnticipatedDate: z.string().nullable().optional(),
+    ExternalReference: z.string().nullable().optional(),
+    UID: z.string().nullable().optional(),
+    Lines: z.array(z.record(z.string(), z.unknown()).nullable()).optional(),
   })
   .passthrough();
 export type AllocatedCustomerDocument = z.infer<typeof AllocatedCustomerDocumentSchema>;
 
 export const AllocatedSupplierDocumentSchema = z
   .object({
-    AllocationId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SourceDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocatedToDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocationTotal: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocationDiscount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SupplierId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SupplierName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Supplier: z.unknown().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Supplier_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Supplier_ExchangeRate: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Printed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    AllocationId: z.number().int().nullable().optional(),
+    SourceDocumentId: z.number().int().nullable().optional(),
+    AllocatedToDocumentId: z.number().int().nullable().optional(),
+    AllocationTotal: z.number().int().nullable().optional(),
+    AllocationDiscount: z.number().int().nullable().optional(),
+    SupplierId: z.number().int().nullable().optional(),
+    SupplierName: z.string().nullable().optional(),
+    Supplier: z.record(z.string(), z.unknown()).nullable().optional(),
+    Modified: z.string().nullable().optional(),
+    Created: z.string().nullable().optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Supplier_CurrencyId: z.number().int().nullable().optional(),
+    Supplier_ExchangeRate: z.number().int().nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Inclusive: z.boolean().nullable().optional(),
+    DiscountPercentage: z.number().nullable().optional(),
+    TaxReference: z.string().nullable().optional(),
+    DocumentNumber: z.string().nullable().optional(),
+    Reference: z.string().nullable().optional(),
+    Message: z.string().nullable().optional(),
+    Discount: z.number().int().nullable().optional(),
+    Exclusive: z.number().int().nullable().optional(),
+    Tax: z.number().int().nullable().optional(),
+    Rounding: z.number().int().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    AmountDue: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().nullable().optional(),
+    PostalAddress02: z.string().nullable().optional(),
+    PostalAddress03: z.string().nullable().optional(),
+    PostalAddress04: z.string().nullable().optional(),
+    PostalAddress05: z.string().nullable().optional(),
+    DeliveryAddress01: z.string().nullable().optional(),
+    DeliveryAddress02: z.string().nullable().optional(),
+    DeliveryAddress03: z.string().nullable().optional(),
+    DeliveryAddress04: z.string().nullable().optional(),
+    DeliveryAddress05: z.string().nullable().optional(),
+    Printed: z.boolean().nullable().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
+    Editable: z.boolean().nullable().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    HasNotes: z.boolean().nullable().optional(),
+    HasAnticipatedDate: z.boolean().nullable().optional(),
+    HasSpecialCountryTax: z.boolean().nullable().optional(),
+    AnticipatedDate: z.string().nullable().optional(),
+    ExternalReference: z.string().nullable().optional(),
+    UID: z.string().nullable().optional(),
+    Lines: z.array(z.record(z.string(), z.unknown()).nullable()).optional(),
   })
   .passthrough();
 export type AllocatedSupplierDocument = z.infer<typeof AllocatedSupplierDocumentSchema>;
 
 export const AllocationSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId_Source: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId_Allocation: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SourceDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AllocatedToDocumentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Type: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    DocumentHeaderId_Source: z.number().int().optional(),
+    DocumentHeaderId_Allocation: z.number().int().optional(),
+    SourceDocumentId: z.number().int().optional(),
+    AllocatedToDocumentId: z.number().int().optional(),
+    Total: z.number().optional(),
+    Discount: z.number().optional(),
+    Type: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
   })
   .passthrough();
 export type Allocation = z.infer<typeof AllocationSchema>;
 
 export const AllocationRequestModelSchema = z
   .object({
-    SelectionId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TransactionId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    IncludePaidInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IncludeUnpaidInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    SelectionId: z.number().int().optional(),
+    TransactionId: z.number().int().optional(),
+    IncludePaidInvoices: z.boolean().optional(),
+    IncludeUnpaidInvoices: z.boolean().optional(),
   })
   .passthrough();
 export type AllocationRequestModel = z.infer<typeof AllocationRequestModelSchema>;
 
 const AttachmentSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
+    Name: z.string(),
+    Size: z.number().int().optional(),
+    AttachmentUID: z.string().optional(),
+    Data: z.string().optional(),
+  })
+  .passthrough();
+
+const BankAccountSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    BankName: z.string().optional(),
+    AccountNumber: z.string().optional(),
+    BranchName: z.string().optional(),
+    BranchNumber: z.string().optional(),
+    Category: z.lazy(() => BankAccountCategorySchema).optional(),
+    Active: z.boolean().optional(),
+    Default: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    Description: z.string().optional(),
+    BankFeedAccount: z.lazy(() => BankFeedAccountSchema).optional(),
+    LastTransactionDate: z.string().nullable().optional(),
+    LastImportDate: z.string().nullable().optional(),
+    HasTransactionsWaitingForReview: z.boolean().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultPaymentMethodId: z.number().int().nullable().optional(),
+    PaymentMethod: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+    CurrencyId: z.number().int().nullable().optional(),
+  })
+  .passthrough();
+
+const BankAccountCategorySchema = z
+  .object({
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
+const BankFeedAccountSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    BankFeedAccountGroupId: z.number().int().optional(),
+    BankFeedAccountGroup: z.lazy(() => BankFeedAccountGroupSchema).optional(),
+    Description: z.string().optional(),
+    Identifier: z.string().optional(),
+    LastRefreshDate: z.string().nullable().optional(),
+    FirstImportDate: z.string().nullable().optional(),
+    Balance: z.number().nullable().optional(),
+    BankAccountId: z.number().int().nullable().optional(),
+    BankAccountName: z.string().optional(),
+    LastRefreshStatusId: z.number().int().optional(),
+  })
+  .passthrough();
+
+const BankFeedAccountGroupSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    BankFeedProviderId: z.number().int().optional(),
+    BankFeedProviderTypeId: z.number().int().optional(),
+    Description: z.string().optional(),
+    Identifier: z.string().optional(),
+    RequiresAdditionalAuthentication: z.boolean().optional(),
+    LastRefreshStatusId: z.number().int().optional(),
+  })
+  .passthrough();
+
+const CommercialDocumentLineSchema = z
+  .object({
+    SelectionId: z.number().int(),
+    TaxTypeId: z.number().int().nullable().optional(),
+    ID: z.number().int().optional(),
+    Description: z.string().optional(),
+    LineType: z
+      .union([z.literal(0), z.literal(1), z.literal(3), z.literal(4), z.literal(5), z.literal(6)])
       .optional(),
-    Size: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AttachmentUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Quantity: z.number(),
+    UnitPriceExclusive: z.number().optional(),
+    Unit: z.string().optional(),
+    UnitPriceInclusive: z.number().optional(),
+    TaxPercentage: z.number().optional(),
+    DiscountPercentage: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Discount: z.number().optional(),
+    Tax: z.number().optional(),
+    Total: z.number().optional(),
+    Comments: z.string().optional(),
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    UnitCost: z.number().nullable().optional(), // read-only / system generated
+    UID: z.string().optional(), // read-only / system generated
+  })
+  .passthrough();
+
+const CustomerSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string(),
+    Category: z.lazy(() => CustomerCategorySchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    TaxReference: z.string().optional(),
+    ContactName: z.string().optional(),
+    Telephone: z.string().optional(),
+    Fax: z.string().optional(),
+    Mobile: z.string().optional(),
+    Email: z.string().optional(),
+    WebAddress: z.string().optional(),
+    Active: z.boolean().optional(),
+    IsObfuscated: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    CreditLimit: z.number().optional(),
+    CommunicationMethod: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    AutoAllocateToOldestInvoice: z.boolean().nullable().optional(),
+    EnableCustomerZone: z.boolean().optional(),
+    CustomerZoneGuid: z.string().optional(), // read-only / system generated
+    CashSale: z.boolean().nullable().optional(),
+    TextField1: z.string().optional(),
+    TextField2: z.string().optional(),
+    TextField3: z.string().optional(),
+    NumericField1: z.number().nullable().optional(),
+    NumericField2: z.number().nullable().optional(),
+    NumericField3: z.number().nullable().optional(),
+    YesNoField1: z.boolean().optional(),
+    YesNoField2: z.boolean().optional(),
+    YesNoField3: z.boolean().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
+    DefaultPriceListId: z.number().int().nullable().optional(),
+    DefaultPriceList: z.lazy(() => AdditionalPriceListSchema).optional(),
+    DefaultPriceListName: z.string().optional(),
+    AcceptsElectronicInvoices: z.boolean().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    BusinessRegistrationNumber: z.string().optional(),
+    TaxStatusVerified: z.string().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    CurrencySymbol: z.string().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultDiscountPercentage: z.number().nullable().optional(),
+    DefaultTaxTypeId: z.number().int().nullable().optional(),
+    DefaultTaxType: z.lazy(() => TaxTypeSchema).optional(),
+    DueDateMethodId: z.number().int().nullable().optional(),
+    DueDateMethodValue: z.number().int().nullable().optional(),
+    CityId: z.number().int().nullable().optional(),
+    AccountingAgreement: z.boolean().nullable().optional(),
+    HasSpecialCountryTaxActivity: z.boolean().optional(), // read-only / system generated
+    OutstandingInvoices: z.boolean().nullable().optional(),
+    OverdueInvoices: z.boolean().nullable().optional(),
+    OnHold: z.boolean().nullable().optional(),
+    ExcludeFromDebtorsManager: z.boolean().nullable().optional(),
+    SubjectToDRCVat: z.boolean().optional(),
   })
   .passthrough();
 
 export const CustomerAdditionalContactDetailSchema = z
   .object({
-    BusinessBaseHashId: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IsDirty: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ContactName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Designation: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Fax: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OutstandingInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OverdueInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    BusinessBaseHashId: z.string().optional(),
+    IsDirty: z.boolean().optional(),
+    ID: z.number().int().optional(),
+    CustomerId: z.number().int().optional(),
+    ContactName: z.string().optional(),
+    Designation: z.string().optional(),
+    Telephone: z.string().optional(),
+    Fax: z.string().optional(),
+    Mobile: z.string().optional(),
+    Email: z.string().optional(),
+    OutstandingInvoices: z.boolean().nullable().optional(),
+    OverdueInvoices: z.boolean().nullable().optional(),
   })
   .passthrough();
 export type CustomerAdditionalContactDetail = z.infer<typeof CustomerAdditionalContactDetailSchema>;
 
 export const CustomerAdditionalContactOptionDTOSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerAdditionalContactDetailId: z
-      .union([z.number().int(), z.string()])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    CompanyId: z.number().int().optional(),
+    CustomerAdditionalContactDetailId: z.number().int().optional(),
   })
   .passthrough();
 export type CustomerAdditionalContactOptionDTO = z.infer<
@@ -358,345 +398,186 @@ export type CustomerAdditionalContactOptionDTO = z.infer<
 
 export const CustomerAdjustmentSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    ContraAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Memo: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AnalysisCategoryId1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId3: z.union([z.number().int(), z.string()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Account: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TotalOutstanding: z.union([z.number(), z.string()]).nullable().optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    CustomerId: z.number().int().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Description: z.string().optional(),
+    TaxTypeId: z.number().int().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Total: z.number().optional(),
+    ContraAccountId: z.number().int().optional(),
+    Memo: z.string().optional(),
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
+    HasAttachments: z.boolean().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(), // read-only / system generated
+    Account: z.lazy(() => AccountSchema).optional(), // read-only / system generated
+    Locked: z.boolean().optional(), // read-only / system generated
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    TotalOutstanding: z.number().nullable().optional(), // read-only / system generated
+    Inclusive: z.boolean().optional(),
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
   })
   .passthrough();
 export type CustomerAdjustment = z.infer<typeof CustomerAdjustmentSchema>;
 
 export const CustomerAgeingSchema = z
   .object({
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    Current: z.union([z.number(), z.string()]).nullable().optional(),
-    Days30: z.union([z.number(), z.string()]).nullable().optional(),
-    Days60: z.union([z.number(), z.string()]).nullable().optional(),
-    Days90: z.union([z.number(), z.string()]).nullable().optional(),
-    Days120Plus: z.union([z.number(), z.string()]).nullable().optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AgeingTransactions: z.array(z.unknown()).nullable().optional(),
+    Total: z.number().optional(),
+    Current: z.number().optional(),
+    Days30: z.number().optional(),
+    Days60: z.number().optional(),
+    Days90: z.number().optional(),
+    Days120Plus: z.number().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    Date: z.string().optional(),
+    AgeingTransactions: z.array(z.lazy(() => AgeingTransactionSchema)).optional(),
   })
   .passthrough();
 export type CustomerAgeing = z.infer<typeof CustomerAgeingSchema>;
 
 export const CustomerAgeingRequestModelSchema = z
   .object({
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Summary: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AgeingPeriod: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FromCustomer: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToCustomer: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IncludeActive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IncludeInactive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BasedOnDueDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ExcludeZeroBalance: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    UseForeignCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    CustomerId: z.number().int().optional(),
+    ToDate: z.string().optional(),
+    Summary: z.boolean().optional(),
+    AgeingPeriod: z.number().int().optional(),
+    FromCustomer: z.string().optional(),
+    ToCustomer: z.string().optional(),
+    FromCategory: z.string().optional(),
+    ToCategory: z.string().optional(),
+    IncludeActive: z.boolean().optional(),
+    IncludeInactive: z.boolean().optional(),
+    BasedOnDueDate: z.boolean().optional(),
+    ExcludeZeroBalance: z.boolean().optional(),
+    UseForeignCurrency: z.boolean().optional(),
   })
   .passthrough();
 export type CustomerAgeingRequestModel = z.infer<typeof CustomerAgeingRequestModelSchema>;
 
+const CustomerCategorySchema = z
+  .object({
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
 export const CustomerReceiptSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Comments: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    TotalUnallocated: z.union([z.number(), z.string()]).nullable().optional(),
-    Reconciled: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PaymentMethod: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Status: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Accepted: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnalysisCategoryId1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId3: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Printed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BankUniqueIdentifier: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ImportTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankImportMappingId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    BankAccount: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    CustomerId: z.number().int().optional(),
+    Date: z.string().optional(),
+    Payee: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Description: z.string().optional(),
+    Comments: z.string().optional(),
+    Total: z.number().optional(),
+    Discount: z.number().optional(),
+    TotalUnallocated: z.number().optional(),
+    Reconciled: z.boolean().optional(),
+    BankAccountId: z.number().int().optional(),
+    PaymentMethod: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).optional(),
+    Status: z.union([z.literal(0), z.literal(1)]).optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    Accepted: z.boolean().optional(),
+    Locked: z.boolean().optional(), // read-only / system generated
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
+    Printed: z.boolean().optional(), // read-only / system generated
+    BankUniqueIdentifier: z.string().optional(),
+    ImportTypeId: z.number().int().nullable().optional(),
+    BankImportMappingId: z.number().int().nullable().optional(),
+    BankAccount_CurrencyId: z.number().int().nullable().optional(),
+    BankAccount_ExchangeRate: z.number().nullable().optional(),
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer: z.lazy(() => CustomerSchema).optional(), // read-only / system generated
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(), // read-only / system generated
+    BankAccount: z.lazy(() => BankAccountSchema).optional(), // read-only / system generated
+    UID: z.string().optional(), // read-only / system generated
   })
   .passthrough();
 export type CustomerReceipt = z.infer<typeof CustomerReceiptSchema>;
 
 export const CustomerReturnSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    FromDocument: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string(),
+    Inclusive: z.boolean().optional(),
+    DiscountPercentage: z.number().optional(),
+    TaxReference: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Message: z.string().optional(),
+    Discount: z.number().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Rounding: z.number().optional(),
+    Total: z.number().optional(),
+    AmountDue: z.number().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
+    Editable: z.boolean().optional(), // read-only / system generated
+    HasAttachments: z.boolean().optional(), // read-only / system generated
+    HasNotes: z.boolean().nullable().optional(), // read-only / system generated
+    HasAnticipatedDate: z.boolean().nullable().optional(), // read-only / system generated
+    HasSpecialCountryTax: z.boolean().optional(), // read-only / system generated
+    AnticipatedDate: z.string().nullable().optional(), // read-only / system generated
+    ExternalReference: z.string().optional(),
+    UID: z.string().optional(), // read-only / system generated
+    CustomerId: z.number().int(),
+    CustomerName: z.string().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().nullable().optional(),
+    FromDocument: z.string().optional(),
+    Locked: z.boolean().optional(), // read-only / system generated
+    Lines: z.array(z.lazy(() => CommercialDocumentLineSchema)).optional(),
   })
   .passthrough();
 export type CustomerReturn = z.infer<typeof CustomerReturnSchema>;
 
 export const CustomerSalesHistorySchema = z
   .object({
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z.unknown().optional(),
-    Exclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Customer: z.record(z.string(), z.unknown()).nullable().optional(),
+    Exclusive: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type CustomerSalesHistory = z.infer<typeof CustomerSalesHistorySchema>;
 
 export const CustomerSalesHistoryRequestModelSchema = z
   .object({
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    IncludeCreditNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    CustomerId: z.number().int().optional(),
+    IncludeCreditNotes: z.boolean().optional(),
   })
   .passthrough();
 export type CustomerSalesHistoryRequestModel = z.infer<
@@ -705,37 +586,16 @@ export type CustomerSalesHistoryRequestModel = z.infer<
 
 export const CustomerTransactionListingRequestModelSchema = z
   .object({
-    FromCustomer: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToCustomer: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IncludeActive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IncludeInactive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TransactionType: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UseForeignCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    FromCustomer: z.string().optional(),
+    ToCustomer: z.string().optional(),
+    FromCategory: z.string().optional(),
+    ToCategory: z.string().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    IncludeActive: z.boolean().optional(),
+    IncludeInactive: z.boolean().optional(),
+    TransactionType: z.string().optional(),
+    UseForeignCurrency: z.boolean().optional(),
   })
   .passthrough();
 export type CustomerTransactionListingRequestModel = z.infer<
@@ -744,253 +604,167 @@ export type CustomerTransactionListingRequestModel = z.infer<
 
 export const CustomerWriteOffSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Comments: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    TotalUnallocated: z.union([z.number(), z.string()]).nullable().optional(),
-    Reconciled: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    CustomerId: z.number().int().optional(),
+    Date: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Description: z.string().optional(),
+    Comments: z.string().optional(),
+    Total: z.number().optional(),
+    TotalUnallocated: z.number().optional(),
+    Reconciled: z.boolean().optional(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    Locked: z.boolean().optional(), // read-only / system generated
+    TaxPeriodId: z.number().int().nullable().optional(), // read-only / system generated
   })
   .passthrough();
 export type CustomerWriteOff = z.infer<typeof CustomerWriteOffSchema>;
 
 export const CustomerZoneUrlRequestModelSchema = z
   .object({
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    DocumentHeaderId: z.number().int().optional(),
+    CustomerId: z.number().int().optional(),
   })
   .passthrough();
 export type CustomerZoneUrlRequestModel = z.infer<typeof CustomerZoneUrlRequestModelSchema>;
 
 const EmailRequestModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EmailAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CCAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BCCAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Attachments: z
-      .array(z.union([z.string(), z.record(z.string(), z.unknown())]))
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    EmailAddress: z.string(),
+    CCAddress: z.string().optional(),
+    BCCAddress: z.string().optional(),
+    Subject: z.string().optional(),
+    Message: z.string().optional(),
+    Attachments: z.array(z.record(z.string(), z.string())).optional(),
   })
   .passthrough();
 
 const IBigModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 
 export const IModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 export type IModel = z.infer<typeof IModelSchema>;
 
 export const OutstandingCustomerDocumentSchema = z
   .object({
-    DocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DueDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExpectedPaymentDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer: z.unknown().optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z.unknown().optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Customer_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer_ExchangeRate: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Inclusive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Message: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Discount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AmountDue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Printed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasNotes: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAnticipatedDate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTax: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnticipatedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ExternalReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Lines: z.array(z.unknown()).nullable().optional(),
+    DocumentTypeId: z.number().int().nullable().optional(),
+    DueDate: z.string().nullable().optional(),
+    ExpectedPaymentDate: z.string().nullable().optional(),
+    CustomerId: z.number().int().nullable().optional(),
+    CustomerName: z.string().nullable().optional(),
+    Customer: z.record(z.string(), z.unknown()).nullable().optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.record(z.string(), z.unknown()).nullable().optional(),
+    StatusId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(),
+    Created: z.string().nullable().optional(),
+    Customer_CurrencyId: z.number().int().nullable().optional(),
+    Customer_ExchangeRate: z.number().int().nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Inclusive: z.boolean().nullable().optional(),
+    DiscountPercentage: z.number().nullable().optional(),
+    TaxReference: z.string().nullable().optional(),
+    DocumentNumber: z.string().nullable().optional(),
+    Reference: z.string().nullable().optional(),
+    Message: z.string().nullable().optional(),
+    Discount: z.number().int().nullable().optional(),
+    Exclusive: z.number().int().nullable().optional(),
+    Tax: z.number().int().nullable().optional(),
+    Rounding: z.number().int().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    AmountDue: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().nullable().optional(),
+    PostalAddress02: z.string().nullable().optional(),
+    PostalAddress03: z.string().nullable().optional(),
+    PostalAddress04: z.string().nullable().optional(),
+    PostalAddress05: z.string().nullable().optional(),
+    DeliveryAddress01: z.string().nullable().optional(),
+    DeliveryAddress02: z.string().nullable().optional(),
+    DeliveryAddress03: z.string().nullable().optional(),
+    DeliveryAddress04: z.string().nullable().optional(),
+    DeliveryAddress05: z.string().nullable().optional(),
+    Printed: z.boolean().nullable().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
+    Editable: z.boolean().nullable().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    HasNotes: z.boolean().nullable().optional(),
+    HasAnticipatedDate: z.boolean().nullable().optional(),
+    HasSpecialCountryTax: z.boolean().nullable().optional(),
+    AnticipatedDate: z.string().nullable().optional(),
+    ExternalReference: z.string().nullable().optional(),
+    UID: z.string().nullable().optional(),
+    Lines: z.array(z.record(z.string(), z.unknown()).nullable()).optional(),
   })
   .passthrough();
 export type OutstandingCustomerDocument = z.infer<typeof OutstandingCustomerDocumentSchema>;
 
 export const OutstandingCustomerDocumentRequestModelSchema = z
   .object({
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    IncludePaidInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    CustomerId: z.number().int().optional(),
+    IncludePaidInvoices: z.boolean().optional(),
   })
   .passthrough();
 export type OutstandingCustomerDocumentRequestModel = z.infer<
   typeof OutstandingCustomerDocumentRequestModelSchema
 >;
 
+const SalesRepresentativeSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    FirstName: z.string(),
+    LastName: z.string().optional(),
+    Name: z.string().optional(), // read-only / system generated
+    Active: z.boolean(),
+    Email: z.string().optional(),
+    Mobile: z.string().optional(),
+    Telephone: z.string().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
 const StorageInformationSchema = z
   .object({
-    SizeUsed: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MaxSizeAllowed: z.union([z.number().int(), z.string()]).nullable().optional(),
+    SizeUsed: z.number().int().optional(),
+    MaxSizeAllowed: z.number().int().optional(),
+  })
+  .passthrough();
+
+const TaxTypeSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    Percentage: z.number().optional(),
+    IsDefault: z.boolean().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    IsManualTax: z.boolean().optional(),
+    Active: z.boolean().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    TaxTypeDefaultUID: z.string().optional(), // read-only / system generated
+    CompanyId: z.number().int().optional(),
   })
   .passthrough();
 
 const TransactionListingSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencySymbol: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OpeningBalanceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OpeningBalance: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ClosingBalanceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ClosingBalance: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    CurrencySymbol: z.string().nullable().optional(),
+    OpeningBalanceDate: z.string().nullable().optional(),
+    OpeningBalance: z.number().int().nullable().optional(),
+    ClosingBalanceDate: z.string().nullable().optional(),
+    ClosingBalance: z.number().int().nullable().optional(),
   })
   .passthrough();
 

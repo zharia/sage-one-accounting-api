@@ -19,209 +19,131 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 export const BASReportSchema = z
   .object({
-    G1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G3: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G4: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G5: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G6: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G7: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G8: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G9: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G10: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G11: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G12: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G13: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G14: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G15: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G16: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G17: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G18: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G19: z.union([z.number().int(), z.string()]).nullable().optional(),
-    G20: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code1A: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code1B: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code2A: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code2B: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Code3: z.union([z.number().int(), z.string()]).nullable().optional(),
-    W1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    W2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    W3: z.union([z.number(), z.string()]).nullable().optional(),
-    W4: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxReportingType: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
+    G1: z.number().int().optional(),
+    G2: z.number().int().optional(),
+    G3: z.number().int().optional(),
+    G4: z.number().int().optional(),
+    G5: z.number().int().optional(),
+    G6: z.number().int().optional(),
+    G7: z.number().int().optional(),
+    G8: z.number().int().optional(),
+    G9: z.number().int().optional(),
+    G10: z.number().int().optional(),
+    G11: z.number().int().optional(),
+    G12: z.number().int().optional(),
+    G13: z.number().int().optional(),
+    G14: z.number().int().optional(),
+    G15: z.number().int().optional(),
+    G16: z.number().int().optional(),
+    G17: z.number().int().optional(),
+    G18: z.number().int().optional(),
+    G19: z.number().int().optional(),
+    G20: z.number().int().optional(),
+    Code1A: z.number().int().optional(),
+    Code1B: z.number().int().optional(),
+    Code2A: z.number().int().optional(),
+    Code2B: z.number().int().optional(),
+    Code3: z.number().int().optional(),
+    W1: z.number().int().optional(),
+    W2: z.number().int().optional(),
+    W3: z.number().optional(),
+    W4: z.number().int().optional(),
+    TaxReportingType: z.number().int().optional(),
   })
   .passthrough();
 export type BASReport = z.infer<typeof BASReportSchema>;
 
 export const BASReportRequestModelSchema = z
   .object({
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type BASReportRequestModel = z.infer<typeof BASReportRequestModelSchema>;
 
 export const ClosingTaxPeriodRequestModelSchema = z
   .object({
-    TaxPeriod: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    TransactionIdList: z
-      .array(z.union([z.number().int(), z.string()]))
-      .nullable()
-      .optional(),
+    TaxPeriod: z.lazy(() => TaxPeriodSchema).optional(),
+    TransactionIdList: z.array(z.number().int()).optional(),
   })
   .passthrough();
 export type ClosingTaxPeriodRequestModel = z.infer<typeof ClosingTaxPeriodRequestModelSchema>;
 
 export const TaxAdjustmentSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxAdjustmentType: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    TaxAdjustmentAccountType: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Date: z.string().optional(),
+    Description: z.string().optional(),
+    Total: z.number().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
+    TaxAdjustmentType: z.union([z.literal(1), z.literal(2), z.literal(3)]).optional(),
+    TaxAdjustmentAccountType: z.union([z.literal(1), z.literal(2)]).optional(),
+    Locked: z.boolean().optional(), // read-only / system generated
   })
   .passthrough();
 export type TaxAdjustment = z.infer<typeof TaxAdjustmentSchema>;
 
 export const TaxPeriodSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PeriodReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    StartDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EndDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxValue: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxPeriodFrequency: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SubmissionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxTotalPaidRefunded: z.union([z.number(), z.string()]).nullable().optional(),
-    UnreportedTransactionTotal: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxReportingTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    PeriodReference: z.string().optional(),
+    StartDate: z.string().nullable().optional(),
+    EndDate: z.string().optional(),
+    Status: z.number().int().optional(),
+    TaxValue: z.number().nullable().optional(),
+    TaxPeriodFrequency: z.number().int().optional(),
+    SubmissionDate: z.string().nullable().optional(),
+    TaxTotalPaidRefunded: z.number().nullable().optional(),
+    UnreportedTransactionTotal: z.number().nullable().optional(),
+    TaxReportingTypeId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TaxPeriod = z.infer<typeof TaxPeriodSchema>;
 
 export const TaxRateAdjustmentSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CountryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CountryCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CountryName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OldTaxTypeDefaultUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NewTaxTypeDefaultUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxRateAdjustmentDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxNotificationEndDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OldTaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    OldTaxName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OldTaxPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    NewTaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NewTaxName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NewTaxPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    TaxRateName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    CountryId: z.number().int().optional(),
+    CountryCode: z.string().optional(),
+    CountryName: z.string().optional(),
+    OldTaxTypeDefaultUID: z.string().optional(),
+    NewTaxTypeDefaultUID: z.string().optional(),
+    TaxRateAdjustmentDate: z.string().optional(),
+    TaxNotificationEndDate: z.string().optional(),
+    OldTaxTypeId: z.number().int().optional(),
+    OldTaxName: z.string().optional(),
+    OldTaxPercentage: z.number().optional(),
+    NewTaxTypeId: z.number().int().optional(),
+    NewTaxName: z.string().optional(),
+    NewTaxPercentage: z.number().optional(),
+    TaxRateName: z.string().optional(),
   })
   .passthrough();
 export type TaxRateAdjustment = z.infer<typeof TaxRateAdjustmentSchema>;
 
+export const TaxReportingTypeSchema = z.record(z.string(), z.unknown());
+export type TaxReportingType = z.infer<typeof TaxReportingTypeSchema>;
+
 export const VAT201DataSchema = z
   .object({
-    VatCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    VatCodeDescription: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Vat: z.union([z.number().int(), z.string()]).nullable().optional(),
-    VatType: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    SortInd: z.union([z.number().int(), z.string()]).nullable().optional(),
+    VatCode: z.string().nullable().optional(),
+    VatCodeDescription: z.string().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    Vat: z.number().int().nullable().optional(),
+    VatType: z.string().nullable().optional(),
+    SortInd: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type VAT201Data = z.infer<typeof VAT201DataSchema>;
 
 export const VAT201ReportRequestModelSchema = z
   .object({
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IncludeAdjustments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OffsetCredits: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    IncludeAdjustments: z.boolean().optional(),
+    OffsetCredits: z.boolean().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type VAT201ReportRequestModel = z.infer<typeof VAT201ReportRequestModelSchema>;

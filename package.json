@@ -54,6 +54,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "bash scripts/verification/verify.sh",
+    "discover:models": "node scripts/api-discovery/fetch-model-extensions.ts",
+    "generate:domains": "node scripts/generate/generate-domains.ts",
     "attw": "attw --pack . --profile esm-only",
     "changeset": "changeset",
     "version-packages": "changeset version",
