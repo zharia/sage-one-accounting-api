@@ -19,183 +19,99 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 export const AccountantEventSchema = z
   .object({
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TotalTasks: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TotalNotes: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EventDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    CompanyId: z.number().int().nullable().optional(),
+    TotalTasks: z.number().int().nullable().optional(),
+    TotalNotes: z.number().int().nullable().optional(),
+    EventDate: z.string().nullable().optional(),
+    ID: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type AccountantEvent = z.infer<typeof AccountantEventSchema>;
 
 export const AccountantEventRequestModelSchema = z
   .object({
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ImpersonateUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ActiveConsoleCompanies: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    CompanyId: z.number().int().nullable().optional(),
+    UserId: z.number().int().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    ImpersonateUserId: z.number().int().nullable().optional(),
+    ActiveConsoleCompanies: z.boolean().optional(),
   })
   .passthrough();
 export type AccountantEventRequestModel = z.infer<typeof AccountantEventRequestModelSchema>;
 
 export const AccountantNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ToAccountant: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    StatusText: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CreatedByUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CreatedBy: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastModified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CategoryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Category: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    IsOwner: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Subject: z.string().optional(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string().nullable().optional(),
+    Status: z.number().int().nullable().optional(),
+    Note: z.string().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    UserId: z.number().int().optional(),
+    CompanyId: z.number().int().optional(),
+    ToAccountant: z.string().optional(),
+    StatusText: z.string().optional(),
+    CreatedByUserId: z.number().int().nullable().optional(),
+    CreatedBy: z.string().optional(),
+    LastModified: z.string().optional(),
+    CategoryId: z.number().int().nullable().optional(),
+    Category: z.string().optional(),
+    DocumentHeaderId: z.number().int().optional(),
+    IsOwner: z.boolean().optional(),
   })
   .passthrough();
 export type AccountantNote = z.infer<typeof AccountantNoteSchema>;
 
 export const AccountantNoteRequestModelSchema = z
   .object({
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Subject: z.string(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string(),
     Status: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CreatedByUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CreatedBy: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastModified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CategoryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Category: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SendEmailToAccountant: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    Note: z.string().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    ID: z.number().int().optional(),
+    CompanyId: z.number().int().nullable().optional(),
+    UserId: z.number().int().optional(),
+    CreatedByUserId: z.number().int().nullable().optional(),
+    CreatedBy: z.string().optional(),
+    LastModified: z.string().optional(),
+    CategoryId: z.number().int().nullable().optional(),
+    Category: z.string().optional(),
+    DocumentHeaderId: z.number().int().nullable().optional(),
+    SendEmailToAccountant: z.boolean().optional(),
   })
   .passthrough();
 export type AccountantNoteRequestModel = z.infer<typeof AccountantNoteRequestModelSchema>;
 
 export const AccountantTaskSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AccountantTaskRecurrenceId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Notes: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    StatusType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ReminderType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ReminderDaysBefore: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AutomaticallyChangeStatusWhenStart: z
-      .union([z.boolean(), z.number().int()])
-      .nullable()
-      .optional(),
-    NotificationDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Notified: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    StartDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EndDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Duration: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    AccountantTaskRecurrenceId: z.number().int().optional(),
+    CompanyId: z.number().int(),
+    CompanyName: z.string().optional(),
+    UserId: z.number().int().optional(),
+    Name: z.string(),
+    Notes: z.string().optional(),
+    StatusType: z.number().int().optional(),
+    ReminderType: z.number().int().optional(),
+    ReminderDaysBefore: z.number().int().nullable().optional(),
+    AutomaticallyChangeStatusWhenStart: z.boolean().nullable().optional(),
+    NotificationDate: z.string().nullable().optional(),
+    Notified: z.boolean().optional(),
+    StartDate: z.string().optional(),
+    EndDate: z.string().optional(),
+    Duration: z.number().int().optional(),
   })
   .passthrough();
 export type AccountantTask = z.infer<typeof AccountantTaskSchema>;
 
 export const AccountantTaskDueInDateRangeRequestModelSchema = z
   .object({
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
   })
   .passthrough();
 export type AccountantTaskDueInDateRangeRequestModel = z.infer<
@@ -204,43 +120,34 @@ export type AccountantTaskDueInDateRangeRequestModel = z.infer<
 
 export const AccountantTaskRecurrenceSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FrequencyType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FrequencyInterval: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FrequencyRelativeInterval: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FrequencyRecurrenceFactor: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FrequencyYearlyMonth: z.union([z.number().int(), z.string()]).nullable().optional(),
-    RecurrenceRangeType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    StartDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EndDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumberOfOccurrences: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaskDuration: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    CompanyId: z.number().int(),
+    FrequencyType: z.number().int().optional(),
+    FrequencyInterval: z.number().int().optional(),
+    FrequencyRelativeInterval: z.number().int().optional(),
+    FrequencyRecurrenceFactor: z.number().int().optional(),
+    FrequencyYearlyMonth: z.number().int().optional(),
+    RecurrenceRangeType: z.number().int().optional(),
+    StartDate: z.string().optional(),
+    EndDate: z.string().nullable().optional(),
+    NumberOfOccurrences: z.number().int().nullable().optional(),
+    TaskDuration: z.number().int().optional(),
   })
   .passthrough();
 export type AccountantTaskRecurrence = z.infer<typeof AccountantTaskRecurrenceSchema>;
 
 export const AccountantTaskRequestModelSchema = z
   .object({
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CompanyId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    Date: z.string().optional(),
+    CompanyId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type AccountantTaskRequestModel = z.infer<typeof AccountantTaskRequestModelSchema>;
 
 export const AccountantTaskUpdateStatusRequestModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    StatusType: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    StatusType: z.number().int().optional(),
   })
   .passthrough();
 export type AccountantTaskUpdateStatusRequestModel = z.infer<
@@ -249,122 +156,76 @@ export type AccountantTaskUpdateStatusRequestModel = z.infer<
 
 const AttachmentSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Size: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AttachmentUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Name: z.string(),
+    Size: z.number().int().optional(),
+    AttachmentUID: z.string().optional(),
+    Data: z.string().optional(),
   })
   .passthrough();
 
 export const CRMActivitySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Username: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CRMActivityTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Type: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Priority: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Category: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CRMActivityCategoryId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CRMPriorityId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Outline: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Body: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LinkId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CRMActivityNotes: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    UserId: z.number().int().nullable().optional(),
+    Username: z.string().optional(),
+    CRMActivityTypeId: z.number().int().nullable().optional(),
+    Type: z.string().optional(),
+    Priority: z.number().int().optional(),
+    Category: z.string().optional(),
+    CRMActivityCategoryId: z.number().int().nullable().optional(),
+    CRMPriorityId: z.number().int().nullable().optional(),
+    Outline: z.string().optional(),
+    Body: z.string().optional(),
+    ActionDate: z.string(),
+    Reference: z.string().optional(),
+    LinkId: z.number().int().nullable().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    CRMActivityNotes: z.array(z.lazy(() => CRMActivityNoteSchema)).optional(), // read-only / system generated
   })
   .passthrough();
 export type CRMActivity = z.infer<typeof CRMActivitySchema>;
 
 export const CRMActivityCategorySchema = z
   .object({
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
   })
   .passthrough();
 export type CRMActivityCategory = z.infer<typeof CRMActivityCategorySchema>;
 
+export const CRMActivityNoteSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Subject: z.string().optional(),
+  })
+  .passthrough();
+export type CRMActivityNote = z.infer<typeof CRMActivityNoteSchema>;
+
 const IModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 
 const StorageInformationSchema = z
   .object({
-    SizeUsed: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MaxSizeAllowed: z.union([z.number().int(), z.string()]).nullable().optional(),
+    SizeUsed: z.number().int().optional(),
+    MaxSizeAllowed: z.number().int().optional(),
   })
   .passthrough();
 
 export const ToDoListItemSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ToDoListCategory: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DueDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Printed: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Amount: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    ToDoListCategory: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    Description: z.string().nullable().optional(),
+    DueDate: z.string().nullable().optional(),
+    Printed: z.boolean().nullable().optional(),
+    Amount: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type ToDoListItem = z.infer<typeof ToDoListItemSchema>;

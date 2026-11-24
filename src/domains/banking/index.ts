@@ -19,476 +19,302 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 const AccountNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int(),
+    Subject: z.string(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string(),
+    Status: z.boolean().nullable().optional(),
+    Note: z.string().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    AccountId: z.number().int().optional(),
+    UserId: z.number().int().nullable().optional(),
   })
   .passthrough();
 
 const AttachmentSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Size: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AttachmentUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Name: z.string(),
+    Size: z.number().int().optional(),
+    AttachmentUID: z.string().optional(),
+    Data: z.string().optional(),
   })
   .passthrough();
 
-export const BankAccountSchema = z
+const BankAccountSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AccountNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BranchName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BranchNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Category: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Default: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Balance: z.union([z.number(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankFeedAccount: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    LastTransactionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastImportDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasTransactionsWaitingForReview: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasActivity: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DefaultPaymentMethodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PaymentMethod: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    BankName: z.string().optional(),
+    AccountNumber: z.string().optional(),
+    BranchName: z.string().optional(),
+    BranchNumber: z.string().optional(),
+    Category: z.lazy(() => BankAccountCategorySchema).optional(),
+    Active: z.boolean().optional(),
+    Default: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    Description: z.string().optional(),
+    BankFeedAccount: z.lazy(() => BankFeedAccountSchema).optional(),
+    LastTransactionDate: z.string().nullable().optional(),
+    LastImportDate: z.string().nullable().optional(),
+    HasTransactionsWaitingForReview: z.boolean().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultPaymentMethodId: z.number().int().nullable().optional(),
+    PaymentMethod: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]).optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+    CurrencyId: z.number().int().nullable().optional(),
   })
   .passthrough();
-export type BankAccount = z.infer<typeof BankAccountSchema>;
 
-export const BankAccountCategorySchema = z
+const BankAccountCategorySchema = z
   .object({
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
   })
   .passthrough();
-export type BankAccountCategory = z.infer<typeof BankAccountCategorySchema>;
 
 export const BankAccountNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int(),
+    Subject: z.string(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string(),
+    Status: z.boolean().nullable().optional(),
+    Note: z.string().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    BankAccountId: z.number().int().optional(),
   })
   .passthrough();
 export type BankAccountNote = z.infer<typeof BankAccountNoteSchema>;
 
 export const BankAccountOpeningBalanceSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Balance: z.union([z.number(), z.string()]).nullable().optional(),
-    Reason: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Balance: z.number().optional(),
+    Reason: z.string().optional(),
+    Date: z.string().optional(),
+    BankAccountId: z.number().int().optional(),
+    BankAccount_CurrencyId: z.number().int().nullable().optional(),
+    BankAccount_ExchangeRate: z.number().nullable().optional(),
   })
   .passthrough();
 export type BankAccountOpeningBalance = z.infer<typeof BankAccountOpeningBalanceSchema>;
 
 export const BankAccountTransactionListingSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    OpeningBalanceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OpeningBalance: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ClosingBalanceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ClosingBalance: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencySymbol: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    OpeningBalanceDate: z.string().nullable().optional(),
+    OpeningBalance: z.number().int().nullable().optional(),
+    ClosingBalanceDate: z.string().nullable().optional(),
+    ClosingBalance: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    CurrencySymbol: z.string().nullable().optional(),
   })
   .passthrough();
 export type BankAccountTransactionListing = z.infer<typeof BankAccountTransactionListingSchema>;
 
 export const BankAccountTransactionListingRequestModelSchema = z
   .object({
-    FromBankAccount: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToBankAccount: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromAccount: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToAccount: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromBankAccountCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToBankAccountCategory: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Inactive: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TransactionType: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    UseForeignCurrency: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    FromBankAccount: z.string().optional(),
+    ToBankAccount: z.string().optional(),
+    FromAccount: z.string().optional(),
+    ToAccount: z.string().optional(),
+    FromBankAccountCategory: z.string().optional(),
+    ToBankAccountCategory: z.string().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    Active: z.boolean().optional(),
+    Inactive: z.boolean().optional(),
+    TransactionType: z.string().optional(),
+    UseForeignCurrency: z.boolean().optional(),
   })
   .passthrough();
 export type BankAccountTransactionListingRequestModel = z.infer<
   typeof BankAccountTransactionListingRequestModelSchema
 >;
 
+const BankFeedAccountSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    BankFeedAccountGroupId: z.number().int().optional(),
+    BankFeedAccountGroup: z.lazy(() => BankFeedAccountGroupSchema).optional(),
+    Description: z.string().optional(),
+    Identifier: z.string().optional(),
+    LastRefreshDate: z.string().nullable().optional(),
+    FirstImportDate: z.string().nullable().optional(),
+    Balance: z.number().nullable().optional(),
+    BankAccountId: z.number().int().nullable().optional(),
+    BankAccountName: z.string().optional(),
+    LastRefreshStatusId: z.number().int().optional(),
+  })
+  .passthrough();
+
+const BankFeedAccountGroupSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    BankFeedProviderId: z.number().int().optional(),
+    BankFeedProviderTypeId: z.number().int().optional(),
+    Description: z.string().optional(),
+    Identifier: z.string().optional(),
+    RequiresAdditionalAuthentication: z.boolean().optional(),
+    LastRefreshStatusId: z.number().int().optional(),
+  })
+  .passthrough();
+
 export const BankImportMappingSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SearchString: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Priority: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DisplayDescription: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AnalysisCategoryId1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId3: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    LinkTypeId: z.number().int().optional(),
+    LinkId: z.number().int().optional(),
+    TaxTypeId: z.number().int().optional(),
+    SearchString: z.string(),
+    Priority: z.boolean().optional(),
+    DisplayDescription: z.string().optional(),
+    Payee: z.string().optional(),
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type BankImportMapping = z.infer<typeof BankImportMappingSchema>;
 
 export const BankImportMappingSettingsSchema = z
   .object({
-    BankStatementMatchingOption: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    BankStatementMatchingOnNewTransactions: z
-      .union([z.boolean(), z.number().int()])
-      .nullable()
-      .optional(),
+    BankStatementMatchingOption: z.union([z.literal(0), z.literal(1), z.literal(2)]).optional(),
+    BankStatementMatchingOnNewTransactions: z.boolean().optional(),
   })
   .passthrough();
 export type BankImportMappingSettings = z.infer<typeof BankImportMappingSettingsSchema>;
 
 export const BankStatementTransactionSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount: z.unknown().optional(),
-    Selection: z.unknown().optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Tax: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankUniqueIdentifier: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    MatchedBankTransactionID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    BankAccountId: z.number().int().nullable().optional(),
+    BankAccount: z.record(z.string(), z.unknown()).nullable().optional(),
+    Selection: z.record(z.string(), z.unknown()).nullable().optional(),
+    Reference: z.string().nullable().optional(),
+    Description: z.string().nullable().optional(),
+    Tax: z.number().int().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    BankUniqueIdentifier: z.string().nullable().optional(),
+    MatchedBankTransactionID: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type BankStatementTransaction = z.infer<typeof BankStatementTransactionSchema>;
 
 export const BaseBankTransactionSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ParentId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankUniqueIdentifier: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Editable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    SplitTransactions: z.array(z.unknown()).nullable().optional(),
-    Duplicate: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Matched: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasAllocations: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ImportTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ImportActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasManualDiscountAllocations: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DiscountAllocationChanged: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    SelectionId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SelectionName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Selection_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Selection_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    SelectionIsObfuscated: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ParentTrackingCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    ParentId: z.number().int().optional(),
+    Description: z.string().optional(),
+    BankUniqueIdentifier: z.string().optional(),
+    Editable: z.boolean().optional(), // read-only / system generated
+    get SplitTransactions() {
+      return z.array(BaseBankTransactionSchema).optional();
+    },
+    Duplicate: z.boolean().optional(), // read-only / system generated
+    Matched: z.boolean().optional(), // read-only / system generated
+    HasAllocations: z.boolean().optional(), // read-only / system generated
+    ImportTypeId: z.number().int().nullable().optional(),
+    ImportActionDate: z.string().nullable().optional(),
+    HasManualDiscountAllocations: z.boolean().optional(),
+    DiscountAllocationChanged: z.boolean().optional(),
+    SelectionId: z.number().int().nullable().optional(),
+    SelectionName: z.string().optional(),
+    Selection_CurrencyId: z.number().int().nullable().optional(),
+    Selection_ExchangeRate: z.number().nullable().optional(),
+    SelectionIsObfuscated: z.boolean().optional(),
+    ParentTrackingCode: z.string().optional(),
     Type: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
+      .union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5), z.literal(6)])
       .optional(),
-    TaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxPeriodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reconciled: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Accepted: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AnalysisCategoryId1: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId2: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AnalysisCategoryId3: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Memo: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Link_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Link_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Discount: z.union([z.number(), z.string()]).nullable().optional(),
-    DiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    Rounding: z.union([z.number(), z.string()]).nullable().optional(),
-    Exclusive: z.union([z.number(), z.string()]).nullable().optional(),
-    Tax: z.union([z.number(), z.string()]).nullable().optional(),
-    Total: z.union([z.number(), z.string()]).nullable().optional(),
-    BankAccount_CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccount_ExchangeRate: z.union([z.number(), z.string()]).nullable().optional(),
-    PaymentMethodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    StatusId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankImportMappingId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TimeTrackingProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingExpenseId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillingMethodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Recharge: z.union([z.number(), z.string()]).nullable().optional(),
-    MarkupPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    DocumentHeaderLinkTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    TaxTypeId: z.number().int().nullable().optional(),
+    TaxPeriodId: z.number().int().nullable().optional(),
+    Payee: z.string().optional(),
+    Reconciled: z.boolean().optional(),
+    Accepted: z.boolean().optional(),
+    AnalysisCategoryId1: z.number().int().nullable().optional(),
+    AnalysisCategoryId2: z.number().int().nullable().optional(),
+    AnalysisCategoryId3: z.number().int().nullable().optional(),
+    BankAccountId: z.number().int().nullable().optional(),
+    Date: z.string().optional(),
+    Memo: z.string().optional(),
+    DocumentNumber: z.string().optional(),
+    Reference: z.string().optional(),
+    Link_CurrencyId: z.number().int().nullable().optional(),
+    Link_ExchangeRate: z.number().nullable().optional(),
+    HasAttachments: z.boolean().nullable().optional(), // read-only / system generated
+    Discount: z.number().nullable().optional(),
+    DiscountPercentage: z.number().nullable().optional(),
+    Rounding: z.number().nullable().optional(),
+    Exclusive: z.number().optional(),
+    Tax: z.number().optional(),
+    Total: z.number().optional(),
+    BankAccount_CurrencyId: z.number().int().nullable().optional(),
+    BankAccount_ExchangeRate: z.number().nullable().optional(),
+    PaymentMethodId: z.number().int().nullable().optional(),
+    StatusId: z.number().int().nullable().optional(), // read-only / system generated
+    BankImportMappingId: z.number().int().nullable().optional(),
+    Locked: z.boolean().optional(), // read-only / system generated
+    TimeTrackingProjectId: z.number().int().nullable().optional(),
+    TimeTrackingExpenseId: z.number().int().nullable().optional(),
+    BillingMethodId: z.number().int().nullable().optional(),
+    Recharge: z.number().nullable().optional(),
+    MarkupPercentage: z.number().nullable().optional(),
+    DocumentHeaderLinkTypeId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type BaseBankTransaction = z.infer<typeof BaseBankTransactionSchema>;
 
 export const CashMovementSchema = z
   .object({
-    BankAccount: z.unknown().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
+    BankAccount: z.record(z.string(), z.unknown()).nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type CashMovement = z.infer<typeof CashMovementSchema>;
 
 export const CashMovementRequestModelSchema = z
   .object({
-    FromDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ToDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankAccountId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    GroupingType: z.union([z.number().int(), z.string()]).nullable().optional(),
+    FromDate: z.string().optional(),
+    ToDate: z.string().optional(),
+    BankAccountId: z.number().int().nullable().optional(),
+    GroupingType: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type CashMovementRequestModel = z.infer<typeof CashMovementRequestModelSchema>;
 
 const IBigModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 
 const IModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 
 export const ProcessBankAndCreditCardMappingSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SearchString: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    LinkTypeId: z.number().int().optional(),
+    LinkId: z.number().int().optional(),
+    TaxTypeId: z.number().int().optional(),
+    SearchString: z.string().optional(),
+    Payee: z.string().optional(),
   })
   .passthrough();
 export type ProcessBankAndCreditCardMapping = z.infer<typeof ProcessBankAndCreditCardMappingSchema>;
 
 export const ProcessBankAndCreditCardMappingSettingsSchema = z
   .object({
-    AutomaticallyRememberBankAndCreditCardDescriptions: z
-      .union([z.boolean(), z.number().int()])
-      .nullable()
-      .optional(),
+    AutomaticallyRememberBankAndCreditCardDescriptions: z.boolean().optional(),
   })
   .passthrough();
 export type ProcessBankAndCreditCardMappingSettings = z.infer<
@@ -497,8 +323,8 @@ export type ProcessBankAndCreditCardMappingSettings = z.infer<
 
 const StorageInformationSchema = z
   .object({
-    SizeUsed: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MaxSizeAllowed: z.union([z.number().int(), z.string()]).nullable().optional(),
+    SizeUsed: z.number().int().optional(),
+    MaxSizeAllowed: z.number().int().optional(),
   })
   .passthrough();
 

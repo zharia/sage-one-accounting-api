@@ -1,0 +1,4153 @@
+{
+  "schemaVersion": "1.0.0",
+  "apiVersion": "2.0.0",
+  "note": "Additive discovery output (WP008.1): ResourceModel help pages for model references missing from resource-models.json. Property tables become model definitions, 'Possible enumeration values' tables become enum definitions, everything else is reported as unresolved rather than guessed.",
+  "generatedAt": "2026-11-23T10:16:53.789Z",
+  "models": {
+    "AccountBalance": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Type",
+        "type": "Account Type",
+        "modelRef": "AccountType",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CategoryId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CategoryDescription",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AnalysisCategoryId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AnalysisCategoryDescription",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Debit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Credit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BudgetItemPeriods",
+        "type": "Collection of Budget Item Period",
+        "modelRef": "BudgetItemPeriod",
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "Attachment": [
+      {
+        "name": "Name",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required",
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Size",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AttachmentUID",
+        "type": "globally unique identifier",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Data",
+        "type": "Collection of byte",
+        "modelRef": null,
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "BankFeedAccount": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankFeedAccountGroupId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankFeedAccountGroup",
+        "type": "Bank Feed Account Group",
+        "modelRef": "BankFeedAccountGroup",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Identifier",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "LastRefreshDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "FirstImportDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Balance",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankAccountId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankAccountName",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "LastRefreshStatusId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "BankFeedAccountGroup": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankFeedProviderId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BankFeedProviderTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Identifier",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "RequiresAdditionalAuthentication",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "LastRefreshStatusId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "BudgetItem": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Account",
+        "type": "Budget Item Account",
+        "modelRef": "BudgetItemAccount",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "BudgetItemPeriods",
+        "type": "Collection of Budget Item Period",
+        "modelRef": "BudgetItemPeriod",
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "This is a list of period Dates and there totals."
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AccountTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "BudgetItemAccount": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ReportingLevelType",
+        "type": "Reporting Level Type",
+        "modelRef": "ReportingLevelType",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Gets or sets the type of the reporting level Type."
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Category",
+        "type": "Account Category",
+        "modelRef": "AccountCategory",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Gets or sets the Account category."
+      }
+    ],
+    "BudgetItemPeriod": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "CommercialDocumentLine": [
+      {
+        "name": "SelectionId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Gets or sets the selection identifier. This is the selected Item Id or Account Id."
+      },
+      {
+        "name": "TaxTypeId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "LineType",
+        "type": "Commercial Document Line Type",
+        "modelRef": "CommercialDocumentLineType",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Quantity",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "The Quantity of a LineType of Item. For a LineType of Accounts, a Quantity of 1 is required. Accounts with a quantity greater than one will result in a validation message."
+      },
+      {
+        "name": "UnitPriceExclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Unit",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "UnitPriceInclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TaxPercentage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DiscountPercentage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Exclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Discount",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Tax",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Comments",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AnalysisCategoryId1",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "AnalysisCategoryId2",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "AnalysisCategoryId3",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "$TrackingCode",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CurrencyId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "UnitCost",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": "Gets the UnitCost identifier. This is the Unit Cost of the Item at Time of Sale (only available on TaxInvoices for Item Lines)."
+      },
+      {
+        "name": "UID",
+        "type": "globally unique identifier",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      }
+    ],
+    "CompanyLogo": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Image",
+        "type": "Collection of byte",
+        "modelRef": null,
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Timestamp",
+        "type": "Collection of byte",
+        "modelRef": null,
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "CRMActivityNote": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Subject",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "CustomerStatement": [
+      {
+        "name": "Customer",
+        "type": "Customer",
+        "modelRef": "Customer",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "StatementLines",
+        "type": "Collection of Customer Statement Line",
+        "modelRef": "CustomerStatementLine",
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalDue",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalPaid",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Current",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Days30",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Days60",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Days90",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Days120Plus",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "CustomerStatementLine": [
+      {
+        "name": "DocumentHeaderId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentNumber",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Reference",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Comment",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Debit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Credit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "DateAndHoursStruct": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "TimesheetIDs",
+        "type": "Collection of integer",
+        "modelRef": null,
+        "isCollection": true,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Hours",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Comments",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "SystemGenerated",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "SystemGeneratedHours",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "BilledHours",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "WrittenOffHours",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "WrittenOffAmount",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "ConsolidatedEntries",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Locked",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "LockedPartially",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "BillableHours",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "BillableAmount",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      }
+    ],
+    "HttpRequestMessage": [
+      {
+        "name": "Version",
+        "type": "Version",
+        "modelRef": "Version",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Content",
+        "type": "Http Content",
+        "modelRef": "HttpContent",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Method",
+        "type": "Http Method",
+        "modelRef": "HttpMethod",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "RequestUri",
+        "type": "URI",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Headers",
+        "type": "Collection of Object",
+        "modelRef": null,
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Properties",
+        "type": "Dictionary of string [key] and Object [value]",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "ItemBundleItem": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "The identifier."
+      },
+      {
+        "name": "ItemId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Foreign Key to Item"
+      },
+      {
+        "name": "Code",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Item Code"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Item Description"
+      },
+      {
+        "name": "Quantity",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Quantity that will be included in this bundle"
+      },
+      {
+        "name": "AverageCost",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Average Cost of this item"
+      },
+      {
+        "name": "BundleCode",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Bundle Code"
+      },
+      {
+        "name": "BundleDescription",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Bundle Description"
+      },
+      {
+        "name": "PriceListCostExclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Price List Cost Exclusive of this item"
+      },
+      {
+        "name": "PriceListCostInclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Price List Cost Inclusive of this item"
+      }
+    ],
+    "OutstandingSupplierDocument": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Inclusive",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DiscountPercentage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TaxReference",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 30"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DocumentNumber",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Reference",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Message",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 8000"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Discount",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Exclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Tax",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Rounding",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AmountDue",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Data type: Currency"
+        ],
+        "description": ""
+      },
+      {
+        "name": "PostalAddress01",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "PostalAddress02",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "PostalAddress03",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "PostalAddress04",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "PostalAddress05",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DeliveryAddress01",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DeliveryAddress02",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DeliveryAddress03",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DeliveryAddress04",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DeliveryAddress05",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "TaxPeriodId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Editable",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "HasAttachments",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "HasNotes",
+        "type": "nullable bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "HasAnticipatedDate",
+        "type": "nullable bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "HasSpecialCountryTax",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "AnticipatedDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "ExternalReference",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "String length: inclusive between 0 and 100"
+        ],
+        "description": ""
+      },
+      {
+        "name": "UID",
+        "type": "globally unique identifier",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "SupplierId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "SupplierName",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Supplier",
+        "type": "Supplier",
+        "modelRef": "Supplier",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Modified",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Created",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "StatusId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Supplier_CurrencyId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Supplier_ExchangeRate",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DueDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ExpectedPaymentDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Lines",
+        "type": "Collection of Commercial Document Line",
+        "modelRef": "CommercialDocumentLine",
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "PurchasesByItem": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TransactionID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentNumber",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "SupplierName",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ItemCode",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ItemDescription",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ItemCodeAndDescription",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "UnitPriceExclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Quantity",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalPurchases",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "PriceExclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "RecurringJournalRecurrence": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "FrequencyType",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Gets or sets the type of the frequency type. OneTimeOnly = 1, Daily = 2, Weekly = 3, Monthly = 4, MonthlyRelative = 5, Yearly = 6, YearlyRelative = 7"
+      },
+      {
+        "name": "FrequencyInterval",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "FrequencyRelativeInterval",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "FrequencyRecurrenceFactor",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "FrequencyYearlyMonth",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "RecurrenceRangeType",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Gets or sets the type of the recurrence range. NoEndDate = 1, EndAfterOccurrences = 2, FixedEndDate = 3"
+      },
+      {
+        "name": "StartDate",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "NextRunDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "LastRunDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "EndDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "NumberOfOccurrences",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Created",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": "Created date."
+      },
+      {
+        "name": "Modified",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": "Modified date."
+      }
+    ],
+    "RecurringJournalTransaction": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Effect",
+        "type": "Effect",
+        "modelRef": "Effect",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": "Gets or sets the Journal Entry. Debit = 1, Credit = 2"
+      },
+      {
+        "name": "AccountId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Reference",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TaxTypeId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Exclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Tax",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ContraAccountId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Memo",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AnalysisCategoryId1",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "AnalysisCategoryId2",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "AnalysisCategoryId3",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": "Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId."
+      },
+      {
+        "name": "Editable",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Locked",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "$TrackingCode",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Debit",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Credit",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Created",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": false,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      },
+      {
+        "name": "Modified",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": true,
+        "nullable": true,
+        "annotations": [
+          "Read Only / System Generated"
+        ],
+        "description": ""
+      }
+    ],
+    "RecurringProfile": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AutoCreate",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "DueDateMethodId",
+        "type": "Due Date Method",
+        "modelRef": "DueDateMethod",
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Specifies which method should be used to determine the invoice due date. Days from date of Invoice = 0, Day of the current Month = 1, Day of the following Month = 2, End of the current Month = 3, Days from the end of the Invoice Month = 4"
+      },
+      {
+        "name": "DueDateMethodValue",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Based on DueDateMethodId selection number of days for invoice due date."
+      },
+      {
+        "name": "EmailContent",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CarbonCopySender",
+        "type": "nullable bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CarbonCopyEmail",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "EmailSignatureTemplateId",
+        "type": "nullable integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "SalesBySalesRepresentative": [
+      {
+        "name": "DocumentHeaderId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentTypeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "SalesRepresentativeId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "DocumentNumber",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "UnitPriceExclusive",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Quantity",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalCost",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Total",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "CustomerName",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "GPAmount",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "GPPercentage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalGroupAverage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "TotalReportAverage",
+        "type": "decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "Schedule": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "ScheduleFrequencyId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": "Gets or sets the schedule frequency id. Required. 1 = Every Day 2 = Every Week 4 = Every Second Week 5 = Every Month 6 = Every Second Month 7 = Every Third Month 8 = Every Sixth Month 9 = Every Year"
+      },
+      {
+        "name": "StartDate",
+        "type": "date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": true,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [
+          "Required"
+        ],
+        "description": ""
+      },
+      {
+        "name": "EndDate",
+        "type": "nullable date",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Active",
+        "type": "bool",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "TakeOnAccountBalance": [
+      {
+        "name": "ID",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "GroupKey",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Category",
+        "type": "Account Category",
+        "modelRef": "AccountCategory",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AccountType",
+        "type": "Take On Balance Account Type",
+        "modelRef": "TakeOnBalanceAccountType",
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "LinkId",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Debit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Credit",
+        "type": "nullable decimal",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": true,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "EntryUrl",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "TakeOnAccountGroup": [
+      {
+        "name": "TakeOnAccountBalances",
+        "type": "Collection of Take On Account Balance",
+        "modelRef": "TakeOnAccountBalance",
+        "isCollection": true,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Order",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "AddUrl",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ],
+    "Version": [
+      {
+        "name": "Major",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Minor",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Build",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "Revision",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "MajorRevision",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      },
+      {
+        "name": "MinorRevision",
+        "type": "integer",
+        "modelRef": null,
+        "isCollection": false,
+        "required": false,
+        "readOnly": false,
+        "nullable": false,
+        "annotations": [],
+        "description": ""
+      }
+    ]
+  },
+  "modelSources": {
+    "AccountBalance": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=AccountBalance",
+      "retrievedAt": "2026-11-23T08:50:05.067Z",
+      "sha256": "e70d2a64fd112927bfb03ec309a7831c53901b049e8311df242b7c1ef4e5e9e2"
+    },
+    "Attachment": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=Attachment",
+      "retrievedAt": "2026-11-22T04:37:00.393Z",
+      "sha256": "4b0c5a5096a6bc16d4ce5b0c72720357dccbf55649929669f6d19cbb0f32f4ea"
+    },
+    "BankFeedAccount": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BankFeedAccount",
+      "retrievedAt": "2026-11-22T04:37:00.613Z",
+      "sha256": "17d9d97188f1e578f08c73e3566cf03565833fce633696f0e01f236d726a294c"
+    },
+    "BankFeedAccountGroup": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BankFeedAccountGroup",
+      "retrievedAt": "2026-11-23T08:59:21.087Z",
+      "sha256": "a2ed301b6a897f03f6addc46a2c178be8a37e12a7bba7d5092bf2ff4c70f6d82"
+    },
+    "BudgetItem": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BudgetItem",
+      "retrievedAt": "2026-11-22T04:37:00.965Z",
+      "sha256": "9fdd676e6e378d2ad2ea11fb748d39e92f6905c79493a538448076433519b921"
+    },
+    "BudgetItemAccount": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BudgetItemAccount",
+      "retrievedAt": "2026-11-23T09:02:56.438Z",
+      "sha256": "c091a2865c9eeead9e3250f5fe6d79aa92c39ec79e3d6b5f76da1591651aa744"
+    },
+    "BudgetItemPeriod": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BudgetItemPeriod",
+      "retrievedAt": "2026-11-23T09:02:58.064Z",
+      "sha256": "4ac06d96d48e0da96176679617d74727fa04ef1bbe5ef6ac19727f5daaf98a54"
+    },
+    "CommercialDocumentLine": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CommercialDocumentLine",
+      "retrievedAt": "2026-11-22T04:37:00.945Z",
+      "sha256": "8e7d9466aec4cc3013d1bfeed4f32554309bc622426ba0d70f76fc8b6def26b0"
+    },
+    "CompanyLogo": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CompanyLogo",
+      "retrievedAt": "2026-11-22T05:05:39.509Z",
+      "sha256": "0ed95a56c0d0210787817084f8ad60d31b6dc3723196fc7e874c434e0bb95e0e"
+    },
+    "CRMActivityNote": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CRMActivityNote",
+      "retrievedAt": "2026-11-22T04:37:01.215Z",
+      "sha256": "ffc14c183646774a6b0557e8f87865f9e3ff7ac815a79b711e0019ab8cbba73d"
+    },
+    "CustomerStatement": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CustomerStatement",
+      "retrievedAt": "2026-11-22T04:41:45.142Z",
+      "sha256": "69190813b461a4b21c8a3cfa3577d9d4e00bcd3bcd4123a92b270d4a11fbb8e8"
+    },
+    "CustomerStatementLine": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CustomerStatementLine",
+      "retrievedAt": "2026-11-22T04:41:51.714Z",
+      "sha256": "5dd3965504f927df6ddedbfadb30dc1b4eec98e20f143b5f9c0e4b253e10b524"
+    },
+    "DateAndHoursStruct": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=DateAndHoursStruct",
+      "retrievedAt": "2026-11-22T04:37:01.464Z",
+      "sha256": "bff53ff44a355bb134dad570392522bcb6f4d9d4c59a9a3d3668c0b3db0ce700"
+    },
+    "HttpRequestMessage": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=HttpRequestMessage",
+      "retrievedAt": "2026-11-23T09:19:29.266Z",
+      "sha256": "f0d9e018d224e1bf612a1824f344cd86970d4f2879d8584edcc49c1765b18202"
+    },
+    "ItemBundleItem": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=ItemBundleItem",
+      "retrievedAt": "2026-11-22T04:37:02.019Z",
+      "sha256": "e6d45cd0cceebaef1d1c1a8081ea50b52d703d77b30b54fafacb87fa49aa0b90"
+    },
+    "OutstandingSupplierDocument": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=OutstandingSupplierDocument",
+      "retrievedAt": "2026-11-22T05:31:50.991Z",
+      "sha256": "1e5b11867b00f9bf28d4b463139d2489e5216974169b3048fc103c2630496ff0"
+    },
+    "PurchasesByItem": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=PurchasesByItem",
+      "retrievedAt": "2026-11-22T04:43:49.680Z",
+      "sha256": "6b243990c96e68a1ef84ff3d2a93e3dfd9bfc113c75a0b7feec1d539b4a613f9"
+    },
+    "RecurringJournalRecurrence": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=RecurringJournalRecurrence",
+      "retrievedAt": "2026-11-22T04:37:02.487Z",
+      "sha256": "590239163de571f0f5758d19194b4635646114c88f4a6fed09b98a8be93120d9"
+    },
+    "RecurringJournalTransaction": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=RecurringJournalTransaction",
+      "retrievedAt": "2026-11-22T04:37:02.483Z",
+      "sha256": "378c9b673a12eb77a5aa31e7880ccb7baf5fdeb8a8f07fd5bc4bede1ac86b301"
+    },
+    "RecurringProfile": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=RecurringProfile",
+      "retrievedAt": "2026-11-22T04:37:02.528Z",
+      "sha256": "cf694c7fd97ccad9bb2501959c72e2355537fc432a15200e6268c6cc4fdae94b"
+    },
+    "SalesBySalesRepresentative": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=SalesBySalesRepresentative",
+      "retrievedAt": "2026-11-22T04:44:11.754Z",
+      "sha256": "91c30e1168307393ba596c4dd19412be1a964df91e5434fe5dd3a710338db973"
+    },
+    "Schedule": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=Schedule",
+      "retrievedAt": "2026-11-22T04:37:02.812Z",
+      "sha256": "fe84cee40977ded089e30bdf75baf7805504339eb903bee44499a55ef28d9643"
+    },
+    "TakeOnAccountBalance": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TakeOnAccountBalance",
+      "retrievedAt": "2026-11-23T09:42:31.645Z",
+      "sha256": "746ab71f6b4b5d091797fa9499ce399df444262759a4a6a3bdcffe2a4d74e7df"
+    },
+    "TakeOnAccountGroup": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TakeOnAccountGroup",
+      "retrievedAt": "2026-11-22T04:37:03.140Z",
+      "sha256": "0fd4061dee25532e29c49dad8d986c05674c9af7667882413af12b87f31765fd"
+    },
+    "Version": {
+      "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=Version",
+      "retrievedAt": "2026-11-22T04:47:24.280Z",
+      "sha256": "1256d8bd6a6b5fa34b04de361fac57e67132bf92135ef3a686628a53b6914ce8"
+    }
+  },
+  "enums": {
+    "AccountType": {
+      "modelName": "AccountType",
+      "displayName": "Account Type",
+      "values": [
+        {
+          "name": "Account",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "SystemAccount",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "SalesOrPurchasesAccount",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "BankAccount",
+          "value": 4,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=AccountType",
+        "retrievedAt": "2026-11-23T10:11:38.880Z",
+        "sha256": "826821642d8c656c37d8891f818d73b3ef59b412a2d9ef976c7ff0b907d1967c"
+      }
+    },
+    "BankStatementMatchingOption": {
+      "modelName": "BankStatementMatchingOption",
+      "displayName": "Bank Statement Matching Option",
+      "values": [
+        {
+          "name": "NoMatching",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "MatchByDateAndAmount",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "MatchByDateAmountAndDescription",
+          "value": 2,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BankStatementMatchingOption",
+        "retrievedAt": "2026-11-22T04:37:00.699Z",
+        "sha256": "69cd59721810f72f2c894ee85545666056add5ff42feb7c3f8c23a324a325f92"
+      }
+    },
+    "BankTransactionType": {
+      "modelName": "BankTransactionType",
+      "displayName": "Bank Transaction Type",
+      "values": [
+        {
+          "name": "Account",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Customer",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "Supplier",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "Transfer",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "Tax",
+          "value": 5,
+          "description": ""
+        },
+        {
+          "name": "Split",
+          "value": 6,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=BankTransactionType",
+        "retrievedAt": "2026-11-22T04:37:00.774Z",
+        "sha256": "4a6667c35c1513ec262a5213fc95ecf51fb9ebf5ff663b45c36394ce3c0a2478"
+      }
+    },
+    "CommercialDocumentLineType": {
+      "modelName": "CommercialDocumentLineType",
+      "displayName": "Commercial Document Line Type",
+      "values": [
+        {
+          "name": "Item",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "Account",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Time",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "TimeEntry",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "Recharge",
+          "value": 5,
+          "description": ""
+        },
+        {
+          "name": "Bundle",
+          "value": 6,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CommercialDocumentLineType",
+        "retrievedAt": "2026-11-23T06:04:56.911Z",
+        "sha256": "ecf56b8349f00707c88811f5004f050a05dc41f75f4b8d9c812f8de749dee62c"
+      }
+    },
+    "CommunicationMethodType": {
+      "modelName": "CommunicationMethodType",
+      "displayName": "Communication Method Type",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "Print",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Email",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "Both",
+          "value": 3,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CommunicationMethodType",
+        "retrievedAt": "2026-11-22T04:37:01.039Z",
+        "sha256": "3892e8b6ae5864391a1e9ca1d57df7c2ccfb016777ed0e132812dc2d994271d6"
+      }
+    },
+    "CompanyStatus": {
+      "modelName": "CompanyStatus",
+      "displayName": "Company Status",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "RegistrationExpired",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "UserAccessDenied",
+          "value": 2,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CompanyStatus",
+        "retrievedAt": "2026-11-23T06:05:03.112Z",
+        "sha256": "9db4d3b2c2b42a8ce8bb88de935f41ad46363c9878971a7e79e8cbd8efd22a79"
+      }
+    },
+    "CompanyTransferStatus": {
+      "modelName": "CompanyTransferStatus",
+      "displayName": "Company Transfer Status",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "Pending",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Completed",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "Rejected",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "Expired",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "Canceled",
+          "value": 5,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CompanyTransferStatus",
+        "retrievedAt": "2026-11-23T06:19:43.119Z",
+        "sha256": "7e5d049a5d3249876bf4dd364df2d5c266b1c128cf0176dfd40158318834374a"
+      }
+    },
+    "CustomerReceiptStatus": {
+      "modelName": "CustomerReceiptStatus",
+      "displayName": "Customer Receipt Status",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "LockedGSTBadDebtRecovery",
+          "value": 1,
+          "description": "When a GST Bad Debt recovery is processed, part of the process relies on the Invoice Total Outstanding, this is controlled by the Receipt. We use this Status to indicate that documents cannot be deleted or unallocated as a Dad Debt recovery is using an invoice this receipt is linked to."
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=CustomerReceiptStatus",
+        "retrievedAt": "2026-11-22T04:37:01.297Z",
+        "sha256": "cbdb7e67168ed6e1732c82e3bbd559974ca9a3242d05f91fca2ff3e734e8abab"
+      }
+    },
+    "DueDateMethod": {
+      "modelName": "DueDateMethod",
+      "displayName": "Due Date Method",
+      "values": [
+        {
+          "name": "NumberOfDays",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "DayOfCurrentMonth",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "DayOfNextMonth",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "EndOfCurrentMonth",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "DaysFromEndOfInvoiceMonth",
+          "value": 4,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=DueDateMethod",
+        "retrievedAt": "2026-11-23T06:04:50.551Z",
+        "sha256": "20f694c402e4942ef41dce046659a627d155c2398155bc711807788447ca6cf5"
+      }
+    },
+    "Effect": {
+      "modelName": "Effect",
+      "displayName": "Effect",
+      "values": [
+        {
+          "name": "Debit",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Credit",
+          "value": 2,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=Effect",
+        "retrievedAt": "2026-11-22T04:37:01.695Z",
+        "sha256": "703a622544ab119d3b6b4b034f8e3984a8ebedd33933fd0f83531826aa5c7bd3"
+      }
+    },
+    "HttpStatusCode": {
+      "modelName": "HttpStatusCode",
+      "displayName": "Http Status Code",
+      "values": [
+        {
+          "name": "Continue",
+          "value": 100,
+          "description": ""
+        },
+        {
+          "name": "SwitchingProtocols",
+          "value": 101,
+          "description": ""
+        },
+        {
+          "name": "OK",
+          "value": 200,
+          "description": ""
+        },
+        {
+          "name": "Created",
+          "value": 201,
+          "description": ""
+        },
+        {
+          "name": "Accepted",
+          "value": 202,
+          "description": ""
+        },
+        {
+          "name": "NonAuthoritativeInformation",
+          "value": 203,
+          "description": ""
+        },
+        {
+          "name": "NoContent",
+          "value": 204,
+          "description": ""
+        },
+        {
+          "name": "ResetContent",
+          "value": 205,
+          "description": ""
+        },
+        {
+          "name": "PartialContent",
+          "value": 206,
+          "description": ""
+        },
+        {
+          "name": "MultipleChoices",
+          "value": 300,
+          "description": ""
+        },
+        {
+          "name": "Ambiguous",
+          "value": 300,
+          "description": ""
+        },
+        {
+          "name": "MovedPermanently",
+          "value": 301,
+          "description": ""
+        },
+        {
+          "name": "Moved",
+          "value": 301,
+          "description": ""
+        },
+        {
+          "name": "Found",
+          "value": 302,
+          "description": ""
+        },
+        {
+          "name": "Redirect",
+          "value": 302,
+          "description": ""
+        },
+        {
+          "name": "SeeOther",
+          "value": 303,
+          "description": ""
+        },
+        {
+          "name": "RedirectMethod",
+          "value": 303,
+          "description": ""
+        },
+        {
+          "name": "NotModified",
+          "value": 304,
+          "description": ""
+        },
+        {
+          "name": "UseProxy",
+          "value": 305,
+          "description": ""
+        },
+        {
+          "name": "Unused",
+          "value": 306,
+          "description": ""
+        },
+        {
+          "name": "TemporaryRedirect",
+          "value": 307,
+          "description": ""
+        },
+        {
+          "name": "RedirectKeepVerb",
+          "value": 307,
+          "description": ""
+        },
+        {
+          "name": "BadRequest",
+          "value": 400,
+          "description": ""
+        },
+        {
+          "name": "Unauthorized",
+          "value": 401,
+          "description": ""
+        },
+        {
+          "name": "PaymentRequired",
+          "value": 402,
+          "description": ""
+        },
+        {
+          "name": "Forbidden",
+          "value": 403,
+          "description": ""
+        },
+        {
+          "name": "NotFound",
+          "value": 404,
+          "description": ""
+        },
+        {
+          "name": "MethodNotAllowed",
+          "value": 405,
+          "description": ""
+        },
+        {
+          "name": "NotAcceptable",
+          "value": 406,
+          "description": ""
+        },
+        {
+          "name": "ProxyAuthenticationRequired",
+          "value": 407,
+          "description": ""
+        },
+        {
+          "name": "RequestTimeout",
+          "value": 408,
+          "description": ""
+        },
+        {
+          "name": "Conflict",
+          "value": 409,
+          "description": ""
+        },
+        {
+          "name": "Gone",
+          "value": 410,
+          "description": ""
+        },
+        {
+          "name": "LengthRequired",
+          "value": 411,
+          "description": ""
+        },
+        {
+          "name": "PreconditionFailed",
+          "value": 412,
+          "description": ""
+        },
+        {
+          "name": "RequestEntityTooLarge",
+          "value": 413,
+          "description": ""
+        },
+        {
+          "name": "RequestUriTooLong",
+          "value": 414,
+          "description": ""
+        },
+        {
+          "name": "UnsupportedMediaType",
+          "value": 415,
+          "description": ""
+        },
+        {
+          "name": "RequestedRangeNotSatisfiable",
+          "value": 416,
+          "description": ""
+        },
+        {
+          "name": "ExpectationFailed",
+          "value": 417,
+          "description": ""
+        },
+        {
+          "name": "UpgradeRequired",
+          "value": 426,
+          "description": ""
+        },
+        {
+          "name": "InternalServerError",
+          "value": 500,
+          "description": ""
+        },
+        {
+          "name": "NotImplemented",
+          "value": 501,
+          "description": ""
+        },
+        {
+          "name": "BadGateway",
+          "value": 502,
+          "description": ""
+        },
+        {
+          "name": "ServiceUnavailable",
+          "value": 503,
+          "description": ""
+        },
+        {
+          "name": "GatewayTimeout",
+          "value": 504,
+          "description": ""
+        },
+        {
+          "name": "HttpVersionNotSupported",
+          "value": 505,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=HttpStatusCode",
+        "retrievedAt": "2026-11-22T05:26:27.805Z",
+        "sha256": "7001fa1c7fe634ea5f9b4ff32be4299d7c879916778e8c9217e31a86e5cc147b"
+      }
+    },
+    "PaymentMethod": {
+      "modelName": "PaymentMethod",
+      "displayName": "Payment Method",
+      "values": [
+        {
+          "name": "Cash",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Cheque",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "CreditCard",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "EFT",
+          "value": 4,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=PaymentMethod",
+        "retrievedAt": "2026-11-22T04:37:02.199Z",
+        "sha256": "8abdb2dacbf750ac1b876e7b34b19eda0a73a48a490eb0d7c7a4c5c7ebd90d52"
+      }
+    },
+    "ReportingLevelType": {
+      "modelName": "ReportingLevelType",
+      "displayName": "Reporting Level Type",
+      "values": [
+        {
+          "name": "Category",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Group",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "Account",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "SystemAccount",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "ItemReportingGroup",
+          "value": 5,
+          "description": ""
+        },
+        {
+          "name": "BankAccount",
+          "value": 6,
+          "description": ""
+        },
+        {
+          "name": "Total",
+          "value": 10,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=ReportingLevelType",
+        "retrievedAt": "2026-11-22T04:37:02.649Z",
+        "sha256": "6362602ac20e6a92e2c66fc0a69af886382997c5d19c97bdfb7596bb18906231"
+      }
+    },
+    "RoundingType": {
+      "modelName": "RoundingType",
+      "displayName": "Rounding Type",
+      "values": [
+        {
+          "name": "Up",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "Down",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "Normal",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "None",
+          "value": 3,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=RoundingType",
+        "retrievedAt": "2026-11-23T06:05:03.110Z",
+        "sha256": "4a45911f9ce13195512b648b2afff8c87db425829d7f5d191b07f2ef777c69ac"
+      }
+    },
+    "SupplierPaymentStatus": {
+      "modelName": "SupplierPaymentStatus",
+      "displayName": "Supplier Payment Status",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "LockedInputTaxAdjustment",
+          "value": 1,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=SupplierPaymentStatus",
+        "retrievedAt": "2026-11-22T04:37:02.963Z",
+        "sha256": "c60ed251bd32bdd2fb7c1f51f1ca500516364ef7c2a5673da925bc77e2a2db6b"
+      }
+    },
+    "TaxAdjustmentAccountType": {
+      "modelName": "TaxAdjustmentAccountType",
+      "displayName": "Tax Adjustment Account Type",
+      "values": [
+        {
+          "name": "TaxPayable",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "TaxProvision",
+          "value": 2,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TaxAdjustmentAccountType",
+        "retrievedAt": "2026-11-22T04:37:03.116Z",
+        "sha256": "59ba1c1aa1bdc4408aed2a7b693bdb434620f72fd11a5c814a060cfbfe673547"
+      }
+    },
+    "TaxAdjustmentType": {
+      "modelName": "TaxAdjustmentType",
+      "displayName": "Tax Adjustment Type",
+      "values": [
+        {
+          "name": "InputTax",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "OutputTax",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "DRCInputTax",
+          "value": 3,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TaxAdjustmentType",
+        "retrievedAt": "2026-11-22T04:37:03.171Z",
+        "sha256": "cc7ac96385ba4bf9598459ad8b9328f0b74f6216a65d7a513e39a84046f28896"
+      }
+    },
+    "TaxSystem": {
+      "modelName": "TaxSystem",
+      "displayName": "Tax System",
+      "values": [
+        {
+          "name": "InvoiceBased",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "PaymentsBased",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "NoTax",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "InvoiceBasedSST",
+          "value": 3,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TaxSystem",
+        "retrievedAt": "2026-11-22T04:45:23.572Z",
+        "sha256": "a53e7e6395f7b4464763fb2d85e1ad8c23395d79cd2c55eb125fda939db546f9"
+      }
+    },
+    "TimeTrackingBillingMethodType": {
+      "modelName": "TimeTrackingBillingMethodType",
+      "displayName": "Time Tracking Billing Method Type",
+      "values": [
+        {
+          "name": "SingleProjectRate",
+          "value": 1,
+          "description": "Timesheet tasks will be consolidated into one invoice line"
+        },
+        {
+          "name": "ProjectRatePerHour",
+          "value": 2,
+          "description": "This project will be billed using a project hourly rate."
+        },
+        {
+          "name": "StaffRatePerHour",
+          "value": 3,
+          "description": "This project will be billed using the relevant user rate for each task."
+        },
+        {
+          "name": "TaskRatePerHour",
+          "value": 4,
+          "description": "This project will be billed using the task rate."
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TimeTrackingBillingMethodType",
+        "retrievedAt": "2026-11-22T04:37:03.396Z",
+        "sha256": "eade0f36bb14d1cc1da82c749381e98898a26097867a945e711f1508b545dc8c"
+      }
+    },
+    "TimeTrackingExpenseBillingMethod": {
+      "modelName": "TimeTrackingExpenseBillingMethod",
+      "displayName": "Time Tracking Expense Billing Method",
+      "values": [
+        {
+          "name": "None",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "RechargeAtCost",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "RechargeAtMarkupPercentage",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "RechargeAtAmount",
+          "value": 3,
+          "description": ""
+        },
+        {
+          "name": "NoRecharge",
+          "value": 4,
+          "description": ""
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TimeTrackingExpenseBillingMethod",
+        "retrievedAt": "2026-11-22T04:37:03.430Z",
+        "sha256": "9ec0969626c59671f4effb8fe77410a8a311a2a1d2b6a3ffd80c9194808794e5"
+      }
+    },
+    "TimeTrackingInvoicingMethodType": {
+      "modelName": "TimeTrackingInvoicingMethodType",
+      "displayName": "Time Tracking Invoicing Method Type",
+      "values": [
+        {
+          "name": "TaskDetailed",
+          "value": 1,
+          "description": "Each timesheet task will appear as a separate invoice line item."
+        },
+        {
+          "name": "GroupByTask",
+          "value": 2,
+          "description": "Timesheet tasks will be grouped on an invoice line."
+        },
+        {
+          "name": "Consolidated",
+          "value": 3,
+          "description": "Consolidate all timesheet tasks into one invoice line per project."
+        }
+      ],
+      "source": {
+        "url": "https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=TimeTrackingInvoicingMethodType",
+        "retrievedAt": "2026-11-22T04:37:03.535Z",
+        "sha256": "7924f4f9a21d6b49199254c0d7885f84546d1937eb7f3e1656f86898307d3666"
+      }
+    }
+  },
+  "unresolved": {
+    "AccountantEvent": "help site returned error/offline pages after retries (rate limited)",
+    "AgeingTransaction": "help site returned error/offline pages after retries (rate limited)",
+    "AllocatedCustomerDocument": "help site returned error/offline pages after retries (rate limited)",
+    "AllocatedSupplierDocument": "help site returned error/offline pages after retries (rate limited)",
+    "BalanceSheetReportingLevel": "help site returned error/offline pages after retries (rate limited)",
+    "BankAccountTransactionListing": "help site returned error/offline pages after retries (rate limited)",
+    "BankAccountTransactionListingDetail": "help site returned error/offline pages after retries (rate limited)",
+    "BankStatementTransaction": "help site returned error/offline pages after retries (rate limited)",
+    "BudgetAccountBalance": "help site returned error/offline pages after retries (rate limited)",
+    "CashMovement": "help site returned error/offline pages after retries (rate limited)",
+    "ComparativeProfitAndLossStatementLine": "help site returned error/offline pages after retries (rate limited)",
+    "CurrencyResponse": "help site returned error/offline pages after retries (rate limited)",
+    "CustomerSalesHistory": "help site returned error/offline pages after retries (rate limited)",
+    "DetailedLedgerTransaction": "help site returned error/offline pages after retries (rate limited)",
+    "DocumentHistory": "help site returned error/offline pages after retries (rate limited)",
+    "DocumentUserDefinedField": "help site returned error/offline pages after retries (rate limited)",
+    "EmailTemplatePlaceHolder": "help site returned error/offline pages after retries (rate limited)",
+    "ExchangeRateResponse": "help site returned error/offline pages after retries (rate limited)",
+    "HttpContent": "help site returned error/offline pages after retries (rate limited)",
+    "IncomeVsExpensesPeriodGrouping": "help site returned error/offline pages after retries (rate limited)",
+    "ItemMovement": "help site returned error/offline pages after retries (rate limited)",
+    "OutstandingCustomerDocument": "help site returned error/offline pages after retries (rate limited)",
+    "PeriodGrouping": "help site returned error/offline pages after retries (rate limited)",
+    "PriceListReportLine": "help site returned error/offline pages after retries (rate limited)",
+    "PriceListReportLineItem": "help site returned error/offline pages after retries (rate limited)",
+    "ProfitAndLossReportingLevel": "help site returned error/offline pages after retries (rate limited)",
+    "ReportingGroup": "help site returned error/offline pages after retries (rate limited)",
+    "SalesByItem": "help site returned error/offline pages after retries (rate limited)",
+    "ScheduleFrequency": "help site returned error/offline pages after retries (rate limited)",
+    "SecretarialShareClass": "help site returned error/offline pages after retries (rate limited)",
+    "SecretarialShareholder": "help site returned error/offline pages after retries (rate limited)",
+    "SecretarialStakeHolder": "help site returned error/offline pages after retries (rate limited)",
+    "SupplierPurchaseHistory": "help site returned error/offline pages after retries (rate limited)",
+    "SupplierStatement": "help site returned error/offline pages after retries (rate limited)",
+    "TaxReportingType": "help site returned error/offline pages after retries (rate limited)",
+    "TimeTrackingExpenseExtended": "help site returned error/offline pages after retries (rate limited)",
+    "TimeTrackingProjectInvoice": "help site returned error/offline pages after retries (rate limited)",
+    "TimeTrackingProjectListingSummary": "help site returned error/offline pages after retries (rate limited)",
+    "TimeTrackingProjectSummary": "help site returned error/offline pages after retries (rate limited)",
+    "TimeTrackingSummaryEntry": "help site returned error/offline pages after retries (rate limited)",
+    "ToDoListItem": "help site returned error/offline pages after retries (rate limited)",
+    "TopCustomersBySales": "help site returned error/offline pages after retries (rate limited)",
+    "TopPurchasedItem": "help site returned error/offline pages after retries (rate limited)",
+    "TopSellingItem": "help site returned error/offline pages after retries (rate limited)",
+    "TopSellingItemByValueOnHand": "help site returned error/offline pages after retries (rate limited)",
+    "TopSuppliersByPurchases": "help site returned error/offline pages after retries (rate limited)",
+    "TransactionListing": "help site returned error/offline pages after retries (rate limited)",
+    "TransactionListingDetail": "help site returned error/offline pages after retries (rate limited)",
+    "TrialBalanceExportMapping": "help site returned error/offline pages after retries (rate limited)",
+    "UserDefinedField": "help site returned error/offline pages after retries (rate limited)",
+    "VAT201Data": "help site returned error/offline pages after retries (rate limited)"
+  }
+}

@@ -365,17 +365,31 @@ describe("Full 622-Endpoint Contract Suite (M004 + M005 + M006)", () => {
       transport: { fetch: mockFetch },
     });
 
+    // Minimal payloads satisfying the strict required request fields (WP008.1):
+    // validation runs before dispatch, so an empty body would fail client-side
+    // and never reach the 503 that this test exercises.
     const mutations: Array<() => Promise<unknown>> = [
-      () => client.taxInvoices.save({}),
-      () => client.quotes.save({}),
-      () => client.salesOrders.save({}),
-      () => client.purchaseOrders.save({}),
-      () => client.supplierInvoices.save({}),
+      () => client.taxInvoices.save({ Date: "2026-01-01", CustomerId: 1, DueDate: "2026-01-31" }),
+      () => client.quotes.save({ Date: "2026-01-01", CustomerId: 1, ExpiryDate: "2026-01-31" }),
+      () =>
+        client.salesOrders.save({ Date: "2026-01-01", CustomerId: 1, DeliveryDate: "2026-01-31" }),
+      () =>
+        client.purchaseOrders.save({
+          Date: "2026-01-01",
+          SupplierId: 1,
+          DeliveryDate: "2026-01-31",
+        }),
+      () =>
+        client.supplierInvoices.save({
+          Date: "2026-01-01",
+          SupplierId: 1,
+          DueDate: "2026-01-31",
+        }),
       () => client.customerReceipts.save({}),
       () => client.supplierPayments.save({}),
       () => client.allocations.save({}),
       () => client.bankTransactions.save({}),
-      () => client.journalEntries.save({}),
+      () => client.journalEntries.save({ Date: "2026-01-01" }),
     ];
 
     for (const runMutation of mutations) {

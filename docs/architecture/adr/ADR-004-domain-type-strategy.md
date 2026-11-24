@@ -48,3 +48,19 @@ Option 2:
 ## References
 
 Spec §7; `docs/architecture/domain-model.md`.
+
+## Amendment — WP008.1 constrained enums (2026-11-23)
+
+The decision line "Enums as literal unions with forward-compatible parsing
+(unknown values tolerated)" is **reversed** for generated wire schemas: enum
+fields now emit constrained literal unions from the published enum pages
+(`contracts/sage-api/snapshots/model-extensions.json`), per M008 §5.1.3
+(constrained representation; zero unexplained broad unions).
+
+Rationale: the published enum pages are the contract; tolerating unknown enum
+values weakened runtime validation (WP008.1). Forward compatibility is
+preserved at the object level via `.passthrough()` — additional response
+properties are accepted — without widening known enum definitions.
+
+Reversal condition: WP008.4 live evidence that production responses contain
+undocumented enum values; revisit this amendment then. See ADR-016.

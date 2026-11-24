@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420">
+  <rect width="1200" height="420" fill="#020A13"/>
+  <g transform="translate(76 62)">
+    <!-- Open ledger form -->
+    <path d="M42 34 H174 Q194 34 194 54 V238 Q194 258 174 258 H42 Q22 258 22 238 V54 Q22 34 42 34Z"
+          fill="none" stroke="#64A6F7" stroke-width="13" stroke-linejoin="round"/>
+    <path d="M65 86 H139 M65 126 H119 M65 166 H103"
+          fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round"/>
+    <!-- API path extending beyond the ledger -->
+    <path d="M103 166 L156 166 L208 114 L244 114"
+          fill="none" stroke="#64A6F7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M156 166 L208 218 L244 218"
+          fill="none" stroke="#64A6F7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="103" cy="166" r="13" fill="#FFFFFF" stroke="#020A13" stroke-width="5"/>
+    <circle cx="244" cy="114" r="16" fill="#084386" stroke="#64A6F7" stroke-width="8"/>
+    <circle cx="244" cy="218" r="16" fill="#084386" stroke="#64A6F7" stroke-width="8"/>
+    <circle cx="156" cy="166" r="8" fill="#64A6F7"/>
+  </g>
+  <g transform="translate(390 0)">
+    <text x="0" y="205" font-family="Inter, Avenir Next, Helvetica, Arial, sans-serif"
+          font-size="104" font-weight="650" letter-spacing="-4" fill="#FFFFFF">sage one</text>
+    <text x="6" y="264" font-family="Inter, Avenir Next, Helvetica, Arial, sans-serif"
+          font-size="25" font-weight="600" letter-spacing="6" fill="#64A6F7">ACCOUNTING SDK</text>
+    <path d="M6 294 H515" stroke="#084386" stroke-width="3"/>
+    <text x="6" y="333" font-family="Inter, Avenir Next, Helvetica, Arial, sans-serif"
+          font-size="19" font-weight="500" letter-spacing="2.2" fill="#A9CFFF">BY BYTE MONEY</text>
+  </g>
+</svg>

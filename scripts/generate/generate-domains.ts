@@ -9,20 +9,34 @@
  * - Every generated operation is traceable to its `endpoint-catalogue.json` ID.
  */
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import type { EndpointCatalogueRecord, ParameterField } from "../api-discovery/parse-help.js";
+import { format, resolveConfig } from "prettier";
+
+import type { EndpointCatalogueRecord, ParameterField } from "../api-discovery/parse-help.ts";
+import {
+  fieldToZodExpr,
+  sanitizeIdentifier,
+  type EnumDefinition,
+  type FieldSchemaContext,
+} from "./field-schema.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../..");
 const CATALOGUE_PATH = resolve(REPO_ROOT, "contracts/sage-api/endpoint-catalogue.json");
 const MODELS_PATH = resolve(REPO_ROOT, "contracts/sage-api/snapshots/resource-models.json");
+const EXTENSIONS_PATH = resolve(REPO_ROOT, "contracts/sage-api/snapshots/model-extensions.json");
 
 interface CatalogueFile {
   readonly discoveredAt: string;
   readonly endpoints: readonly EndpointCatalogueRecord[];
+}
+
+interface ModelExtensionsFile {
+  readonly models: Record<string, readonly ParameterField[]>;
+  readonly enums: Record<string, EnumDefinition>;
 }
 
 const catalogue = JSON.parse(readFileSync(CATALOGUE_PATH, "utf8")) as CatalogueFile;
@@ -30,31 +44,53 @@ const explicitModels = JSON.parse(readFileSync(MODELS_PATH, "utf8")) as Record<
   string,
   readonly ParameterField[]
 >;
+const extensions: ModelExtensionsFile = existsSync(EXTENSIONS_PATH)
+  ? (JSON.parse(readFileSync(EXTENSIONS_PATH, "utf8")) as ModelExtensionsFile)
+  : { models: {}, enums: {} };
 
-// Build unified model dictionary (combining resource-models.json + sample-inferred models)
+// Build unified model dictionary (resource-models.json + WP008.1 model extensions;
+// sample inference below only fills models still missing after both).
 const allModels = new Map<string, readonly ParameterField[]>();
 for (const [k, v] of Object.entries(explicitModels)) {
   allModels.set(k, v);
 }
+for (const [k, v] of Object.entries(extensions.models)) {
+  allModels.set(k, v);
+}
+
+const enumMap = new Map<string, EnumDefinition>(Object.entries(extensions.enums));
+const schemaCtx: FieldSchemaContext = { enums: enumMap };
+
+/** Unsupported/ambiguous source metadata recorded during generation (WP008.1 §5.1.2). */
+const unsupportedFields: string[] = [];
 
 function inferFieldsFromSampleObj(obj: Record<string, unknown>): ParameterField[] {
   const fields: ParameterField[] = [];
   for (const [k, v] of Object.entries(obj)) {
     let type = "string";
     let isCollection = false;
-    if (typeof v === "number") {
+    if (v === null) {
+      // Sample carries no type evidence — never guess a concrete type (WP008.1).
+      type = "unknown";
+    } else if (typeof v === "number") {
       type = Number.isInteger(v) ? "integer" : "decimal";
     } else if (typeof v === "boolean") {
       type = "bool";
     } else if (Array.isArray(v)) {
       isCollection = true;
-      type =
-        typeof v[0] === "number"
-          ? "Collection of integer"
-          : typeof v[0] === "string"
-            ? "Collection of string"
-            : "Collection of Object";
-    } else if (v !== null && typeof v === "object") {
+      const first = v[0];
+      if (first === undefined || first === null) {
+        type = "Collection of unknown";
+      } else if (typeof first === "number") {
+        type = Number.isInteger(first) ? "Collection of integer" : "Collection of decimal";
+      } else if (typeof first === "string") {
+        type = "Collection of string";
+      } else if (typeof first === "boolean") {
+        type = "Collection of bool";
+      } else {
+        type = "Collection of Object";
+      }
+    } else if (typeof v === "object") {
       type = "Object";
     }
     fields.push({
@@ -120,49 +156,6 @@ for (const ep of catalogue.endpoints) {
       }
     }
   }
-}
-
-function fieldToZodExpr(field: ParameterField): string {
-  const t = field.type.toLowerCase();
-  if (field.isCollection) {
-    if (t.includes("integer") || t.includes("byte")) {
-      return "z.array(z.union([z.number().int(), z.string()])).nullable().optional()";
-    }
-    if (t.includes("decimal")) {
-      return "z.array(z.union([z.number(), z.string()])).nullable().optional()";
-    }
-    if (t.includes("string") || t.includes("guid") || t.includes("identifier")) {
-      return "z.array(z.union([z.string(), z.record(z.string(), z.unknown())])).nullable().optional()";
-    }
-    return "z.array(z.unknown()).nullable().optional()";
-  }
-
-  if (field.modelRef !== null) {
-    return "z.union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()]).nullable().optional()";
-  }
-
-  if (t.includes("integer") || t.includes("byte")) {
-    return "z.union([z.number().int(), z.string()])" + ".nullable().optional()";
-  }
-  if (t.includes("decimal")) {
-    return "z.union([z.number(), z.string()]).nullable().optional()";
-  }
-  if (t.includes("bool")) {
-    return "z.union([z.boolean(), z.number().int()]).nullable().optional()";
-  }
-  if (
-    t.includes("date") ||
-    t.includes("string") ||
-    t.includes("guid") ||
-    t.includes("identifier")
-  ) {
-    return "z.union([z.string(), z.number(), z.record(z.string(), z.unknown())]).nullable().optional()";
-  }
-  return "z.unknown().optional()";
-}
-
-function sanitizeIdentifier(name: string): string {
-  return name.replace(/[^A-Za-z0-9_]/g, "_");
 }
 
 function toCamelCase(input: string): string {
@@ -518,6 +511,17 @@ export const DOMAIN_MODULES: readonly DomainModuleConfig[] = [
 ];
 
 // Global set of emitted model names so we never collide across barrel re-exports in src/index.ts
+const NON_SCHEMA_MODELS: ReadonlySet<string> = new Set([
+  "IHttpActionResult",
+  "HttpResponseMessage",
+  "Object",
+  "boolean",
+  "number",
+  "string",
+  "multipart/form-data",
+  "application/octet-stream",
+]);
+
 const globallyEmittedModels = new Set<string>([
   "TaxType",
   "AccountCategory",
@@ -565,7 +569,7 @@ function getAttachmentParentParam(ep: EndpointCatalogueRecord): string {
   return "TransactionId";
 }
 
-function generateDomainModule(config: DomainModuleConfig): void {
+async function generateDomainModule(config: DomainModuleConfig): Promise<void> {
   const serviceSet = new Set(config.services);
   const endpoints = catalogue.endpoints.filter((e) => serviceSet.has(e.service));
 
@@ -577,20 +581,24 @@ function generateDomainModule(config: DomainModuleConfig): void {
         s.kind === "page" || s.kind === "collection"
           ? (s.itemModelName ?? s.modelName)
           : s.modelName;
-      if (
-        m &&
-        m !== "IHttpActionResult" &&
-        m !== "HttpResponseMessage" &&
-        m !== "Object" &&
-        m !== "boolean" &&
-        m !== "number" &&
-        m !== "string" &&
-        m !== "multipart/form-data" &&
-        m !== "application/octet-stream" &&
-        !m.startsWith("MetaDataResponse")
-      ) {
+      if (m && !NON_SCHEMA_MODELS.has(m) && !m.startsWith("MetaDataResponse")) {
         referencedModels.add(m);
       }
+    }
+  }
+
+  // WP008.1 §5.1.3: also emit every model reachable through nested field
+  // references so `z.lazy(() => XSchema)` always resolves within the module
+  // (including circular references).
+  const closureQueue = [...referencedModels];
+  while (closureQueue.length > 0) {
+    const current = closureQueue.pop() as string;
+    for (const nested of allModels.get(current) ?? []) {
+      const ref = nested.modelRef;
+      if (!ref || enumMap.has(ref) || NON_SCHEMA_MODELS.has(ref)) continue;
+      if (ref.startsWith("MetaDataResponse") || referencedModels.has(ref)) continue;
+      referencedModels.add(ref);
+      closureQueue.push(ref);
     }
   }
 
@@ -637,7 +645,28 @@ function generateDomainModule(config: DomainModuleConfig): void {
       for (const f of fields) {
         if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(f.name) || seenFieldNames.has(f.name)) continue;
         seenFieldNames.add(f.name);
-        lines.push(`    ${f.name}: ${fieldToZodExpr(f)},`);
+        const outcome = fieldToZodExpr(f, schemaCtx, rawModelName);
+        if (outcome.unsupported !== null) {
+          unsupportedFields.push(`${rawModelName}.${f.name}: ${outcome.unsupported}`);
+        }
+        const readOnlyNote = f.readOnly ? " // read-only / system generated" : "";
+        if (f.modelRef === rawModelName) {
+          // Self-referential model: a const cannot reference itself inside its
+          // own initializer (TS7022/TS7024). Emit the field as a getter with a
+          // direct reference instead of `z.lazy` — the getter body evaluates
+          // only after the const is initialised (runtime-safe), and TypeScript
+          // defers return-type inference through function bodies (WP008.1 §5.1.3,
+          // circular model references).
+          const direct = outcome.expr.replace(
+            `z.lazy(() => ${safeName}Schema)`,
+            `${safeName}Schema`,
+          );
+          lines.push(`    get ${f.name}() {`);
+          lines.push(`      return ${direct};${readOnlyNote}`);
+          lines.push("    },");
+        } else {
+          lines.push(`    ${f.name}: ${outcome.expr},${readOnlyNote}`);
+        }
       }
       lines.push("  })");
       lines.push("  .passthrough();");
@@ -938,13 +967,20 @@ function generateDomainModule(config: DomainModuleConfig): void {
 
   const outAbs = resolve(REPO_ROOT, config.filePath);
   mkdirSync(dirname(outAbs), { recursive: true });
-  writeFileSync(outAbs, `${lines.join("\n")}\n`, "utf8");
+  await writeFormatted(outAbs, `${lines.join("\n")}\n`);
   console.log(
     `Generated ${config.filePath} (${config.services.length} services, ${endpoints.length} operations)`,
   );
 }
 
-function generateClientFile(): void {
+/** Write generated content formatted with the repository Prettier config (deterministic). */
+async function writeFormatted(absPath: string, content: string): Promise<void> {
+  const config = await resolveConfig(absPath);
+  const formatted = await format(content, { ...config, filepath: absPath });
+  writeFileSync(absPath, formatted, "utf8");
+}
+
+async function generateClientFile(): Promise<void> {
   const m004Bindings: ReadonlyArray<{
     readonly serviceId: string;
     readonly prop: string;
@@ -1258,13 +1294,29 @@ function generateClientFile(): void {
   lines.push("}");
 
   const clientOut = resolve(REPO_ROOT, "src/client/index.ts");
-  writeFileSync(clientOut, `${lines.join("\n")}\n`, "utf8");
+  await writeFormatted(clientOut, `${lines.join("\n")}\n`);
   console.log(`Generated src/client/index.ts with ${allBindings.length} service properties.`);
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+async function runGeneration(): Promise<void> {
   for (const mod of DOMAIN_MODULES) {
-    generateDomainModule(mod);
+    await generateDomainModule(mod);
   }
-  generateClientFile();
+  await generateClientFile();
+
+  if (unsupportedFields.length > 0) {
+    console.warn(`generator: ${unsupportedFields.length} unsupported field(s) recorded:`);
+    for (const entry of unsupportedFields) {
+      console.warn(`  - ${entry}`);
+    }
+  } else {
+    console.log("generator: all source field metadata mapped to precise schemas");
+  }
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  runGeneration().catch((error: unknown) => {
+    console.error("generation failed:", error);
+    process.exitCode = 1;
+  });
 }

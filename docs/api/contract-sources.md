@@ -10,6 +10,7 @@ Where API contract data comes from, and how to trust it.
 | Sage One Developer Program Overview | https://accounting.sageone.co.za/Marketing/DeveloperProgram.aspx | 2026-11-21 | `contracts/sage-api/snapshots/developer-program.html` |
 | 622 Endpoint Detail Pages | `https://accounting.sageone.co.za/api/2.0.0/Help/Api/{id}` | 2026-11-21 | `contracts/sage-api/endpoint-catalogue.json` |
 | 153 Resource Model Pages | `https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName={name}` | 2026-11-21 | `contracts/sage-api/snapshots/resource-models.json` |
+| Model/enum extension pages (additive, WP008.1) | Same ResourceModel URL for model references absent from `resource-models.json` | 2026-11-23 | `contracts/sage-api/snapshots/model-extensions.json` |
 
 ## OpenAPI / Swagger Investigation
 
@@ -25,4 +26,5 @@ The published ASP.NET Web API Help Pages at `/api/2.0.0/help` are therefore the 
 - Raw contract lives in `contracts/sage-api/` (`source-manifest.json`, `endpoint-catalogue.json`, `snapshots/`).
 - Every snapshot records: source URL, discovery date, retrieval method, and SHA-256 content hash.
 - Contract snapshots are regenerated via `node scripts/api-discovery/discover.ts` and diffed via `scripts/api-discovery/diff-catalogue.ts`.
+- Model/enum extensions are fetched via `node scripts/api-discovery/fetch-model-extensions.ts` (resumable; classifies each page as a property table, an enumeration page, or unresolved — unresolved rate-limited pages are reported in `model-extensions.json`, never guessed).
 - SDK source never imports contract data at runtime (enforced by `scripts/verification/check-boundaries.ts`).

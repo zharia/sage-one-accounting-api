@@ -17,393 +17,281 @@ import {
 import { createSagePageSchema } from "../../validation/index.js";
 import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
+const AdditionalPriceListSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Description: z.string(),
+    IsDefault: z.boolean().optional(),
+  })
+  .passthrough();
+
 const CustomerSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Category: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    SalesRepresentativeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SalesRepresentative: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    TaxReference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ContactName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Fax: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    WebAddress: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IsObfuscated: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Balance: z.union([z.number(), z.string()]).nullable().optional(),
-    CreditLimit: z.union([z.number(), z.string()]).nullable().optional(),
-    CommunicationMethod: z.union([z.number().int(), z.string()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DeliveryAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AutoAllocateToOldestInvoice: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    EnableCustomerZone: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    CustomerZoneGuid: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CashSale: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    TextField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumericField1: z.union([z.number(), z.string()]).nullable().optional(),
-    NumericField2: z.union([z.number(), z.string()]).nullable().optional(),
-    NumericField3: z.union([z.number(), z.string()]).nullable().optional(),
-    YesNoField1: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    YesNoField2: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    YesNoField3: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DateField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DefaultPriceListId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DefaultPriceList: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    DefaultPriceListName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    AcceptsElectronicInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessRegistrationNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxStatusVerified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CurrencyId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CurrencySymbol: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasActivity: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DefaultDiscountPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    DefaultTaxTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DefaultTaxType: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    DueDateMethodId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DueDateMethodValue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CityId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AccountingAgreement: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    HasSpecialCountryTaxActivity: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OutstandingInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OverdueInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OnHold: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ExcludeFromDebtorsManager: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    SubjectToDRCVat: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Name: z.string(),
+    Category: z.lazy(() => CustomerCategorySchema).optional(),
+    SalesRepresentativeId: z.number().int().nullable().optional(),
+    SalesRepresentative: z.lazy(() => SalesRepresentativeSchema).optional(),
+    TaxReference: z.string().optional(),
+    ContactName: z.string().optional(),
+    Telephone: z.string().optional(),
+    Fax: z.string().optional(),
+    Mobile: z.string().optional(),
+    Email: z.string().optional(),
+    WebAddress: z.string().optional(),
+    Active: z.boolean().optional(),
+    IsObfuscated: z.boolean().optional(),
+    Balance: z.number().optional(), // read-only / system generated
+    CreditLimit: z.number().optional(),
+    CommunicationMethod: z.number().int().nullable().optional(),
+    PostalAddress01: z.string().optional(),
+    PostalAddress02: z.string().optional(),
+    PostalAddress03: z.string().optional(),
+    PostalAddress04: z.string().optional(),
+    PostalAddress05: z.string().optional(),
+    DeliveryAddress01: z.string().optional(),
+    DeliveryAddress02: z.string().optional(),
+    DeliveryAddress03: z.string().optional(),
+    DeliveryAddress04: z.string().optional(),
+    DeliveryAddress05: z.string().optional(),
+    AutoAllocateToOldestInvoice: z.boolean().nullable().optional(),
+    EnableCustomerZone: z.boolean().optional(),
+    CustomerZoneGuid: z.string().optional(), // read-only / system generated
+    CashSale: z.boolean().nullable().optional(),
+    TextField1: z.string().optional(),
+    TextField2: z.string().optional(),
+    TextField3: z.string().optional(),
+    NumericField1: z.number().nullable().optional(),
+    NumericField2: z.number().nullable().optional(),
+    NumericField3: z.number().nullable().optional(),
+    YesNoField1: z.boolean().optional(),
+    YesNoField2: z.boolean().optional(),
+    YesNoField3: z.boolean().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
+    DefaultPriceListId: z.number().int().nullable().optional(),
+    DefaultPriceList: z.lazy(() => AdditionalPriceListSchema).optional(),
+    DefaultPriceListName: z.string().optional(),
+    AcceptsElectronicInvoices: z.boolean().optional(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().optional(), // read-only / system generated
+    BusinessRegistrationNumber: z.string().optional(),
+    TaxStatusVerified: z.string().nullable().optional(),
+    CurrencyId: z.number().int().nullable().optional(),
+    CurrencySymbol: z.string().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    DefaultDiscountPercentage: z.number().nullable().optional(),
+    DefaultTaxTypeId: z.number().int().nullable().optional(),
+    DefaultTaxType: z.lazy(() => TaxTypeSchema).optional(),
+    DueDateMethodId: z.number().int().nullable().optional(),
+    DueDateMethodValue: z.number().int().nullable().optional(),
+    CityId: z.number().int().nullable().optional(),
+    AccountingAgreement: z.boolean().nullable().optional(),
+    HasSpecialCountryTaxActivity: z.boolean().optional(), // read-only / system generated
+    OutstandingInvoices: z.boolean().nullable().optional(),
+    OverdueInvoices: z.boolean().nullable().optional(),
+    OnHold: z.boolean().nullable().optional(),
+    ExcludeFromDebtorsManager: z.boolean().nullable().optional(),
+    SubjectToDRCVat: z.boolean().optional(),
+  })
+  .passthrough();
+
+const CustomerCategorySchema = z
+  .object({
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
+export const DateAndHoursStructSchema = z
+  .object({
+    ID: z.number().int().optional(), // read-only / system generated
+    TimesheetIDs: z.array(z.number().int()).optional(), // read-only / system generated
+    Date: z.string().optional(),
+    Hours: z.number().optional(),
+    Comments: z.string().optional(),
+    SystemGenerated: z.boolean().optional(), // read-only / system generated
+    SystemGeneratedHours: z.number().optional(), // read-only / system generated
+    BilledHours: z.number().optional(), // read-only / system generated
+    WrittenOffHours: z.number().optional(), // read-only / system generated
+    WrittenOffAmount: z.number().optional(), // read-only / system generated
+    ConsolidatedEntries: z.number().int().optional(), // read-only / system generated
+    Locked: z.boolean().optional(), // read-only / system generated
+    LockedPartially: z.boolean().optional(), // read-only / system generated
+    BillableHours: z.number().optional(), // read-only / system generated
+    BillableAmount: z.number().optional(), // read-only / system generated
+  })
+  .passthrough();
+export type DateAndHoursStruct = z.infer<typeof DateAndHoursStructSchema>;
+
+const SalesRepresentativeSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    FirstName: z.string(),
+    LastName: z.string().optional(),
+    Name: z.string().optional(), // read-only / system generated
+    Active: z.boolean(),
+    Email: z.string().optional(),
+    Mobile: z.string().optional(),
+    Telephone: z.string().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+  })
+  .passthrough();
+
+const TaxTypeSchema = z
+  .object({
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    Percentage: z.number().optional(),
+    IsDefault: z.boolean().optional(),
+    HasActivity: z.boolean().optional(), // read-only / system generated
+    IsManualTax: z.boolean().optional(),
+    Active: z.boolean().optional(),
+    Created: z.string().optional(), // read-only / system generated
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    TaxTypeDefaultUID: z.string().optional(), // read-only / system generated
+    CompanyId: z.number().int().optional(),
   })
   .passthrough();
 
 export const TimeTrackingExpenseSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    TimeTrackingProjectId: z.number().int().optional(),
+    DocumentHeaderId: z.number().int().optional(),
     BillingMethod: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
+      .union([z.literal(0), z.literal(1), z.literal(2), z.literal(3), z.literal(4)])
       .optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Expense: z.union([z.number(), z.string()]).nullable().optional(),
-    Recharge: z.union([z.number(), z.string()]).nullable().optional(),
-    MarkupPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    IsBilled: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    Date: z.string().optional(),
+    Payee: z.string().optional(),
+    Description: z.string().optional(),
+    Expense: z.number().optional(),
+    Recharge: z.number().optional(),
+    MarkupPercentage: z.number().optional(),
+    IsBilled: z.boolean().optional(),
   })
   .passthrough();
 export type TimeTrackingExpense = z.infer<typeof TimeTrackingExpenseSchema>;
 
 export const TimeTrackingExpenseExtendedSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Exclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Total: z.union([z.number().int(), z.string()]).nullable().optional(),
-    RechargeDescription: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LinkedDocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkedDocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkedDocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillingMethod: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Payee: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Expense: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Recharge: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MarkupPercentage: z.union([z.number(), z.string()]).nullable().optional(),
-    IsBilled: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    Name: z.string().nullable().optional(),
+    Exclusive: z.number().int().nullable().optional(),
+    Total: z.number().int().nullable().optional(),
+    RechargeDescription: z.string().nullable().optional(),
+    LinkedDocumentHeaderId: z.number().int().nullable().optional(),
+    LinkedDocumentTypeId: z.number().int().nullable().optional(),
+    LinkedDocumentNumber: z.string().nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    TimeTrackingProjectId: z.number().int().nullable().optional(),
+    DocumentHeaderId: z.number().int().nullable().optional(),
+    BillingMethod: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    Payee: z.string().nullable().optional(),
+    Description: z.string().nullable().optional(),
+    Expense: z.number().int().nullable().optional(),
+    Recharge: z.number().int().nullable().optional(),
+    MarkupPercentage: z.number().nullable().optional(),
+    IsBilled: z.boolean().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingExpenseExtended = z.infer<typeof TimeTrackingExpenseExtendedSchema>;
 
 export const TimeTrackingFilterRequestModelSchema = z
   .object({
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaskId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    CustomerId: z.number().int().nullable().optional(),
+    ProjectId: z.number().int().nullable().optional(),
+    TaskId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingFilterRequestModel = z.infer<typeof TimeTrackingFilterRequestModelSchema>;
 
 export const TimeTrackingProjectSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Customer: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    BillingMethodID: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    InvoicingMethodID: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    EstimatedHours: z.union([z.number(), z.string()]).nullable().optional(),
-    EstimatedValue: z.union([z.number(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FixedRate: z.union([z.number(), z.string()]).nullable().optional(),
-    RatePerHour: z.union([z.number(), z.string()]).nullable().optional(),
-    PONumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    StartDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EndDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastInvoiceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastInvoiceDocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AmountInvoiced: z.union([z.number(), z.string()]).nullable().optional(),
-    ToBeInvoiced: z.union([z.number(), z.string()]).nullable().optional(),
-    TotalHours: z.union([z.number(), z.string()]).nullable().optional(),
-    UnbilledHours: z.union([z.number(), z.string()]).nullable().optional(),
-    NonBillableHours: z.union([z.number(), z.string()]).nullable().optional(),
-    BillableHours: z.union([z.number(), z.string()]).nullable().optional(),
-    BillableAmount: z.union([z.number(), z.string()]).nullable().optional(),
-    BudgetedHours: z.union([z.number(), z.string()]).nullable().optional(),
-    ProjectTasks: z.array(z.unknown()).nullable().optional(),
-    ProjectStaff: z.array(z.unknown()).nullable().optional(),
-    Tasks: z.array(z.unknown()).nullable().optional(),
-    Billable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    InvoicedHours: z.union([z.number(), z.string()]).nullable().optional(),
-    WrittenOffTime: z.union([z.number(), z.string()]).nullable().optional(),
-    BudgetBasedOn: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    Name: z.string(),
+    CustomerID: z.number().int(),
+    Customer: z.lazy(() => CustomerSchema).optional(),
+    BillingMethodID: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+    InvoicingMethodID: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+    EstimatedHours: z.number().optional(),
+    EstimatedValue: z.number().optional(),
+    Description: z.string().optional(),
+    FixedRate: z.number().optional(),
+    RatePerHour: z.number().optional(),
+    PONumber: z.string().optional(),
+    StartDate: z.string(),
+    EndDate: z.string().nullable().optional(),
+    LastInvoiceDate: z.string().nullable().optional(),
+    LastInvoiceDocumentHeaderId: z.number().int().optional(),
+    AmountInvoiced: z.number().optional(),
+    ToBeInvoiced: z.number().optional(),
+    TotalHours: z.number().optional(),
+    UnbilledHours: z.number().optional(),
+    NonBillableHours: z.number().optional(),
+    BillableHours: z.number().optional(),
+    BillableAmount: z.number().optional(),
+    BudgetedHours: z.number().optional(),
+    ProjectTasks: z.array(z.lazy(() => TimeTrackingProjectTaskSchema)),
+    ProjectStaff: z.array(z.lazy(() => TimeTrackingProjectStaffSchema)).optional(),
+    Tasks: z.array(z.lazy(() => TimeTrackingTaskSchema)).optional(), // read-only / system generated
+    Billable: z.boolean().optional(),
+    Active: z.boolean().optional(),
+    InvoicedHours: z.number().optional(),
+    WrittenOffTime: z.number().optional(),
+    BudgetBasedOn: z.number().int(),
   })
   .passthrough();
 export type TimeTrackingProject = z.infer<typeof TimeTrackingProjectSchema>;
 
 export const TimeTrackingProjectInvoiceSchema = z
   .object({
-    DocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Reference: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Paid: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DueDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ProjectExclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ProjectTotal: z.union([z.number().int(), z.string()]).nullable().optional(),
-    InvoiceExclusive: z.union([z.number().int(), z.string()]).nullable().optional(),
-    InvoiceTotal: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TotalOutstanding: z.union([z.number().int(), z.string()]).nullable().optional(),
+    DocumentHeaderId: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
+    DocumentNumber: z.string().nullable().optional(),
+    Reference: z.string().nullable().optional(),
+    Status: z.number().int().nullable().optional(),
+    Paid: z.boolean().nullable().optional(),
+    DueDate: z.string().nullable().optional(),
+    DocumentTypeId: z.number().int().nullable().optional(),
+    ProjectExclusive: z.number().int().nullable().optional(),
+    ProjectTotal: z.number().int().nullable().optional(),
+    InvoiceExclusive: z.number().int().nullable().optional(),
+    InvoiceTotal: z.number().int().nullable().optional(),
+    TotalOutstanding: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingProjectInvoice = z.infer<typeof TimeTrackingProjectInvoiceSchema>;
 
 export const TimeTrackingProjectListingSummarySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    CustomerID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Billable: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BillingMethod: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillableHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ToBeInvoiced: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillableAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UnbilledHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AmountInvoiced: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NonBillableHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    InvoicedHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TotalHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    WrittenOffTime: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BudgetedHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LastInvoiceDocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LastInvoiceDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EstimatedHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    EstimatedValue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerOnHold: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    TimeTrackingProjectId: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    CustomerID: z.number().int().nullable().optional(),
+    CustomerName: z.string().nullable().optional(),
+    Active: z.boolean().nullable().optional(),
+    Billable: z.boolean().nullable().optional(),
+    BillingMethod: z.number().int().nullable().optional(),
+    BillableHours: z.number().int().nullable().optional(),
+    ToBeInvoiced: z.number().int().nullable().optional(),
+    BillableAmount: z.number().int().nullable().optional(),
+    UnbilledHours: z.number().int().nullable().optional(),
+    AmountInvoiced: z.number().int().nullable().optional(),
+    NonBillableHours: z.number().int().nullable().optional(),
+    InvoicedHours: z.number().int().nullable().optional(),
+    TotalHours: z.number().int().nullable().optional(),
+    WrittenOffTime: z.number().int().nullable().optional(),
+    BudgetedHours: z.number().int().nullable().optional(),
+    LastInvoiceDocumentHeaderId: z.number().int().nullable().optional(),
+    LastInvoiceDate: z.string().nullable().optional(),
+    EstimatedHours: z.number().int().nullable().optional(),
+    EstimatedValue: z.number().int().nullable().optional(),
+    CustomerOnHold: z.boolean().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingProjectListingSummary = z.infer<
@@ -412,91 +300,70 @@ export type TimeTrackingProjectListingSummary = z.infer<
 
 export const TimeTrackingProjectStaffSchema = z
   .object({
-    ProjectID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillingRate: z.union([z.number(), z.string()]).nullable().optional(),
-    CostPerHour: z.union([z.number(), z.string()]).nullable().optional(),
-    UserType: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ProjectID: z.number().int().optional(),
+    TimeTrackingUserId: z.number().int().optional(),
+    BillingRate: z.number().optional(),
+    CostPerHour: z.number().optional(),
+    UserType: z.number().int().optional(), // read-only / system generated
   })
   .passthrough();
 export type TimeTrackingProjectStaff = z.infer<typeof TimeTrackingProjectStaffSchema>;
 
 export const TimeTrackingProjectSummarySchema = z
   .object({
-    BillableHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NonBillableHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    DayPart: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MonthWeekPart: z.union([z.number().int(), z.string()]).nullable().optional(),
-    YearPart: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    BillableHours: z.number().int().nullable().optional(),
+    NonBillableHours: z.number().int().nullable().optional(),
+    DayPart: z.number().int().nullable().optional(),
+    MonthWeekPart: z.number().int().nullable().optional(),
+    YearPart: z.number().int().nullable().optional(),
+    Date: z.string().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingProjectSummary = z.infer<typeof TimeTrackingProjectSummarySchema>;
 
 export const TimeTrackingProjectTaskSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ProjectID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaskID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillToClient: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BillingRate: z.union([z.number(), z.string()]).nullable().optional(),
-    BudgetedHours: z.union([z.number(), z.string()]).nullable().optional(),
-    TotalHoursLogged: z.union([z.number(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    ProjectID: z.number().int().optional(),
+    TaskID: z.number().int().optional(),
+    BillToClient: z.boolean().optional(),
+    BillingRate: z.number().optional(),
+    BudgetedHours: z.number().optional(),
+    TotalHoursLogged: z.number().optional(),
   })
   .passthrough();
 export type TimeTrackingProjectTask = z.infer<typeof TimeTrackingProjectTaskSchema>;
 
 export const TimeTrackingSummaryEntrySchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastTimesheetEntry: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HoursCaptured: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillableHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BillableAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    WrittenOffHours: z.union([z.number().int(), z.string()]).nullable().optional(),
-    WrittenOffAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    InvoicedAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    InvoicedDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LinkedDocumentHeaderId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkedDocumentTypeId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    LinkedDocumentNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BillingMethodId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    Email: z.string().nullable().optional(),
+    LastTimesheetEntry: z.string().nullable().optional(),
+    HoursCaptured: z.number().int().nullable().optional(),
+    BillableHours: z.number().int().nullable().optional(),
+    BillableAmount: z.number().int().nullable().optional(),
+    WrittenOffHours: z.number().int().nullable().optional(),
+    WrittenOffAmount: z.number().int().nullable().optional(),
+    InvoicedAmount: z.number().int().nullable().optional(),
+    InvoicedDate: z.string().nullable().optional(),
+    LinkedDocumentHeaderId: z.number().int().nullable().optional(),
+    LinkedDocumentTypeId: z.number().int().nullable().optional(),
+    LinkedDocumentNumber: z.string().nullable().optional(),
+    BillingMethodId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingSummaryEntry = z.infer<typeof TimeTrackingSummaryEntrySchema>;
 
 export const TimeTrackingSummaryEntryRequestModelSchema = z
   .object({
-    Type: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    RangeType: z.union([z.number().int(), z.string()]).nullable().optional(),
-    CustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TaskId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    FilterId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    Type: z.number().int(),
+    Date: z.string(),
+    RangeType: z.number().int(),
+    CustomerId: z.number().int().nullable().optional(),
+    ProjectId: z.number().int().nullable().optional(),
+    TaskId: z.number().int().nullable().optional(),
+    FilterId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingSummaryEntryRequestModel = z.infer<
@@ -505,62 +372,47 @@ export type TimeTrackingSummaryEntryRequestModel = z.infer<
 
 export const TimeTrackingTaskSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BillingRate: z.union([z.number(), z.string()]).nullable().optional(),
-    BillToClient: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DefaultTask: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    ProjectTasks: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    Name: z.string().optional(),
+    Description: z.string().optional(),
+    BillingRate: z.number().optional(),
+    BillToClient: z.boolean().optional(),
+    DefaultTask: z.boolean().optional(),
+    Active: z.boolean().optional(),
+    ProjectTasks: z.array(z.lazy(() => TimeTrackingProjectTaskSchema)).optional(),
   })
   .passthrough();
 export type TimeTrackingTask = z.infer<typeof TimeTrackingTaskSchema>;
 
 export const TimeTrackingTimesheetSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingTaskId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    TimeTrackingCustomerId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Hours: z.union([z.number(), z.string()]).nullable().optional(),
-    Comments: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    SystemGenerated: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BilledAmount: z.union([z.number(), z.string()]).nullable().optional(),
-    BilledHours: z.union([z.number(), z.string()]).nullable().optional(),
-    WrittenOffHours: z.union([z.number(), z.string()]).nullable().optional(),
-    WrittenOffAmount: z.union([z.number(), z.string()]).nullable().optional(),
-    WeeklyEntries: z.array(z.unknown()).nullable().optional(),
-    MonthlyEntries: z.array(z.unknown()).nullable().optional(),
-    Locked: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    LockedPartially: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BillableHours: z.union([z.number(), z.string()]).nullable().optional(),
-    BillableAmount: z.union([z.number(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
+    TimeTrackingUserId: z.number().int(),
+    TimeTrackingProjectId: z.number().int(),
+    TimeTrackingTaskId: z.number().int(),
+    TimeTrackingCustomerId: z.number().int(),
+    Date: z.string(),
+    Hours: z.number(),
+    Comments: z.string().optional(),
+    SystemGenerated: z.boolean().optional(),
+    BilledAmount: z.number().optional(),
+    BilledHours: z.number().optional(),
+    WrittenOffHours: z.number().optional(),
+    WrittenOffAmount: z.number().optional(),
+    WeeklyEntries: z.array(z.lazy(() => DateAndHoursStructSchema)).optional(), // read-only / system generated
+    MonthlyEntries: z.array(z.lazy(() => DateAndHoursStructSchema)).optional(), // read-only / system generated
+    Locked: z.boolean().optional(), // read-only / system generated
+    LockedPartially: z.boolean().optional(), // read-only / system generated
+    BillableHours: z.number().optional(), // read-only / system generated
+    BillableAmount: z.number().optional(), // read-only / system generated
   })
   .passthrough();
 export type TimeTrackingTimesheet = z.infer<typeof TimeTrackingTimesheetSchema>;
 
 export const TimeTrackingTimesheetRequestModelSchema = z
   .object({
-    Date: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TimeTrackingUserId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    Date: z.string().nullable().optional(),
+    TimeTrackingUserId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingTimesheetRequestModel = z.infer<
@@ -569,11 +421,8 @@ export type TimeTrackingTimesheetRequestModel = z.infer<
 
 export const TimeTrackingUpdateProjectRequestModelSchema = z
   .object({
-    TimeTrackingProject: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    UpdateRecurringInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    TimeTrackingProject: z.lazy(() => TimeTrackingProjectSchema).optional(),
+    UpdateRecurringInvoices: z.boolean().optional(),
   })
   .passthrough();
 export type TimeTrackingUpdateProjectRequestModel = z.infer<
@@ -582,11 +431,8 @@ export type TimeTrackingUpdateProjectRequestModel = z.infer<
 
 export const TimeTrackingUpdateRecurringInvoicesRequestModelSchema = z
   .object({
-    TaskIds: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ProjectId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    TaskIds: z.string().optional(),
+    ProjectId: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type TimeTrackingUpdateRecurringInvoicesRequestModel = z.infer<
@@ -595,12 +441,9 @@ export type TimeTrackingUpdateRecurringInvoicesRequestModel = z.infer<
 
 export const TimeTrackingUpdateTaskRequestModelSchema = z
   .object({
-    TimeTrackingTask: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    UpdateProjectTasks: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    UpdateRecurringInvoices: z.union([z.boolean(), z.number().int()]).nullable().optional(),
+    TimeTrackingTask: z.lazy(() => TimeTrackingTaskSchema).optional(),
+    UpdateProjectTasks: z.boolean().optional(),
+    UpdateRecurringInvoices: z.boolean().optional(),
   })
   .passthrough();
 export type TimeTrackingUpdateTaskRequestModel = z.infer<
@@ -609,29 +452,17 @@ export type TimeTrackingUpdateTaskRequestModel = z.infer<
 
 export const TimeTrackingUserSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    UserId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FirstName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    LastName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    FullName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DefaultUser: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    BillingRate: z.union([z.number(), z.string()]).nullable().optional(),
-    CostPerHour: z.union([z.number(), z.string()]).nullable().optional(),
-    Deleted: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    UserProjects: z.array(z.unknown()).nullable().optional(),
+    ID: z.number().int().optional(),
+    UserId: z.number().int().optional(),
+    Email: z.string().optional(),
+    FirstName: z.string().optional(),
+    LastName: z.string().optional(),
+    FullName: z.string().optional(),
+    DefaultUser: z.boolean().optional(),
+    BillingRate: z.number().optional(),
+    CostPerHour: z.number().optional(),
+    Deleted: z.boolean().optional(),
+    UserProjects: z.array(z.lazy(() => TimeTrackingProjectStaffSchema)).optional(),
   })
   .passthrough();
 export type TimeTrackingUser = z.infer<typeof TimeTrackingUserSchema>;

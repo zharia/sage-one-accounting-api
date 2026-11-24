@@ -19,120 +19,60 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 export const AssetSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Category: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    Location: z
-      .union([z.record(z.string(), z.unknown()), z.number(), z.string(), z.boolean()])
-      .nullable()
-      .optional(),
-    DatePurchased: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    SerialNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BoughtFrom: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PurchasePrice: z.union([z.number(), z.string()]).nullable().optional(),
-    CurrentValue: z.union([z.number(), z.string()]).nullable().optional(),
-    ReplacementValue: z.union([z.number(), z.string()]).nullable().optional(),
-    TextField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TextField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    NumericField1: z.union([z.number(), z.string()]).nullable().optional(),
-    NumericField2: z.union([z.number(), z.string()]).nullable().optional(),
-    NumericField3: z.union([z.number(), z.string()]).nullable().optional(),
-    YesNoField1: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    YesNoField2: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    YesNoField3: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    DateField1: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField2: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateField3: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    Description: z.string(),
+    Category: z.lazy(() => AssetCategorySchema).optional(),
+    Location: z.lazy(() => AssetLocationSchema).optional(),
+    DatePurchased: z.string().optional(),
+    SerialNumber: z.string().optional(),
+    BoughtFrom: z.string().optional(),
+    PurchasePrice: z.number().nullable().optional(),
+    CurrentValue: z.number().nullable().optional(),
+    ReplacementValue: z.number().nullable().optional(),
+    TextField1: z.string().optional(),
+    TextField2: z.string().optional(),
+    TextField3: z.string().optional(),
+    NumericField1: z.number().nullable().optional(),
+    NumericField2: z.number().nullable().optional(),
+    NumericField3: z.number().nullable().optional(),
+    YesNoField1: z.boolean().optional(),
+    YesNoField2: z.boolean().optional(),
+    YesNoField3: z.boolean().optional(),
+    DateField1: z.string().nullable().optional(),
+    DateField2: z.string().nullable().optional(),
+    DateField3: z.string().nullable().optional(),
   })
   .passthrough();
 export type Asset = z.infer<typeof AssetSchema>;
 
 export const AssetCategorySchema = z
   .object({
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Modified: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Created: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Description: z.string().optional(),
+    ID: z.number().int(),
+    Modified: z.string().nullable().optional(), // read-only / system generated
+    Created: z.string().nullable().optional(), // read-only / system generated
   })
   .passthrough();
 export type AssetCategory = z.infer<typeof AssetCategorySchema>;
 
 export const AssetLocationSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    Description: z.string().optional(),
   })
   .passthrough();
 export type AssetLocation = z.infer<typeof AssetLocationSchema>;
 
 export const AssetNoteSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Subject: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    EntryDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    ActionDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Status: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    Note: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasAttachments: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    AssetId: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int(),
+    Subject: z.string(),
+    EntryDate: z.string().nullable().optional(),
+    ActionDate: z.string(),
+    Status: z.boolean().nullable().optional(),
+    Note: z.string().optional(),
+    HasAttachments: z.boolean().nullable().optional(),
+    AssetId: z.number().int().optional(),
   })
   .passthrough();
 export type AssetNote = z.infer<typeof AssetNoteSchema>;

@@ -25,6 +25,11 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    /* Typecheck-only config (scripts/ use .ts import specifiers — required by
+       Node type stripping, which does not rewrite .js -> .ts). noEmit makes
+       allowImportingTsExtensions legal here; tsconfig.build.json disables it. */
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
 
     /* Output — typecheck only config; build uses tsconfig.build.json */
     "declaration": true,

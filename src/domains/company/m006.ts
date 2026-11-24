@@ -19,247 +19,91 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 export const SecretarialCompanyRoleSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Description: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    Description: z.string(),
   })
   .passthrough();
 export type SecretarialCompanyRole = z.infer<typeof SecretarialCompanyRoleSchema>;
 
 export const SecretarialShareClassSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ShareClass: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    QuantityOfShares: z.union([z.number().int(), z.string()]).nullable().optional(),
-    NominalValue: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ValueOfShares: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().nullable().optional(),
+    ShareClass: z.string().nullable().optional(),
+    QuantityOfShares: z.number().int().nullable().optional(),
+    NominalValue: z.number().int().nullable().optional(),
+    ValueOfShares: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type SecretarialShareClass = z.infer<typeof SecretarialShareClassSchema>;
 
 export const SecretarialShareholderSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IDNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateOfBirth: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Nationality: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasOwnership: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OwnershipAppointmentDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OwnershipResignationDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OwnershipHoldingAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IsPerson: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    IDNumber: z.string().nullable().optional(),
+    DateOfBirth: z.string().nullable().optional(),
+    Nationality: z.string().nullable().optional(),
+    TaxNumber: z.string().nullable().optional(),
+    HasOwnership: z.boolean().nullable().optional(),
+    OwnershipAppointmentDate: z.string().nullable().optional(),
+    OwnershipResignationDate: z.string().nullable().optional(),
+    OwnershipHoldingAmount: z.number().int().nullable().optional(),
+    Active: z.boolean().nullable().optional(),
+    IsPerson: z.boolean().nullable().optional(),
+    PostalAddress01: z.string().nullable().optional(),
+    PostalAddress02: z.string().nullable().optional(),
+    PostalAddress03: z.string().nullable().optional(),
+    PostalAddress04: z.string().nullable().optional(),
+    PostalAddress05: z.string().nullable().optional(),
+    PhysicalAddress01: z.string().nullable().optional(),
+    PhysicalAddress02: z.string().nullable().optional(),
+    PhysicalAddress03: z.string().nullable().optional(),
+    PhysicalAddress04: z.string().nullable().optional(),
+    PhysicalAddress05: z.string().nullable().optional(),
+    BusinessAddress01: z.string().nullable().optional(),
+    BusinessAddress02: z.string().nullable().optional(),
+    BusinessAddress03: z.string().nullable().optional(),
+    BusinessAddress04: z.string().nullable().optional(),
+    BusinessAddress05: z.string().nullable().optional(),
+    Telephone: z.string().nullable().optional(),
+    Mobile: z.string().nullable().optional(),
+    Email: z.string().nullable().optional(),
   })
   .passthrough();
 export type SecretarialShareholder = z.infer<typeof SecretarialShareholderSchema>;
 
 export const SecretarialStakeHolderSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    IDNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    DateOfBirth: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Nationality: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    TaxNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    HasOwnership: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    OwnershipAppointmentDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OwnershipResignationDate: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    OwnershipHoldingAmount: z.union([z.number().int(), z.string()]).nullable().optional(),
-    Active: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    IsPerson: z.union([z.boolean(), z.number().int()]).nullable().optional(),
-    PostalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PostalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    PhysicalAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress01: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress02: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress03: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress04: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BusinessAddress05: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().nullable().optional(),
+    Name: z.string().nullable().optional(),
+    IDNumber: z.string().nullable().optional(),
+    DateOfBirth: z.string().nullable().optional(),
+    Nationality: z.string().nullable().optional(),
+    TaxNumber: z.string().nullable().optional(),
+    HasOwnership: z.boolean().nullable().optional(),
+    OwnershipAppointmentDate: z.string().nullable().optional(),
+    OwnershipResignationDate: z.string().nullable().optional(),
+    OwnershipHoldingAmount: z.number().int().nullable().optional(),
+    Active: z.boolean().nullable().optional(),
+    IsPerson: z.boolean().nullable().optional(),
+    PostalAddress01: z.string().nullable().optional(),
+    PostalAddress02: z.string().nullable().optional(),
+    PostalAddress03: z.string().nullable().optional(),
+    PostalAddress04: z.string().nullable().optional(),
+    PostalAddress05: z.string().nullable().optional(),
+    PhysicalAddress01: z.string().nullable().optional(),
+    PhysicalAddress02: z.string().nullable().optional(),
+    PhysicalAddress03: z.string().nullable().optional(),
+    PhysicalAddress04: z.string().nullable().optional(),
+    PhysicalAddress05: z.string().nullable().optional(),
+    BusinessAddress01: z.string().nullable().optional(),
+    BusinessAddress02: z.string().nullable().optional(),
+    BusinessAddress03: z.string().nullable().optional(),
+    BusinessAddress04: z.string().nullable().optional(),
+    BusinessAddress05: z.string().nullable().optional(),
+    Telephone: z.string().nullable().optional(),
+    Mobile: z.string().nullable().optional(),
+    Email: z.string().nullable().optional(),
   })
   .passthrough();
 export type SecretarialStakeHolder = z.infer<typeof SecretarialStakeHolderSchema>;

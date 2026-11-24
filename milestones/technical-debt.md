@@ -11,6 +11,7 @@ Explicit, prioritised, with dispositions (spec §22). Dispositions: `accept` (li
 | TD-005 | Vite+ evaluation outstanding (spec §4.4) | low | M001 | `schedule` → M007 | ADR-014 records current stance |
 | TD-006 | Live test suite needs dedicated test company + credential flow | high (for M007) | M001 | `schedule` → M007 | Opt-in live test harness created at `tests/live/live-smoke.test.ts` (`SAGE_LIVE_TESTS=true`); live sandbox company execution scheduled for M007 |
 | TD-007 | `PROGRESS.md` is a session artefact — remove or fold into milestones after M001 closes | low | M001 | `closed` (M001 acceptance) | Removed `PROGRESS.md`; status tracked exclusively in `milestones/` |
+| TD-008 | Model/enum help pages still unfetched (help-site throttling: HTTP 200 error pages) — unresolved references keep the `z.record(z.string(), z.unknown())` fallback | medium | M008 | `schedule` → M008.4 | 51 unresolved at WP008.1 close (2026-11-23); zero published-sample conflicts (recursive audit of 670 sample objects). Resumable + checkpointed: `pnpm discover:models`; re-run after throttle window, then regenerate |
 
 ## Rules
 

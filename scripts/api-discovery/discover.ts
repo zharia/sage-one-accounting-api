@@ -21,7 +21,7 @@ import {
   type ParameterField,
   parseEndpointDetailPage,
   parseHelpIndex,
-} from "./parse-help.js";
+} from "./parse-help.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../..");
@@ -108,7 +108,7 @@ async function runDiscovery(): Promise<void> {
     const html = await res.text();
     const tblMatch = html.match(/<table class="help-page-table">[\s\S]*?<\/table>/);
     if (tblMatch?.[0]) {
-      const { parseParameterTable } = await import("./parse-help.js");
+      const { parseParameterTable } = await import("./parse-help.ts");
       const fields = parseParameterTable(tblMatch[0]);
       if (fields.length > 0) {
         modelsMap.set(modelName, fields);

@@ -19,88 +19,49 @@ import { buildQueryWithOData, type SageRequestExecutor } from "../executor.js";
 
 const AttachmentSchema = z
   .object({
-    Name: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Size: z.union([z.number().int(), z.string()]).nullable().optional(),
-    AttachmentUID: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Data: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    Name: z.string(),
+    Size: z.number().int().optional(),
+    AttachmentUID: z.string().optional(),
+    Data: z.string().optional(),
   })
   .passthrough();
 
 const IModelSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int().optional(),
   })
   .passthrough();
 
 const StorageInformationSchema = z
   .object({
-    SizeUsed: z.union([z.number().int(), z.string()]).nullable().optional(),
-    MaxSizeAllowed: z.union([z.number().int(), z.string()]).nullable().optional(),
+    SizeUsed: z.number().int().optional(),
+    MaxSizeAllowed: z.number().int().optional(),
   })
   .passthrough();
 
 export const SupplierAdditionalContactDetailSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SupplierId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    ContactName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Designation: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Telephone: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Fax: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Mobile: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    Email: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
+    ID: z.number().int().optional(),
+    SupplierId: z.number().int().optional(),
+    ContactName: z.string().optional(),
+    Designation: z.string().optional(),
+    Telephone: z.string().optional(),
+    Fax: z.string().optional(),
+    Mobile: z.string().optional(),
+    Email: z.string().optional(),
   })
   .passthrough();
 export type SupplierAdditionalContactDetail = z.infer<typeof SupplierAdditionalContactDetailSchema>;
 
 export const SupplierBankDetailSchema = z
   .object({
-    ID: z.union([z.number().int(), z.string()]).nullable().optional(),
-    SupplierId: z.union([z.number().int(), z.string()]).nullable().optional(),
-    BankAccountHolder: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankAccountNumber: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankName: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankBranchCode: z
-      .union([z.string(), z.number(), z.record(z.string(), z.unknown())])
-      .nullable()
-      .optional(),
-    BankAccountType: z.union([z.number().int(), z.string()]).nullable().optional(),
+    ID: z.number().int(),
+    SupplierId: z.number().int(),
+    BankAccountHolder: z.string(),
+    BankAccountNumber: z.string(),
+    BankName: z.string(),
+    BankBranchCode: z.string(),
+    BankAccountType: z.number().int().nullable().optional(),
   })
   .passthrough();
 export type SupplierBankDetail = z.infer<typeof SupplierBankDetailSchema>;
