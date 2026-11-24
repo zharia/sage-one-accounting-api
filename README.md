@@ -13,12 +13,6 @@
 
 <p align="center">
   <a href="https://github.com/zharia/sage-one-accounting-api/actions/workflows/ci.yml"><img src="https://github.com/zharia/sage-one-accounting-api/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/zharia/sage-one-accounting-api/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zharia/sage-one-accounting-api" alt="License" /></a>
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-24%2B-339933?logo=nodedotjs&logoColor=white" alt="Node.js 24+" /></a>
-  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" alt="TypeScript" /></a>
-  <a href="https://zod.dev/"><img src="https://img.shields.io/badge/validation-Zod-3E67B1" alt="Zod validation" /></a>
-  <img src="https://img.shields.io/badge/API_coverage-622%2F622-1f883d" alt="622 of 622 API operations implemented" />
-  <img src="https://img.shields.io/badge/status-beta-d97706" alt="Beta" />
 </p>
 
 <p align="center">
