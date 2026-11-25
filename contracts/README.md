@@ -22,14 +22,15 @@ contracts/
 
 ## Status
 
-**M002 has not started.** Directory exists per spec §3; files populate during discovery.
+Discovery complete (M002, 2026-11-21); contract data is live and consumed by
+the generator and the contract suites.
 
 | File | State |
 |---|---|
-| `source-manifest.json` | pending M002 |
-| `endpoint-catalogue.json` | pending M002 (schema documented in `docs/api/endpoint-inventory.md`) |
-| `snapshots/` | pending M002 |
-| `fixtures/` | pending M002 (first fixtures with M003 reference resource) |
+| `source-manifest.json` | ✅ sources with URL, date, method, content hash |
+| `endpoint-catalogue.json` | ✅ 162 services / 622 operations with statuses |
+| `snapshots/` | ✅ help-index, developer-program, model-extensions, resource-models |
+| `fixtures/` | ✅ 622 fixtures (one per operation); provenance in [`fixtures/PROVENANCE.md`](./fixtures/PROVENANCE.md) |
 
 ## Catalogue record (spec §6.1)
 

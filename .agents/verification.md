@@ -10,6 +10,11 @@ pnpm verify
 
 Runs, in order (spec §17.7): format check → lint → typecheck → unit/integration/contract tests → type tests → build → package export check (attw) → documentation presence → package contents.
 
+Non-live only (verification levels V0–V4, see
+`docs/architecture/verification-levels.md`). The live stage (V5) is separate:
+`pnpm test:live` / `.github/workflows/live-tests.yml` — never part of
+`verify`, never in ordinary CI.
+
 ## What each step proves
 
 | Step | Tool | Failure means |

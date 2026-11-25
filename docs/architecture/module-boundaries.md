@@ -31,6 +31,6 @@ No cycles. Lower layers never import higher layers.
 
 ## Test boundaries
 
-- `tests/mocks`, `tests/fixtures` — MSW handlers and contract fixtures; never imported by `src/`.
+- `tests/mocks`, `tests/fixtures` — reserved for shared MSW handlers and test-local samples; never imported by `src/`. (MSW handlers currently live inline in `tests/integration/msw-integration.test.ts`.)
 - `tests/live` — opt-in, env-gated, excluded from default vitest run.
 - Contract fixtures traceable to Sage docs URL/date or verified live observation.

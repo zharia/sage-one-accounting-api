@@ -3,7 +3,7 @@
 **Project:** Sage One Accounting API — TypeScript SDK  
 **Repository:** `zharia/sage-one-accounting-api`  
 **Milestone:** M008  
-**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25)  
+**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25; WP008.3 complete — 2026-11-25)  
 **Priority:** Critical  
 **Predecessor:** M006 — API Coverage and SDK Implementation  
 **Successor:** M007 — Production Release  
@@ -577,14 +577,14 @@ Live verification must be a separate, explicitly configured test stage.
 
 ### 5.3.6 Acceptance criteria
 
-- [ ] Test verification levels are documented.
-- [ ] Existing tests are classified correctly.
-- [ ] Synthetic fixtures are identifiable.
-- [ ] Captured fixtures have provenance.
-- [ ] API operation coverage is reconciled.
-- [ ] Test reports distinguish implemented from verified operations.
-- [ ] No mocked test is described as live verification.
-- [ ] CI can execute the non-live test suites independently.
+- [x] Test verification levels are documented — V0–V5 table + evidence rule in `docs/architecture/verification-levels.md`; ADR-013 amended.
+- [x] Existing tests are classified correctly — every one of the 11 test files classified in the suite-classification table (same doc); boundary check identified as V0.
+- [x] Synthetic fixtures are identifiable — `contracts/fixtures/PROVENANCE.md` classifies all 622 as synthetic/docs-derived; test rejects stray `captured` claims.
+- [x] Captured fixtures have provenance — per-fixture `sourceUrl` + `discoveredAt` + `documentationCompleteness` enforced by `tests/unit/fixture-provenance.test.ts` (622/622); captured-kind rules defined and enforced for future WP008.4 captures.
+- [x] API operation coverage is reconciled — `tests/unit/coverage-reconciliation.test.ts` revalidates 162 services / 622 operations, 552/56/8/6 split, per-service counts, and fixture↔catalogue bijection against the repo.
+- [x] Test reports distinguish implemented from verified operations — `docs/api/coverage-matrix.md` "Verification status per operation" table reports the 8 statuses individually (Implemented 622, Fixture-verified 622, **Live-verified 0**), no collapsed percentage.
+- [x] No mocked test is described as live verification — verification-levels doc classifies MSW/contract suites as V3/V4; live = V5 only; stale docs claiming `tests/mocks`/`tests/fixtures` content and `--project live` fixed.
+- [x] CI can execute the non-live test suites independently — `ci.yml` runs `pnpm verify` with no Sage credentials (live excluded by `vitest.config.ts`); live stage is a separate manual workflow (`live-tests.yml`) + `pnpm test:live`.
 
 **Deliverable:** Verification strategy, updated fixtures and coverage records, and an auditable test classification.
 
@@ -1330,34 +1330,34 @@ M008 is complete only when all mandatory acceptance criteria below have been sat
 
 ## 12.1 Contract correctness
 
-- [ ] Generator preserves source type semantics.
-- [ ] Required and optional properties are correct.
-- [ ] Nullability is correct.
-- [ ] Nested model types are generated correctly.
-- [ ] Collections are strongly typed.
-- [ ] Decimal wire representations are verified.
-- [ ] Generator regression tests pass.
-- [ ] Generated output is deterministic.
-- [ ] All affected domain modules are regenerated.
+- [x] Generator preserves source type semantics.
+- [x] Required and optional properties are correct.
+- [x] Nullability is correct.
+- [x] Nested model types are generated correctly.
+- [x] Collections are strongly typed.
+- [x] Decimal wire representations are verified.
+- [x] Generator regression tests pass.
+- [x] Generated output is deterministic.
+- [x] All affected domain modules are regenerated.
 
 ## 12.2 Operational resilience
 
-- [ ] Central request scheduler implemented.
-- [ ] Per-company request coordination verified.
-- [ ] Concurrency controls verified.
-- [ ] `Retry-After` handling verified.
-- [ ] Exponential backoff verified.
-- [ ] Cancellation verified.
-- [ ] Mutation retry safety verified.
-- [ ] Scheduler logging and observability verified.
+- [x] Central request scheduler implemented.
+- [x] Per-company request coordination verified.
+- [x] Concurrency controls verified.
+- [x] `Retry-After` handling verified.
+- [x] Exponential backoff verified.
+- [x] Cancellation verified.
+- [x] Mutation retry safety verified.
+- [x] Scheduler logging and observability verified.
 
 ## 12.3 Verification integrity
 
-- [ ] Verification levels documented.
-- [ ] Fixture provenance recorded.
-- [ ] Contract coverage reconciled.
-- [ ] Mock and live tests distinguished.
-- [ ] Test reporting accurately represents verification status.
+- [x] Verification levels documented (`docs/architecture/verification-levels.md`, ADR-013 amendment).
+- [x] Fixture provenance recorded (`contracts/fixtures/PROVENANCE.md` + `tests/unit/fixture-provenance.test.ts`).
+- [x] Contract coverage reconciled (`tests/unit/coverage-reconciliation.test.ts` revalidates 162/622 and 552/56/8/6 against catalogue, fixtures and matrix).
+- [x] Mock and live tests distinguished (separate `vitest.live.config.ts`, `pnpm test:live`, manual `live-tests.yml`; default run cannot reach live API).
+- [x] Test reporting accurately represents verification status (per-operation status table in `docs/api/coverage-matrix.md`: implemented 622 vs live-verified 0).
 
 ## 12.4 Live Sage compatibility
 

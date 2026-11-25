@@ -20,6 +20,25 @@ Dimensions per endpoint (spec §24): Discovered · Contract · Type definitions 
 | Contract-tested endpoints (`tests/contract/` + `contracts/fixtures/`) | **622 / 622 (100%)** |
 | Known API limitations | see [known-limitations.md](./known-limitations.md) |
 
+## Verification status per operation (M008 WP008.3)
+
+Statuses are reported **individually** — implemented ≠ verified, and no single
+collapsed coverage percentage is authoritative (spec §5.3.4). Evidence model:
+[`docs/architecture/verification-levels.md`](../architecture/verification-levels.md).
+
+| Status | Count | Meaning | Evidence |
+|---|---:|---|---|
+| Discovered | 622 | Present in the endpoint catalogue | `contracts/sage-api/endpoint-catalogue.json` |
+| Documented | 616 | Help-page documentation exists (552 `full` + 56 `partial` + 8 `experimental`); 6 `none` have no model documentation | `documentationCompleteness` per endpoint |
+| Modelled | 622 | Wire types + Zod schemas generated and validated | `src/domains/**`, `tests/unit/generate/` (V1/V2) |
+| Implemented | 622 | Domain service method callable through the SDK | `tests/contract/all-endpoints-contract.test.ts` (V3 over V4) |
+| Fixture-verified | 622 | Recorded fixture executed: method, route, query, body, response schema | `contracts/fixtures/**` (provenance: `contracts/fixtures/PROVENANCE.md`) |
+| Live-verified | **0** | Verified against the live Sage API (V5) | pending WP008.4 — `pnpm test:live` stage |
+| Unsupported | 0 | Known-unsupported operations | none recorded |
+| Deprecated | 0 | Deprecated or unavailable operations | none recorded |
+
+Documentation completeness split (revalidated against the catalogue by `tests/unit/coverage-reconciliation.test.ts`): 552 `full` · 56 `partial` · 8 `experimental` · 6 `none` = 622.
+
 ## Status by Service Group (All 162 Discovered Services — 622 Operations — 100% Complete)
 
 Legend: 🟩 Complete · 🟨 Partial · ⬜ Planned · ⚠️ Undocumented

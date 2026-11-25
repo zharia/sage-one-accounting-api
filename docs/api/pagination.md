@@ -19,4 +19,4 @@ interface SagePage<T> {
 
 ## Per-endpoint behaviour
 
-**Pending M002.** Not all Sage endpoints use the same mechanism (spec §11.2); some may use OData `$skip`/`$top`, others a documented paging parameter, others none. Each endpoint's behaviour is recorded here and in the coverage matrix once discovered — until then, no iterator is claimed for any endpoint.
+**Per-endpoint behaviour recorded at discovery (M002).** Not all Sage endpoints use the same mechanism (spec §11.2): some use OData `$skip`/`$top`, others a documented paging parameter, others none. Each endpoint's behaviour is recorded in `contracts/sage-api/endpoint-catalogue.json` (`pagingBehaviour`, `odataSupport`) and surfaced in the coverage matrix.

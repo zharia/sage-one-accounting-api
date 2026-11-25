@@ -19,4 +19,6 @@ Everything about the Sage One Accounting API surface as consumed by this SDK.
 - Documentation source: https://accounting.sageone.co.za/api/2.0.0/help
 - Stable-release target: 100% coverage of the discoverable documented endpoint inventory (spec §24).
 
-**Current state: M002 (API discovery) has not started.** These documents are scaffolds with the required structure; contents fill in as discovery lands. Nothing here may claim endpoint support before it appears in the coverage matrix with a traceable contract source.
+**Current state: M002 API discovery complete** — 162 services / 622 operations
+catalogued (2026-11-21), all implemented (M003–M006), with per-operation
+verification status in the [coverage matrix](./coverage-matrix.md).

@@ -18,4 +18,4 @@ const query = odata<Customer>()
 
 ## Per-endpoint compatibility
 
-**Pending M002.** The builder's existence does not imply every endpoint accepts every option. Support claims are recorded per endpoint in the coverage matrix only after documentation or live verification. `$expand` and `$count` in particular are unconfirmed across services.
+**Per-endpoint compatibility recorded at discovery (M002).** The builder's existence does not imply every endpoint accepts every option. Support claims come from `contracts/sage-api/endpoint-catalogue.json` (`odataSupport` per endpoint); `$expand` and `$count` remain unconfirmed across services — see [known-limitations.md](./known-limitations.md).

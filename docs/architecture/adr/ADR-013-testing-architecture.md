@@ -56,3 +56,22 @@ Fixtures in `tests/fixtures` and `contracts/fixtures` must be traceable to Sage 
 ## References
 
 Spec §17; `scripts/verification/verify.sh`; `.agents/verification.md`.
+
+## Amendment 2026-11-25 (M008 WP008.3): verification classification
+
+Every suite is now classified by evidence level **V0–V5** (static → unit →
+generated contract → fixture integration → mocked transport → live) in
+[`docs/architecture/verification-levels.md`](../verification-levels.md).
+Rules added:
+
+- A lower level never counts as evidence for a higher one; implemented ≠
+  verified ≠ live-verified (per-operation statuses in
+  `docs/api/coverage-matrix.md`).
+- The live stage is a separate, explicitly configured vitest project:
+  `vitest.live.config.ts` + `pnpm test:live` + manual-dispatch workflow
+  `.github/workflows/live-tests.yml` (replaces the single-config opt-in
+  described above; `pnpm verify` and CI remain credential-free).
+- Fixture provenance (synthetic vs captured, redaction, transformations) is
+  recorded in `contracts/fixtures/PROVENANCE.md` and enforced by
+  `tests/unit/fixture-provenance.test.ts`; coverage figures are reconciled by
+  `tests/unit/coverage-reconciliation.test.ts`.
