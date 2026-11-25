@@ -48,7 +48,7 @@ Accounting integrations deserve more than a thin collection of HTTP wrappers. Th
 | **Strong TypeScript contracts** | Typed resources, request models, response models and accounting-domain types |
 | **Runtime validation** | Zod schemas validate request and response boundaries |
 | **Authentication** | Dedicated authentication and session-management interfaces |
-| **HTTP transport** | Native Fetch transport with configurable behaviour, timeouts and conservative retries |
+| **HTTP transport** | Native Fetch transport with configurable behaviour, timeouts, conservative retries and a central per-company request scheduler (`Retry-After`, concurrency, pacing) |
 | **OData queries** | Typed query construction, filtering, ordering and pagination |
 | **Financial safety** | Financial mutations are not automatically retried by default |
 | **Structured logging** | Pluggable logging with sensitive-value redaction |

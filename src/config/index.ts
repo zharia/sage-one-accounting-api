@@ -12,6 +12,10 @@ export const DEFAULT_BASE_URL = "https://accounting.sageone.co.za/api/2.0.0" as 
 export const DEFAULT_TIMEOUT_MS = 30_000 as const;
 export const DEFAULT_RETRY_MAX_ATTEMPTS = 3 as const;
 export const DEFAULT_RETRY_BASE_DELAY_MS = 250 as const;
+export const DEFAULT_SCHEDULER_MAX_CONCURRENCY = 4 as const;
+export const DEFAULT_SCHEDULER_MIN_INTERVAL_MS = 0 as const;
+export const DEFAULT_SCHEDULER_MAX_RETRY_AFTER_MS = 60_000 as const;
+export const DEFAULT_SCHEDULER_MAX_BACKOFF_MS = 30_000 as const;
 
 export interface SageCredentials {
   readonly username: string;
@@ -22,6 +26,29 @@ export interface SageRetryConfig {
   readonly enabled: boolean;
   readonly maxAttempts: number;
   readonly baseDelayMs: number;
+}
+
+/**
+ * Central request scheduler settings (M008 WP008.2).
+ *
+ * Defaults encode SDK-side safety only — no undocumented Sage limit is
+ * assumed. The documented per-company limit (100 req/min, see
+ * `docs/api/authentication.md`) can be expressed via `minIntervalMs: 600`.
+ */
+export interface SageSchedulerConfig {
+  /** Maximum in-flight requests across all company lanes. */
+  readonly maxConcurrency: number;
+  /** Minimum spacing between dispatched requests within one company lane (0 = disabled). */
+  readonly minIntervalMs: number;
+  /**
+   * Maximum delay the scheduler will wait for a `Retry-After` value before
+   * giving up and preserving the original rate-limit error.
+   */
+  readonly maxRetryAfterMs: number;
+  /** Upper bound for a single exponential-backoff delay (before jitter). */
+  readonly maxBackoffMs: number;
+  /** Apply full jitter (`delay = random() * cappedExponential`) to backoff. */
+  readonly jitter: boolean;
 }
 
 export interface SageLoggingConfig {
@@ -45,6 +72,15 @@ export interface SageOneConfigInput {
         readonly enabled?: boolean | undefined;
         readonly maxAttempts?: number | undefined;
         readonly baseDelayMs?: number | undefined;
+      }
+    | undefined;
+  readonly scheduler?:
+    | {
+        readonly maxConcurrency?: number | undefined;
+        readonly minIntervalMs?: number | undefined;
+        readonly maxRetryAfterMs?: number | undefined;
+        readonly maxBackoffMs?: number | undefined;
+        readonly jitter?: boolean | undefined;
       }
     | undefined;
   readonly logging?:
@@ -74,6 +110,7 @@ export interface ResolvedSageOneConfig {
   readonly credentials: SageCredentials | undefined;
   readonly timeout: number;
   readonly retry: SageRetryConfig;
+  readonly scheduler: SageSchedulerConfig;
   readonly logging: SageLoggingConfig;
   readonly validation: SageValidationConfig;
   readonly headers: Readonly<Record<string, string>>;
@@ -103,6 +140,25 @@ const ConfigInputSchema = z
           .max(10, "retry.maxAttempts must be <= 10")
           .optional(),
         baseDelayMs: z.number().int().min(0, "retry.baseDelayMs must be >= 0").optional(),
+      })
+      .strict()
+      .optional(),
+    scheduler: z
+      .object({
+        maxConcurrency: z
+          .number()
+          .int()
+          .min(1, "scheduler.maxConcurrency must be >= 1")
+          .max(1024, "scheduler.maxConcurrency must be <= 1024")
+          .optional(),
+        minIntervalMs: z.number().int().min(0, "scheduler.minIntervalMs must be >= 0").optional(),
+        maxRetryAfterMs: z
+          .number()
+          .int()
+          .min(0, "scheduler.maxRetryAfterMs must be >= 0")
+          .optional(),
+        maxBackoffMs: z.number().int().min(0, "scheduler.maxBackoffMs must be >= 0").optional(),
+        jitter: z.boolean().optional(),
       })
       .strict()
       .optional(),
@@ -169,6 +225,13 @@ export function resolveConfig(input: SageOneConfigInput = {}): ResolvedSageOneCo
       enabled: data.retry?.enabled ?? true,
       maxAttempts: data.retry?.maxAttempts ?? DEFAULT_RETRY_MAX_ATTEMPTS,
       baseDelayMs: data.retry?.baseDelayMs ?? DEFAULT_RETRY_BASE_DELAY_MS,
+    },
+    scheduler: {
+      maxConcurrency: data.scheduler?.maxConcurrency ?? DEFAULT_SCHEDULER_MAX_CONCURRENCY,
+      minIntervalMs: data.scheduler?.minIntervalMs ?? DEFAULT_SCHEDULER_MIN_INTERVAL_MS,
+      maxRetryAfterMs: data.scheduler?.maxRetryAfterMs ?? DEFAULT_SCHEDULER_MAX_RETRY_AFTER_MS,
+      maxBackoffMs: data.scheduler?.maxBackoffMs ?? DEFAULT_SCHEDULER_MAX_BACKOFF_MS,
+      jitter: data.scheduler?.jitter ?? true,
     },
     logging: {
       enabled: loggingEnabled,

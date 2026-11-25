@@ -11,7 +11,8 @@ Consumer guide: `docs/integration/configuration.md` · Design: `docs/architectur
 | `authenticator` | `SageAuthenticator` | built-in | Custom implementations |
 | `companyId` | `CompanyId` | — | Conveyance pending auth discovery |
 | `timeout` | `number` (ms) | finite, documented | Client default; per-request override |
-| `retry` | `{ enabled, maxAttempts }` | mutations **off** | GET-only conservative policy (spec §10.1) |
+| `retry` | `{ enabled, maxAttempts, baseDelayMs }` | mutations **off** | GET/HEAD conservative policy (spec §10.1) |
+| `scheduler` | `{ maxConcurrency, minIntervalMs, maxRetryAfterMs, maxBackoffMs, jitter }` | `4`, `0`, `60000`, `30000`, `true` | Central scheduler: concurrency, per-company pacing, Retry-After cap, backoff cap, full jitter (ADR-017) |
 | `logging` | `{ enabled, level }` | minimal/off | `SageLogger` injectable |
 | `validation` | `{ validateRequests, validateResponses }` | on | Boundary validation toggles |
 | `transport.fetch` | Fetch-compatible | native fetch | Injection point for tests/instrumentation |

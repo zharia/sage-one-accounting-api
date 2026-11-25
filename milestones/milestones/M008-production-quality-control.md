@@ -3,7 +3,7 @@
 **Project:** Sage One Accounting API — TypeScript SDK  
 **Repository:** `zharia/sage-one-accounting-api`  
 **Milestone:** M008  
-**Status:** In progress (WP008.1 complete — 2026-11-24)  
+**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25)  
 **Priority:** Critical  
 **Predecessor:** M006 — API Coverage and SDK Implementation  
 **Successor:** M007 — Production Release  
@@ -470,17 +470,17 @@ Use fake clocks or equivalent deterministic timing controls where possible. Test
 
 ### 5.2.9 Acceptance criteria
 
-- [ ] All API requests pass through the central scheduler.
-- [ ] Per-company request coordination works.
-- [ ] Concurrency limits are configurable.
-- [ ] Queued requests can be cancelled.
-- [ ] `Retry-After` delta seconds are honoured.
-- [ ] `Retry-After` HTTP-date is honoured.
-- [ ] Backoff uses bounded, documented behaviour.
-- [ ] Mutation retry policies prevent ambiguous duplicate transactions.
-- [ ] Logging is useful and appropriately redacted.
-- [ ] Scheduler tests are deterministic.
-- [ ] Existing transport and service tests pass.
+- [x] All API requests pass through the central scheduler — every attempt in `SageTransport.execute` awaits `scheduler.acquire()` before the timeout timer starts; the auth `Login/Validate` preflight is the documented single-request exception (ADR-017).
+- [x] Per-company request coordination works — lane key `request.companyId ?? config.companyId ?? "default"`; test "suspends only the affected company lane on 429" proves isolation.
+- [x] Concurrency limits are configurable — `scheduler.maxConcurrency` (default 4), Zod-validated; test "enforces the configurable concurrency limit".
+- [x] Queued requests can be cancelled — `AbortSignal` removes the entry pre-dispatch (never runs) and aborts in-flight attempts; tests "cancels a queued request before dispatch" + "cancels an in-flight request via caller AbortSignal".
+- [x] `Retry-After` delta seconds are honoured — `parseRetryAfterMs("60")` → 60 000 ms; transport test advances the fake clock and asserts no early retry.
+- [x] `Retry-After` HTTP-date is honoured — `Date.parse` relative to now, past dates clamp to 0; transport test asserts retry only after the computed delay.
+- [x] Backoff uses bounded, documented behaviour — full jitter `random() * min(maxBackoffMs, base * 2^(attempt-1))`, `scheduler.maxBackoffMs` default 30 s, invalid `Retry-After` falls back to backoff (all tested with injectable `random`).
+- [x] Mutation retry policies prevent ambiguous duplicate transactions — POST/PUT/DELETE require `allowRetry: true`, `isFinancialMutation` never retries; test "never auto-retries mutations (POST 503 = single attempt)".
+- [x] Logging is useful and appropriately redacted — `scheduler.enqueue/dispatch/cancel/rate_limit` events carry lane, method, resource, operation, correlation ID, queue wait, delay; test asserts no credential-shaped keys.
+- [x] Scheduler tests are deterministic — `tests/unit/transport-scheduler.test.ts` uses `vi.useFakeTimers()` only; no real-world delays.
+- [x] Existing transport and service tests pass — full suite 81/81 green (55 pre-existing + 26 new).
 
 **Deliverable:** Central scheduler, rate-limit handling, retry-policy implementation, operational documentation and automated tests.
 

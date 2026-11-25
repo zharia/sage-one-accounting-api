@@ -210,7 +210,7 @@ import {
   RedactingLogger,
   type SageLogger,
 } from "../logging/index.js";
-import { SageTransport } from "../transport/index.js";
+import { SageTransport, type SchedulerSnapshot } from "../transport/index.js";
 
 export interface SageOneClientConfig extends SageOneConfigInput {
   readonly authenticator?: SageAuthenticator | undefined;
@@ -616,5 +616,23 @@ export class SageOneClient implements SageRequestExecutor {
       fetch: this.config.fetch,
       signal: options?.signal,
     });
+  }
+
+  /**
+   * Observable central-scheduler queue state (M008 WP008.2 §5.2.3):
+   * active/pending counts and per-company lane suspension — no credentials,
+   * headers or payloads.
+   */
+  public schedulerSnapshot(): SchedulerSnapshot {
+    return this.transport.schedulerSnapshot();
+  }
+
+  /**
+   * Graceful shutdown (M008 WP008.2 §5.2.3): stop admitting new requests
+   * (they reject with `SAGE_SCHEDULER_SHUTDOWN`), let queued and in-flight
+   * requests finish. In-flight requests remain cancellable via their signals.
+   */
+  public shutdown(): Promise<void> {
+    return this.transport.shutdown();
   }
 }

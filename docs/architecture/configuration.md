@@ -10,7 +10,14 @@ interface SageOneConfig {
   credentials?: { username: string; password: string };
   companyId?: CompanyId;
   timeout?: number; // ms, client default
-  retry?: { enabled: boolean; maxAttempts: number };
+  retry?: { enabled: boolean; maxAttempts: number; baseDelayMs: number };
+  scheduler?: {
+    maxConcurrency: number; // global in-flight cap
+    minIntervalMs: number; // per-company request pacing
+    maxRetryAfterMs: number; // cap on honoured Retry-After
+    maxBackoffMs: number; // cap on one backoff delay
+    jitter: boolean; // full jitter
+  };
   logging?: { enabled: boolean; level: LogLevel };
   validation?: { validateRequests: boolean; validateResponses: boolean };
   transport?: { fetch?: typeof fetch };

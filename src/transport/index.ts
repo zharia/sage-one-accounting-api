@@ -1,5 +1,5 @@
 /**
- * HTTP Transport layer (spec §10, ADR-006).
+ * HTTP Transport layer (spec §10, ADR-006, ADR-017).
  *
  * Owns:
  * - Request URL and header construction
@@ -7,9 +7,14 @@
  * - JSON, multipart FormData, and binary (`ArrayBuffer`) response handling
  * - Timeouts & `AbortSignal` composition
  * - Request correlation IDs
- * - Conservative GET-only retry policy (never retries financial mutations)
+ * - Central scheduling of every request through `RequestScheduler`
+ *   (concurrency, per-company lanes, pacing, suspension — WP008.2)
+ * - Conservative retry policy (never retries financial mutations; honours
+ *   `Retry-After` delta-seconds and HTTP-date; full-jitter exponential
+ *   backoff bounded by `scheduler.maxBackoffMs`)
  * - Deterministic mapping into the `SageError` hierarchy
- * - Structured logging events (`request.start`, `request.end`, `request.retry`, `request.abort`)
+ * - Structured logging events (`request.start`, `request.end`, `request.retry`,
+ *   `request.abort`, `scheduler.rate_limit`)
  */
 
 import { randomUUID } from "node:crypto";
@@ -31,8 +36,24 @@ import {
 } from "../errors/index.js";
 import { NOOP_LOGGER, type SageLogger } from "../logging/index.js";
 import { validateRequestPayload, validateResponsePayload } from "../validation/index.js";
+import {
+  computeBackoffDelayMs,
+  parseRetryAfterMs,
+  RequestScheduler,
+  type SchedulerSnapshot,
+} from "./scheduler.js";
 
-export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+export {
+  computeBackoffDelayMs,
+  parseRetryAfterMs,
+  RequestScheduler,
+  type SchedulerAcquireOptions,
+  type SchedulerLaneSnapshot,
+  type SchedulerPermit,
+  type SchedulerSnapshot,
+} from "./scheduler.js";
+
+export type HttpMethod = "GET" | "HEAD" | "POST" | "PUT" | "DELETE";
 
 export interface TransportRequest<TReq = unknown, TRes = unknown> {
   readonly resource: string;
@@ -66,7 +87,10 @@ function isRetryAllowed<TReq, TRes>(
   if (request.isFinancialMutation === true) {
     return false;
   }
-  if (request.method !== "GET" && request.allowRetry !== true) {
+  // Safe methods retry transient failures; unsafe methods (PUT/DELETE/POST)
+  // require an explicit `allowRetry: true` — the operation-aware policy of
+  // WP008.2 §5.2.5 (POST never retries ambiguous outcomes implicitly).
+  if (request.method !== "GET" && request.method !== "HEAD" && request.allowRetry !== true) {
     return false;
   }
   return true;
@@ -93,18 +117,33 @@ function extractHeadersRecord(headers: Headers): Record<string, string> {
 }
 
 function parseRetryAfterSeconds(headers: Headers): number | undefined {
-  const raw = headers.get("retry-after");
-  if (!raw) {
-    return undefined;
+  const ms = parseRetryAfterMs(headers.get("retry-after"));
+  return ms === null ? undefined : Math.ceil(ms / 1000);
+}
+
+/** Sleep that rejects when `signal` aborts (WP008.2 §5.2.6 — abortable waits). */
+function abortableSleep(ms: number, signal: AbortSignal | undefined): Promise<void> {
+  if (signal?.aborted) {
+    return Promise.reject(new Error("Aborted"));
   }
-  const num = Number.parseInt(raw, 10);
-  return Number.isFinite(num) && num >= 0 ? num : undefined;
+  return new Promise<void>((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal?.removeEventListener("abort", onAbort);
+      resolve();
+    }, ms);
+    function onAbort(): void {
+      clearTimeout(timer);
+      reject(new Error("Aborted"));
+    }
+    signal?.addEventListener("abort", onAbort, { once: true });
+  });
 }
 
 export class SageTransport {
   private readonly config: ResolvedSageOneConfig;
   private readonly authenticator: SageAuthenticator;
   private readonly logger: SageLogger;
+  private readonly scheduler: RequestScheduler;
 
   public constructor(options: {
     readonly config: ResolvedSageOneConfig;
@@ -114,6 +153,21 @@ export class SageTransport {
     this.config = options.config;
     this.authenticator = options.authenticator;
     this.logger = options.logger ?? NOOP_LOGGER;
+    this.scheduler = new RequestScheduler({
+      maxConcurrency: options.config.scheduler.maxConcurrency,
+      minIntervalMs: options.config.scheduler.minIntervalMs,
+      logger: this.logger,
+    });
+  }
+
+  /** Observable scheduler queue state (WP008.2 §5.2.3). */
+  public schedulerSnapshot(): SchedulerSnapshot {
+    return this.scheduler.snapshot();
+  }
+
+  /** Graceful scheduler shutdown: stop admitting, drain queued and in flight (WP008.2 §5.2.3). */
+  public shutdown(): Promise<void> {
+    return this.scheduler.shutdown();
   }
 
   public async execute<TReq = unknown, TRes = unknown>(
@@ -121,6 +175,9 @@ export class SageTransport {
   ): Promise<TRes> {
     const correlationId = randomUUID();
     const requiresAuth = request.requiresAuthentication ?? true;
+    // Company lane for scheduling isolation (WP008.2 §5.2.3): a suspension
+    // for one company must not stop unrelated companies.
+    const lane = String(request.companyId ?? this.config.companyId ?? "default");
 
     let validatedBody: unknown = request.body;
     if (
@@ -172,7 +229,6 @@ export class SageTransport {
     let attempt = 0;
     while (attempt < maxAttempts) {
       attempt += 1;
-      const startTime = Date.now();
 
       this.logger.debug("request.start", {
         correlationId,
@@ -181,6 +237,33 @@ export class SageTransport {
         attempt,
       });
 
+      if (request.signal?.aborted) {
+        throw new SageTimeoutError(
+          `Request ${request.resource}.${request.operation} was aborted by caller`,
+          {
+            isAborted: true,
+            resource: request.resource,
+            operation: request.operation,
+            requestId: correlationId,
+            cause: request.signal.reason,
+          },
+        );
+      }
+
+      // Every request passes through the central scheduler (WP008.2 §5.2.2):
+      // it waits for a concurrency slot, lane pacing and any lane suspension
+      // (e.g. a previous 429 for this company). Queue wait does not consume
+      // the request timeout — the timer starts only once dispatched.
+      const permit = await this.scheduler.acquire({
+        lane,
+        signal: request.signal,
+        correlationId,
+        method: request.method,
+        resource: request.resource,
+        operation: request.operation,
+      });
+
+      const startTime = Date.now();
       const timeoutController = new AbortController();
       const timer = setTimeout(() => {
         timeoutController.abort(new Error(`Request timed out after ${String(timeoutMs)}ms`));
@@ -191,19 +274,6 @@ export class SageTransport {
         : timeoutController.signal;
 
       try {
-        if (request.signal?.aborted) {
-          throw new SageTimeoutError(
-            `Request ${request.resource}.${request.operation} was aborted by caller`,
-            {
-              isAborted: true,
-              resource: request.resource,
-              operation: request.operation,
-              requestId: correlationId,
-              cause: request.signal.reason,
-            },
-          );
-        }
-
         const init: RequestInit = {
           method: request.method,
           headers: authed.headers,
@@ -226,13 +296,57 @@ export class SageTransport {
 
         if (!response.ok) {
           const mappedError = await this.mapHttpError(response, request, correlationId);
-          if (canRetry && attempt < maxAttempts && TRANSIENT_HTTP_STATUSES.has(response.status)) {
+          const transient = TRANSIENT_HTTP_STATUSES.has(response.status);
+
+          if (response.status === 429 && canRetry && attempt < maxAttempts) {
+            // Rate limit: coordinate the whole company lane through the
+            // scheduler (WP008.2 §5.2.4). The next acquire waits out the
+            // suspension — this request never retries before it expires.
+            const retryAfterMs = parseRetryAfterMs(response.headers.get("retry-after"));
+            if (retryAfterMs !== null && retryAfterMs > this.config.scheduler.maxRetryAfterMs) {
+              // Server demands a longer wait than this request's documented
+              // max-wait policy: honour the full delay for the lane, but do
+              // not keep this caller waiting — preserve the original error.
+              this.scheduler.suspend(lane, retryAfterMs);
+              this.logger.warn("scheduler.rate_limit", {
+                correlationId,
+                lane,
+                retryAfterMs,
+                attempt,
+                action: "suspend_lane_preserve_error",
+              });
+              throw mappedError;
+            }
+            const delayMs = Math.min(
+              retryAfterMs ??
+                computeBackoffDelayMs(
+                  attempt,
+                  this.config.retry.baseDelayMs,
+                  this.config.scheduler.maxBackoffMs,
+                  this.config.scheduler.jitter,
+                ),
+              this.config.scheduler.maxRetryAfterMs,
+            );
+            this.scheduler.suspend(lane, delayMs);
+            this.logger.warn("scheduler.rate_limit", {
+              correlationId,
+              lane,
+              delayMs,
+              retryAfterMs,
+              attempt,
+            });
+            permit.release();
+            continue;
+          }
+
+          if (canRetry && attempt < maxAttempts && transient) {
             this.logger.warn("request.retry", {
               correlationId,
               attempt,
               reason: `HTTP ${String(response.status)}`,
             });
-            await this.sleepBackoff(attempt);
+            permit.release();
+            await this.sleepBackoff(attempt, request.signal);
             continue;
           }
           throw mappedError;
@@ -283,7 +397,8 @@ export class SageTransport {
               attempt,
               reason: "timeout",
             });
-            await this.sleepBackoff(attempt);
+            permit.release();
+            await this.sleepBackoff(attempt, request.signal);
             continue;
           }
           throw timeoutErr;
@@ -295,7 +410,8 @@ export class SageTransport {
             attempt,
             reason: "network_error",
           });
-          await this.sleepBackoff(attempt);
+          permit.release();
+          await this.sleepBackoff(attempt, request.signal);
           continue;
         }
 
@@ -310,6 +426,7 @@ export class SageTransport {
           },
         );
       } finally {
+        permit.release();
         clearTimeout(timer);
       }
     }
@@ -324,15 +441,17 @@ export class SageTransport {
     );
   }
 
-  private async sleepBackoff(attempt: number): Promise<void> {
-    const base = this.config.retry.baseDelayMs;
-    if (base <= 0) {
+  private async sleepBackoff(attempt: number, signal: AbortSignal | undefined): Promise<void> {
+    const delay = computeBackoffDelayMs(
+      attempt,
+      this.config.retry.baseDelayMs,
+      this.config.scheduler.maxBackoffMs,
+      this.config.scheduler.jitter,
+    );
+    if (delay <= 0) {
       return;
     }
-    const delay = base * 2 ** (attempt - 1);
-    await new Promise<void>((resolve) => {
-      setTimeout(resolve, delay);
-    });
+    await abortableSleep(delay, signal);
   }
 
   private async parseSuccessResponse<TReq, TRes>(

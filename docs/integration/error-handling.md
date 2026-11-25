@@ -40,4 +40,4 @@ try {
 - **SDK failure vs Sage rejection** are different classes — handle differently.
 - **Never log `credentials`.** Error objects are secret-free by construction; keep them that way in your own handlers.
 - `retryable` is a hint; it never makes a financial mutation safe to retry.
-- Rate limits (`SageRateLimitError`) may carry `retryAfter` — honour it manually if appropriate.
+- Rate limits (`SageRateLimitError`) may carry `retryAfterSeconds` — the SDK's scheduler already honours it before any retry attempt; if you handle the error yourself, honour it manually.
