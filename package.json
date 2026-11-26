@@ -1,6 +1,6 @@
 {
   "name": "@bytemoney/sage-one",
-  "version": "0.1.0",
+  "version": "0.2.0-next.0",
   "description": "Strongly typed TypeScript SDK for the Sage One Accounting API (South Africa, API 2.0.0)",
   "license": "Apache-2.0",
   "type": "module",

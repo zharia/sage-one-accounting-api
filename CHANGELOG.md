@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0-next.0
+
+### Minor Changes
+
+- 3494aed: Central request scheduler hardening (M008 WP008.2R): Sage-guided 1 req/s
+  default pacing, distinct HTTP 429 lockout handling with configurable
+  fallback suspension, abortable backoff with documented error mapping,
+  login-throttle separation, verification-level documentation, and
+  release-pipeline recovery (Changesets CLI v3 + action v2 inputs).
+
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
