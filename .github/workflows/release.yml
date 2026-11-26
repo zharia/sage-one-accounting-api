@@ -28,6 +28,12 @@ jobs:
         run: nix develop --command pnpm verify
 
       - name: Create release PR or publish
+        # Requires (WP008.2R run #17 root cause, logged 2026-11-26):
+        # 1. Repo setting: Settings → Actions → General → Workflow
+        #    permissions → "Allow GitHub Actions to create and approve
+        #    pull requests" (else 403 creating the Version PR).
+        # 2. `NPM_TOKEN` repository secret (publish path only; Version-PR
+        #    path works without it, publish fails with an empty token).
         uses: changesets/action@v2
         with:
           # action v2 renamed these inputs (v1 used `publish`/`version`);
