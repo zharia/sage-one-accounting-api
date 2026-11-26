@@ -30,8 +30,10 @@ jobs:
       - name: Create release PR or publish
         uses: changesets/action@v2
         with:
-          publish: nix develop --command pnpm release
-          version: nix develop --command pnpm version-packages
+          # action v2 renamed these inputs (v1 used `publish`/`version`);
+          # requires @changesets/cli v3 — see WP008.2R completion report.
+          publish-script: nix develop --command pnpm release
+          version-script: nix develop --command pnpm version-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

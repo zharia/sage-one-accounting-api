@@ -3,7 +3,7 @@
 **Project:** Sage One Accounting API — TypeScript SDK  
 **Repository:** `zharia/sage-one-accounting-api`  
 **Milestone:** M008  
-**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25; WP008.3 complete — 2026-11-25)  
+**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25; WP008.3 complete — 2026-11-25; WP008.2R complete — 2026-11-25, release-pipeline verification pending first post-fix workflow run)  
 **Priority:** Critical  
 **Predecessor:** M006 — API Coverage and SDK Implementation  
 **Successor:** M007 — Production Release  

@@ -75,7 +75,10 @@ export interface TransportRequest<TReq = unknown, TRes = unknown> {
   readonly headers?: Readonly<Record<string, string>> | undefined;
 }
 
-const TRANSIENT_HTTP_STATUSES = new Set([429, 502, 503, 504]);
+// Generic transient statuses. HTTP 429 is deliberately NOT in this set:
+// a rate-limit response has its own suspension policy (below) and must never
+// fall through to ordinary exponential-backoff retry (WP008.2R §4.4).
+const TRANSIENT_HTTP_STATUSES = new Set([502, 503, 504]);
 
 function isRetryAllowed<TReq, TRes>(
   request: TransportRequest<TReq, TRes>,
@@ -298,45 +301,57 @@ export class SageTransport {
           const mappedError = await this.mapHttpError(response, request, correlationId);
           const transient = TRANSIENT_HTTP_STATUSES.has(response.status);
 
-          if (response.status === 429 && canRetry && attempt < maxAttempts) {
-            // Rate limit: coordinate the whole company lane through the
-            // scheduler (WP008.2 §5.2.4). The next acquire waits out the
-            // suspension — this request never retries before it expires.
+          if (response.status === 429) {
+            // Rate limit — handled distinctly from generic 5xx (WP008.2R §4.3/§4.4).
+            // Sage documents: 100 req/min per company, ≤1 req/s advised, one-hour
+            // block, "do not continue to make requests"; no Retry-After behaviour
+            // is published (developer-api page, accessed 2026-11-25).
             const retryAfterMs = parseRetryAfterMs(response.headers.get("retry-after"));
-            if (retryAfterMs !== null && retryAfterMs > this.config.scheduler.maxRetryAfterMs) {
-              // Server demands a longer wait than this request's documented
-              // max-wait policy: honour the full delay for the lane, but do
-              // not keep this caller waiting — preserve the original error.
-              this.scheduler.suspend(lane, retryAfterMs);
+            // Login/Validate 429 is the documented failed-login throttle
+            // (20/hour → 24 h username block) — an independent condition that
+            // must not suspend the resource-request lane (WP008.2R §4.5).
+            const isAuthThrottle = request.resource === "Login" && request.operation === "Validate";
+
+            if (isAuthThrottle) {
               this.logger.warn("scheduler.rate_limit", {
                 correlationId,
-                lane,
-                retryAfterMs,
+                scope: "authentication",
                 attempt,
-                action: "suspend_lane_preserve_error",
+                action: "surface_error_no_lane_suspension",
               });
               throw mappedError;
             }
-            const delayMs = Math.min(
-              retryAfterMs ??
-                computeBackoffDelayMs(
-                  attempt,
-                  this.config.retry.baseDelayMs,
-                  this.config.scheduler.maxBackoffMs,
-                  this.config.scheduler.jitter,
-                ),
-              this.config.scheduler.maxRetryAfterMs,
-            );
-            this.scheduler.suspend(lane, delayMs);
+
+            const suspensionMs =
+              retryAfterMs !== null && retryAfterMs <= this.config.scheduler.maxRetryAfterMs
+                ? retryAfterMs
+                : retryAfterMs !== null
+                  ? retryAfterMs // full server delay — never shorten a valid Retry-After
+                  : this.config.scheduler.rateLimitFallbackMs; // missing/invalid: documented block policy
+            this.scheduler.suspend(lane, suspensionMs);
             this.logger.warn("scheduler.rate_limit", {
               correlationId,
               lane,
-              delayMs,
               retryAfterMs,
+              suspensionMs,
               attempt,
             });
-            permit.release();
-            continue;
+
+            // Auto-retry only after a valid, within-budget Retry-After has
+            // fully elapsed (the next acquire waits out the suspension, so no
+            // request can be dispatched during the block). Missing/invalid
+            // Retry-After never retries: surface SageRateLimitError instead
+            // of probing the service (WP008.2R §4.3).
+            if (
+              retryAfterMs !== null &&
+              retryAfterMs <= this.config.scheduler.maxRetryAfterMs &&
+              canRetry &&
+              attempt < maxAttempts
+            ) {
+              permit.release();
+              continue;
+            }
+            throw mappedError;
           }
 
           if (canRetry && attempt < maxAttempts && transient) {
@@ -346,7 +361,8 @@ export class SageTransport {
               reason: `HTTP ${String(response.status)}`,
             });
             permit.release();
-            await this.sleepBackoff(attempt, request.signal);
+            clearTimeout(timer); // backoff must not consume the attempt's timeout timer
+            await this.sleepBackoff(attempt, request, correlationId);
             continue;
           }
           throw mappedError;
@@ -398,7 +414,8 @@ export class SageTransport {
               reason: "timeout",
             });
             permit.release();
-            await this.sleepBackoff(attempt, request.signal);
+            clearTimeout(timer);
+            await this.sleepBackoff(attempt, request, correlationId);
             continue;
           }
           throw timeoutErr;
@@ -411,7 +428,8 @@ export class SageTransport {
             reason: "network_error",
           });
           permit.release();
-          await this.sleepBackoff(attempt, request.signal);
+          clearTimeout(timer);
+          await this.sleepBackoff(attempt, request, correlationId);
           continue;
         }
 
@@ -441,7 +459,18 @@ export class SageTransport {
     );
   }
 
-  private async sleepBackoff(attempt: number, signal: AbortSignal | undefined): Promise<void> {
+  /**
+   * Bounded, jittered, abortable backoff wait (WP008.2R §5.2).
+   *
+   * A caller abort during the delay rejects with the documented
+   * `SageTimeoutError { isAborted: true }` — never a generic `Error` — and
+   * terminates the retry sequence before any further dispatch.
+   */
+  private async sleepBackoff(
+    attempt: number,
+    request: TransportRequest<unknown, unknown>,
+    correlationId: string,
+  ): Promise<void> {
     const delay = computeBackoffDelayMs(
       attempt,
       this.config.retry.baseDelayMs,
@@ -451,7 +480,27 @@ export class SageTransport {
     if (delay <= 0) {
       return;
     }
-    await abortableSleep(delay, signal);
+    try {
+      await abortableSleep(delay, request.signal);
+    } catch (err: unknown) {
+      if (request.signal?.aborted) {
+        this.logger.warn("request.abort", {
+          correlationId,
+          reason: "caller_abort_during_backoff",
+        });
+        throw new SageTimeoutError(
+          `Request ${request.resource}.${request.operation} was aborted during retry backoff`,
+          {
+            isAborted: true,
+            resource: request.resource,
+            operation: request.operation,
+            requestId: correlationId,
+            cause: request.signal.reason,
+          },
+        );
+      }
+      throw err;
+    }
   }
 
   private async parseSuccessResponse<TReq, TRes>(
@@ -559,7 +608,22 @@ export class SageTransport {
           operation: request.operation,
           requestId: correlationId,
         });
-      case 429:
+      case 429: {
+        // Failed-login throttle (20/hour → 24 h username block) surfaces as an
+        // authentication error so consumers can distinguish it from an ordinary
+        // resource rate limit (WP008.2R §4.5).
+        if (request.resource === "Login" && request.operation === "Validate") {
+          return new SageAuthenticationError(
+            `${baseMessage} (login attempt limit reached — Sage blocks the username for 24 hours after 20 failed logins/hour)`,
+            {
+              status: 429,
+              details: parsedBody,
+              resource: request.resource,
+              operation: request.operation,
+              requestId: correlationId,
+            },
+          );
+        }
         return new SageRateLimitError(baseMessage, {
           responseBody: parsedBody,
           responseHeaders: headersRecord,
@@ -568,6 +632,7 @@ export class SageTransport {
           operation: request.operation,
           requestId: correlationId,
         });
+      }
       default:
         return new SageApiError(baseMessage, {
           status: response.status,

@@ -420,6 +420,7 @@ describe("HTTP transport retry policy, timeouts, and error mapping", () => {
       apiKey: "k",
       companyId: 1,
       retry: { enabled: true, maxAttempts: 3, baseDelayMs: 1 },
+      scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
       transport: { fetch: mockFetch },
     });
 
@@ -437,6 +438,7 @@ describe("HTTP transport retry policy, timeouts, and error mapping", () => {
         credentials: { username: "u", password: "p" },
         retry: { enabled: false },
         timeout: 30,
+        scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
         transport: { fetch: handler },
       });
       return new SageTransport({

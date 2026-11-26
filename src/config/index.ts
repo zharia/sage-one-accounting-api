@@ -13,9 +13,25 @@ export const DEFAULT_TIMEOUT_MS = 30_000 as const;
 export const DEFAULT_RETRY_MAX_ATTEMPTS = 3 as const;
 export const DEFAULT_RETRY_BASE_DELAY_MS = 250 as const;
 export const DEFAULT_SCHEDULER_MAX_CONCURRENCY = 4 as const;
-export const DEFAULT_SCHEDULER_MIN_INTERVAL_MS = 0 as const;
+/**
+ * Per-company dispatch pacing default.
+ *
+ * Reflects Sage South Africa's published guidance "advisable to make no more
+ * than one request per second" (https://www.sage.com/en-za/sage-business-cloud/accounting/developer-api/,
+ * accessed 2026-11-25). This is a conservative SDK default, not a hard Sage
+ * protocol guarantee — see ADR-017.
+ */
+export const DEFAULT_SCHEDULER_MIN_INTERVAL_MS = 1_000 as const;
 export const DEFAULT_SCHEDULER_MAX_RETRY_AFTER_MS = 60_000 as const;
 export const DEFAULT_SCHEDULER_MAX_BACKOFF_MS = 30_000 as const;
+/**
+ * Lane suspension applied when a 429 arrives with a missing or invalid
+ * `Retry-After`. Sage publishes no `Retry-After` behaviour but documents a
+ * one-hour block during which "you must not continue to make requests"
+ * (same source, accessed 2026-11-25) — the fallback mirrors that documented
+ * block. Configurable; setting it to 0 disables fallback suspension.
+ */
+export const DEFAULT_SCHEDULER_RATE_LIMIT_FALLBACK_MS = 3_600_000 as const;
 
 export interface SageCredentials {
   readonly username: string;
@@ -38,13 +54,20 @@ export interface SageRetryConfig {
 export interface SageSchedulerConfig {
   /** Maximum in-flight requests across all company lanes. */
   readonly maxConcurrency: number;
-  /** Minimum spacing between dispatched requests within one company lane (0 = disabled). */
+  /**
+   * Minimum spacing between dispatched requests within one company lane
+   * (0 = disabled). Default 1 000 ms — Sage's published ≤1 req/s guidance;
+   * client-side safeguard only, not a Sage guarantee (ADR-017).
+   */
   readonly minIntervalMs: number;
   /**
    * Maximum delay the scheduler will wait for a `Retry-After` value before
-   * giving up and preserving the original rate-limit error.
+   * giving up and preserving the original rate-limit error. Never shortens a
+   * server-provided delay: the lane suspension always uses the full value.
    */
   readonly maxRetryAfterMs: number;
+  /** Lane suspension for a 429 with missing/invalid `Retry-After` (documented 1 h block; 0 disables). */
+  readonly rateLimitFallbackMs: number;
   /** Upper bound for a single exponential-backoff delay (before jitter). */
   readonly maxBackoffMs: number;
   /** Apply full jitter (`delay = random() * cappedExponential`) to backoff. */
@@ -79,6 +102,7 @@ export interface SageOneConfigInput {
         readonly maxConcurrency?: number | undefined;
         readonly minIntervalMs?: number | undefined;
         readonly maxRetryAfterMs?: number | undefined;
+        readonly rateLimitFallbackMs?: number | undefined;
         readonly maxBackoffMs?: number | undefined;
         readonly jitter?: boolean | undefined;
       }
@@ -157,6 +181,12 @@ const ConfigInputSchema = z
           .int()
           .min(0, "scheduler.maxRetryAfterMs must be >= 0")
           .optional(),
+        rateLimitFallbackMs: z
+          .number()
+          .int()
+          .min(0, "scheduler.rateLimitFallbackMs must be >= 0")
+          .max(86_400_000, "scheduler.rateLimitFallbackMs must be <= 24h")
+          .optional(),
         maxBackoffMs: z.number().int().min(0, "scheduler.maxBackoffMs must be >= 0").optional(),
         jitter: z.boolean().optional(),
       })
@@ -230,6 +260,8 @@ export function resolveConfig(input: SageOneConfigInput = {}): ResolvedSageOneCo
       maxConcurrency: data.scheduler?.maxConcurrency ?? DEFAULT_SCHEDULER_MAX_CONCURRENCY,
       minIntervalMs: data.scheduler?.minIntervalMs ?? DEFAULT_SCHEDULER_MIN_INTERVAL_MS,
       maxRetryAfterMs: data.scheduler?.maxRetryAfterMs ?? DEFAULT_SCHEDULER_MAX_RETRY_AFTER_MS,
+      rateLimitFallbackMs:
+        data.scheduler?.rateLimitFallbackMs ?? DEFAULT_SCHEDULER_RATE_LIMIT_FALLBACK_MS,
       maxBackoffMs: data.scheduler?.maxBackoffMs ?? DEFAULT_SCHEDULER_MAX_BACKOFF_MS,
       jitter: data.scheduler?.jitter ?? true,
     },

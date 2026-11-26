@@ -83,6 +83,7 @@ function createHarness(
     apiKey: "{39478ac6-ac2a-44d8-a31c-7e7e14af4de3}",
     companyId: 101,
     retry: { enabled: false },
+    scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
     transport: { fetch: mockFetch },
   });
 

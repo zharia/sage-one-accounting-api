@@ -108,6 +108,7 @@ describe("MSW Integration Flows (spec §17.2)", () => {
       apiKey: "{39478ac6-ac2a-44d8-a31c-7e7e14af4de3}",
       companyId: 12345,
       retry: { enabled: false },
+      scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
     });
 
     const authResult = await client.verifyAuthentication();
@@ -146,6 +147,7 @@ describe("MSW Integration Flows (spec §17.2)", () => {
       apiKey: "{39478ac6-ac2a-44d8-a31c-7e7e14af4de3}",
       companyId: 12345,
       retry: { enabled: false },
+      scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
     });
 
     await expect(client.verifyAuthentication()).rejects.toBeInstanceOf(SageAuthenticationError);

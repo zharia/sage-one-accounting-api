@@ -237,6 +237,7 @@ describe("Full 622-Endpoint Contract Suite (M004 + M005 + M006)", () => {
       apiKey: "{39478ac6-ac2a-44d8-a31c-7e7e14af4de3}",
       companyId: 101,
       retry: { enabled: false },
+      scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
       transport: { fetch: mockFetch },
     });
 
@@ -362,6 +363,7 @@ describe("Full 622-Endpoint Contract Suite (M004 + M005 + M006)", () => {
       apiKey: "k",
       companyId: 1,
       retry: { enabled: true, maxAttempts: 3, baseDelayMs: 1 },
+      scheduler: { minIntervalMs: 0 }, // explicit override — test speed (default is 1000 ms)
       transport: { fetch: mockFetch },
     });
 

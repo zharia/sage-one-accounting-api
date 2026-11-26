@@ -13,8 +13,9 @@ interface SageOneConfig {
   retry?: { enabled: boolean; maxAttempts: number; baseDelayMs: number };
   scheduler?: {
     maxConcurrency: number; // global in-flight cap
-    minIntervalMs: number; // per-company request pacing
+    minIntervalMs: number; // per-company pacing (default 1000 — Sage ≤1 req/s guidance)
     maxRetryAfterMs: number; // cap on honoured Retry-After
+    rateLimitFallbackMs: number; // 429 w/o valid Retry-After → lane suspension (default 1 h documented block; 0 disables)
     maxBackoffMs: number; // cap on one backoff delay
     jitter: boolean; // full jitter
   };
