@@ -44,7 +44,7 @@
                 corepack enable --install-directory "$PWD/.local-bin" >/dev/null 2>&1 || true
               fi
 
-              echo "sage-one-typescript dev shell"
+              echo "sage-one-accounting-api dev shell"
               echo "  node:    $(node --version)"
               echo "  pnpm:    $(command -v pnpm >/dev/null && pnpm --version || echo 'not yet activated')"
               echo "  pin:     $(node -p "require('./package.json').packageManager" 2>/dev/null || echo 'n/a')"

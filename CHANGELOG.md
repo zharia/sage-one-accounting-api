@@ -13,4 +13,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   TypeScript strict toolchain, lint/format/test/build configuration, CI workflows,
   documentation skeleton and milestone plan.
 
-[Unreleased]: https://github.com/zharia/sage-one-typescript/compare/HEAD...HEAD
+[Unreleased]: https://github.com/zharia/sage-one-accounting-api/compare/HEAD...HEAD

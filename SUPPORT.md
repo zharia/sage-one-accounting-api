@@ -4,7 +4,7 @@
 
 | Need | Channel |
 |---|---|
-| Bug reports | [GitHub Issues](https://github.com/zharia/sage-one-typescript/issues) |
+| Bug reports | [GitHub Issues](https://github.com/zharia/sage-one-accounting-api/issues) |
 | Security vulnerabilities | [SECURITY.md](./SECURITY.md) — private disclosure only |
 | Usage questions | GitHub Discussions (when enabled) |
 | Sage API questions | [Sage One API documentation](https://accounting.sageone.co.za/api/2.0.0/help) |

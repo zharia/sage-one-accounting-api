@@ -14,8 +14,8 @@ Target: local development on Arch Linux **without requiring NixOS**, plus identi
 ## Setup
 
 ```bash
-git clone https://github.com/zharia/sage-one-typescript.git
-cd sage-one-typescript
+git clone https://github.com/zharia/sage-one-accounting-api.git
+cd sage-one-accounting-api
 nix develop              # Node 24 LTS, pinned pnpm, git — see flake.nix
 pnpm install             # creates node_modules from pnpm-lock.yaml
 pnpm verify              # baseline: everything green

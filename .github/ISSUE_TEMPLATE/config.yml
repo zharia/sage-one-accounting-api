@@ -4,5 +4,5 @@ contact_links:
     url: https://accounting.sageone.co.za/api/2.0.0/help
     about: Questions about Sage API behaviour belong to Sage's documentation/support.
   - name: Security vulnerability
-    url: https://github.com/zharia/sage-one-typescript/security/advisories/new
+    url: https://github.com/zharia/sage-one-accounting-api/security/advisories/new
     about: Report security issues privately — never in a public issue.

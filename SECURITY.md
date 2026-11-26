@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Report security issues privately via GitHub Security Advisories on the `zharia/sage-one-typescript` repository. Do not open a public issue for security vulnerabilities.
+Report security issues privately via GitHub Security Advisories on the `zharia/sage-one-accounting-api` repository. Do not open a public issue for security vulnerabilities.
 
 Include:
 

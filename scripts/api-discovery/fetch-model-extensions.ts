@@ -31,7 +31,7 @@ const PAGE_URL = (modelName: string): string =>
   `https://accounting.sageone.co.za/api/2.0.0/Help/ResourceModel?modelName=${encodeURIComponent(modelName)}`;
 
 const USER_AGENT =
-  "sage-one-typescript-discovery/0.1 (+https://github.com/zharia/sage-one-accounting-api)";
+  "sage-one-accounting-api-discovery/0.1 (+https://github.com/zharia/sage-one-accounting-api)";
 const CONCURRENCY = 1;
 const DELAY_MS = 1500;
 const MAX_ATTEMPTS = 3;
