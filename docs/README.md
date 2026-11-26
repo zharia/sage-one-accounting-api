@@ -4,6 +4,7 @@ Documentation is a deliverable (spec §19). Structure:
 
 | Section | Contents |
 |---|---|
+| [guide/](./guide/README.md) | **Start here:** what the SDK is, where it came from, who it is for, how it works, why use it |
 | [architecture/](./architecture/overview.md) | Layer model, boundaries, auth, transport, errors, logging, config, domain model, validation, ADRs |
 | [api/](./api/README.md) | Endpoint catalogue, coverage matrix, contract sources, auth/pagination/OData/attachment notes, known limitations |
 | [development/](./development/environment-setup.md) | Environment, Nix, toolchain, build, testing, debugging, releasing, troubleshooting |

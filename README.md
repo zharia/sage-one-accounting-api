@@ -19,7 +19,8 @@
 </p>
 
 <p align="center">
-  <a href="#why-this-sdk">Why this SDK</a> ·
+  <a href="#what-is-it">What is it?</a> ·
+  <a href="./docs/guide/README.md">Guide</a> ·
   <a href="#api-coverage">API coverage</a> ·
   <a href="#quick-example">Example</a> ·
   <a href="#development">Development</a> ·
@@ -170,6 +171,16 @@ CI runs the verification workflow on pushes and pull requests to `main`. It vali
 
 ## Documentation
 
+### Guide — start here
+
+- [What is it?](./docs/guide/what-is-it.md) — the SDK, its provenance and how it was built
+- [Who is it for?](./docs/guide/who-its-for.md) — audiences, fit and non-fit
+- [How it works](./docs/guide/how-it-works.md) — architecture and the life of a request
+- [Why use it?](./docs/guide/why-use-it.md) — the case over hand-rolled HTTP
+
+### Reference
+
+- [Documentation index](./docs/README.md)
 - [Architecture overview](./docs/architecture/overview.md)
 - [API coverage matrix](./docs/api/coverage-matrix.md)
 - [Known API limitations](./docs/api/known-limitations.md)
