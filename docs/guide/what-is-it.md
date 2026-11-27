@@ -78,9 +78,8 @@ Key properties of that process:
 
 - **Implemented:** all 622 discovered operations — typed, Zod-validated and
   contract-tested.
-- **Published:** not yet on npm; the package is in beta while the
-  production-readiness milestone completes. Follow the repository for
-  release announcements.
+- **Published:** npm prerelease — `@bytemoney/sage-one-accounting-api@0.2.0-next.0`;
+  stable `1.0.0` follows the production-readiness milestone.
 - **Live-verified:** 0 operations against a real Sage company — contract
   tests run against archived fixtures, and the live suite is opt-in and
   scheduled for the release milestone. See

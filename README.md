@@ -122,7 +122,7 @@ Credentials and API keys should be supplied through your application's secret-ma
 
 ### Package availability
 
-The project is currently in beta and progressing through its production-readiness milestone. The package is not advertised here as a published npm release. Follow the repository for release announcements and installation guidance as the release process is finalised.
+The project is currently in beta and progressing through its production-readiness milestone. The package is published on npm as a prerelease: `npm install @bytemoney/sage-one-accounting-api`. Pin the exact version in production; stable `1.0.0` arrives with the release milestone.
 
 ## Requirements
 

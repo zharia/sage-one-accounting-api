@@ -3,7 +3,7 @@
 **Project:** Sage One Accounting API — TypeScript SDK  
 **Repository:** `zharia/sage-one-accounting-api`  
 **Milestone:** M008  
-**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25; WP008.3 complete — 2026-11-25; WP008.2R complete — 2026-11-25, release pipeline recovered: run #18 success https://github.com/zharia/sage-one-accounting-api/actions/runs/45763375541, Version PR #7 open)  
+**Status:** In progress (WP008.1 complete — 2026-11-24; WP008.2 complete — 2026-11-25; WP008.3 complete — 2026-11-25; WP008.2R complete — 2026-11-25; **WP008.5 complete — 2026-11-27**: release pipeline recovered + prerelease `@bytemoney/sage-one-accounting-api@0.2.0-next.0` published, run #24 https://github.com/zharia/sage-one-accounting-api/actions/runs/45947095967; WP008.4 and WP008.6 pending)  
 **Priority:** Critical  
 **Predecessor:** M006 — API Coverage and SDK Implementation  
 **Successor:** M007 — Production Release  
@@ -858,15 +858,15 @@ Where practical, install the packed artifact into a minimal external consumer pr
 
 ### 5.5.8 Acceptance criteria
 
-- [ ] Changesets CLI and GitHub Action are compatible.
-- [ ] Workflow inputs are valid.
-- [ ] npm publishing credentials are correctly configured.
-- [ ] Release workflow completes successfully.
-- [ ] Controlled prerelease is demonstrated.
-- [ ] Package metadata references the correct repository.
-- [ ] Packed package contents are verified.
-- [ ] External consumer installation test succeeds.
-- [ ] No accidental stable publication occurs.
+- [x] Changesets CLI and GitHub Action are compatible. — `@changesets/cli@3.0.3` + `changesets/action@v2`; runs #18–#24 green
+- [x] Workflow inputs are valid. — `publish-script`/`version-script` inputs validated by run #18+
+- [x] npm publishing credentials are correctly configured. — `NPM_TOKEN` secret set; `~/.npmrc` auth write + `npm whoami` preflight step (run #23+); no credentials in source/output/package
+- [x] Release workflow completes successfully. — run #24 success https://github.com/zharia/sage-one-accounting-api/actions/runs/45947095967 (and #18/#21/#23)
+- [x] Controlled prerelease is demonstrated. — `@bytemoney/sage-one-accounting-api@0.2.0-next.0` published with dist-tags `latest`+`next` (first publish of a never-released package goes to `latest` per Changesets; version is prerelease semver); GH prerelease created
+- [x] Package metadata references the correct repository. — packument `repository.url` = `git+https://github.com/zharia/sage-one-accounting-api.git`; all `sage-one-typescript` refs corrected (5.5.5)
+- [x] Packed package contents are verified. — published tarball: 137 files, exports `.`+`./package.json`, deps only pino+zod, Apache-2.0, zero dev material
+- [x] External consumer installation test succeeds. — fresh consumer: `npm install @bytemoney/sage-one-accounting-api@0.2.0-next.0` → import + `schedulerSnapshot()` + `shutdown()` all pass
+- [x] No accidental stable publication occurs. — only prerelease versions ever published (`0.2.0-next.0`; owner placeholder `0.0.0-stage`); no stable version exists
 
 **Deliverable:** Corrected release workflow, validated package artifact and prerelease evidence.
 

@@ -1,26 +1,20 @@
 # Integration quick start
 
 > **Beta (M007/M008).** The client, all 162 services and all 622 operations
-> are implemented and contract-tested. The package is not yet published to
-> npm — install from source until the release milestone lands (see
-> [package availability](../../README.md#package-availability)).
-> New to the SDK? Read the [guide](../guide/README.md) first.
+> are implemented and contract-tested. The package is published on npm as a
+> prerelease — see [Install](#install) below. New to the SDK? Read the
+> [guide](../guide/README.md) first.
 
 ## Install
 
-The package is not yet published to npm. Until the release milestone lands,
-install from a local checkout (the SDK ships compiled `dist/`, so it must
-be built first):
-
 ```bash
-git clone https://github.com/zharia/sage-one-accounting-api.git
-cd sage-one-accounting-api
-pnpm install && pnpm build
-
-# in your application:
-pnpm add /path/to/sage-one-accounting-api
 # requires Node.js >= 24; ESM only
+npm install @bytemoney/sage-one-accounting-api
+# or: pnpm add @bytemoney/sage-one-accounting-api
 ```
+
+Current release: **`0.2.0-next.0`** (prerelease). Pin the exact version in
+production; stable `1.0.0` arrives with the release milestone.
 
 ## Setup
 

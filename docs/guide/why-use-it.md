@@ -94,8 +94,8 @@ Being straight about the trade-offs:
 
 - **Beta, pre-1.0** — follow the [roadmap](../../milestones/roadmap.md);
   pin exact versions.
-- **Not yet published to npm** — install from source until the release
-  milestone lands.
+- **Prerelease on npm** — `0.2.0-next.0` today; pin exact versions until
+  1.0 (see the [roadmap](../../milestones/roadmap.md)).
 - **South African Sage One only** — see [who it is for](./who-its-for.md).
 - **Live verification pending** — contract fixtures today, live suite
   scheduled for the release milestone.
