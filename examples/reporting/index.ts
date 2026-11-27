@@ -1,5 +1,5 @@
 /**
- * Financial statements and management reporting example (`@bytemoney/sage-one` — M006).
+ * Financial statements and management reporting example (`@bytemoney/sage-one-accounting-api` — M006).
  */
 
 import { SageOneClient } from "../../src/index.js";

@@ -102,7 +102,7 @@ Being straight about the trade-offs:
 
 ## Summary
 
-| | Hand-rolled client | `@bytemoney/sage-one` |
+| | Hand-rolled client | `@bytemoney/sage-one-accounting-api` |
 |---|---|---|
 | Coverage | Whatever you implemented | All 622 operations |
 | Types | Ad-hoc or none | Full, generated, checked |

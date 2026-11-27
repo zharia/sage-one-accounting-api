@@ -11,7 +11,7 @@ import {
   SageTimeoutError,
   SageValidationError,
   // ...
-} from "@bytemoney/sage-one";
+} from "@bytemoney/sage-one-accounting-api";
 
 try {
   await sage.invoices.create(payload);

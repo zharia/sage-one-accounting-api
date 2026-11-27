@@ -6,7 +6,7 @@
 - ESM only (`"type": "module"`). CommonJS consumers use dynamic import:
 
 ```javascript
-const { SageOneClient } = await import("@bytemoney/sage-one");
+const { SageOneClient } = await import("@bytemoney/sage-one-accounting-api");
 ```
 
 - No bundler, Nix or pnpm required at runtime (spec §18).
@@ -16,7 +16,7 @@ const { SageOneClient } = await import("@bytemoney/sage-one");
 ### Explicit configuration (recommended)
 
 ```typescript
-import { SageOneClient } from "@bytemoney/sage-one";
+import { SageOneClient } from "@bytemoney/sage-one-accounting-api";
 
 const sage = new SageOneClient({
   credentials: { username: env.SAGE_USERNAME, password: env.SAGE_PASSWORD },

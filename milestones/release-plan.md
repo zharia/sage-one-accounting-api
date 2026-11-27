@@ -2,7 +2,7 @@
 
 ## Versioning
 
-- Semver for the npm package `@bytemoney/sage-one` (ADR-015).
+- Semver for the npm package `@bytemoney/sage-one-accounting-api` (ADR-015).
 - Pre-1.0 (`0.x`): minor may break; documented in SUPPORT.md.
 - `1.0.0` gate = M007 acceptance (spec §27 Definition of Done).
 - Public TypeScript interface changes can be breaking even when Sage's API didn't change (spec §23.4).
@@ -25,7 +25,7 @@
 ## First publish checklist
 
 - [ ] `NPM_TOKEN` secret configured
-- [ ] npm org/package access for `@bytemoney/sage-one`
+- [ ] npm org/package access for `@bytemoney/sage-one-accounting-api`
 - [ ] README/LICENSE/NOTICE/CHANGELOG in package `files`
 - [ ] `pnpm verify` includes `attw` (already)
 - [ ] Auth verified (M002) — no unverified claims in published README

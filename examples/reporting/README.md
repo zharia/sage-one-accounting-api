@@ -4,7 +4,7 @@
 
 Planned content for this example directory:
 
-- A minimal, copy-pasteable script using `@bytemoney/sage-one`
+- A minimal, copy-pasteable script using `@bytemoney/sage-one-accounting-api`
 - Application-owned env config (see `.env.example`)
 - Error handling per `docs/integration/error-handling.md`
 - Explicitly no automatic retries of financial mutations

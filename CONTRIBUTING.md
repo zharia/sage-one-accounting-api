@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for contributing to `@bytemoney/sage-one`.
+Thank you for contributing to `@bytemoney/sage-one-accounting-api`.
 
 ## Ground rules
 

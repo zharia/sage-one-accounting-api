@@ -4,7 +4,7 @@ Status: M001 skeleton — decisions provisional until M002 (contract discovery) 
 
 ## Purpose
 
-`@bytemoney/sage-one` is a strongly typed TypeScript SDK for the Sage One Accounting API (South Africa, `2.0.0`). It hides HTTP mechanics from consumers while preserving Sage's semantics exactly.
+`@bytemoney/sage-one-accounting-api` is a strongly typed TypeScript SDK for the Sage One Accounting API (South Africa, `2.0.0`). It hides HTTP mechanics from consumers while preserving Sage's semantics exactly.
 
 ## Layer model
 

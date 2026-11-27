@@ -2,7 +2,7 @@
 ## Project Definition and Technical Implementation Specification
 
 **Project:** Sage One Accounting TypeScript SDK  
-**Proposed package:** `@bytemoney/sage-one`  
+**Proposed package:** `@bytemoney/sage-one-accounting-api`  
 **Repository:** `github.com/zharia/sage-one-typescript` (provisional)  
 **Language:** TypeScript  
 **Runtime:** Node.js  

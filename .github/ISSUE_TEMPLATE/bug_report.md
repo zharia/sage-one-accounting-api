@@ -12,7 +12,7 @@ A clear description of what is wrong, including the SDK method/endpoint involved
 
 **SDK version**
 
-- `@bytemoney/sage-one`:
+- `@bytemoney/sage-one-accounting-api`:
 - Node.js:
 - OS:
 

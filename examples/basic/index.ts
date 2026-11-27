@@ -1,5 +1,5 @@
 /**
- * Basic usage example for `@bytemoney/sage-one` (M003/M004).
+ * Basic usage example for `@bytemoney/sage-one-accounting-api` (M003/M004).
  *
  * Demonstrates client initialization, authentication verification, retrieving
  * the current company, listing accounts with OData filtering, and listing tax types.

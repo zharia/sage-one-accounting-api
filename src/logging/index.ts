@@ -122,7 +122,7 @@ export function createPinoLogger(level: LogLevel = "warn"): SageLogger {
     return NOOP_LOGGER;
   }
   const instance = pino({
-    name: "@bytemoney/sage-one",
+    name: "@bytemoney/sage-one-accounting-api",
     level,
   });
 

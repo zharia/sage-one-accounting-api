@@ -1,5 +1,5 @@
 /**
- * Banking and bank transactions workflow example (`@bytemoney/sage-one` — M006).
+ * Banking and bank transactions workflow example (`@bytemoney/sage-one-accounting-api` — M006).
  */
 
 import { type BankAccount, odata, SageOneClient, toDecimal } from "../../src/index.js";

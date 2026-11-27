@@ -1,5 +1,5 @@
 /**
- * Public entry point for `@bytemoney/sage-one`.
+ * Public entry point for `@bytemoney/sage-one-accounting-api`.
  *
  * Exports the primary `SageOneClient`, all 162 domain services (622 operations),
  * wire schemas and types, authentication interfaces, error hierarchy, OData query

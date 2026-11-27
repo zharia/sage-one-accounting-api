@@ -1,5 +1,5 @@
 /**
- * Error hierarchy for `@bytemoney/sage-one` (spec §15, ADR-009).
+ * Error hierarchy for `@bytemoney/sage-one-accounting-api` (spec §15, ADR-009).
  */
 
 export type SageErrorCode =

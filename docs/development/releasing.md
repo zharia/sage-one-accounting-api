@@ -19,7 +19,7 @@ CI (`.github/workflows/release.yml`) on push to `main`:
 ## Requirements before first publish
 
 - [ ] `NPM_TOKEN` repository secret configured
-- [ ] npm package name `@bytemoney/sage-one` access confirmed (org publishing rights)
+- [ ] npm package name `@bytemoney/sage-one-accounting-api` access confirmed (org publishing rights)
 - [ ] README/CHANGELOG/LICENSE/NOTICE in package `files` (already set)
 - [ ] `pnpm verify` green including `attw`
 

@@ -1,5 +1,5 @@
 /**
- * Invoices, quotes, customer receipts, allocations, and attachments example (`@bytemoney/sage-one` — M005).
+ * Invoices, quotes, customer receipts, allocations, and attachments example (`@bytemoney/sage-one-accounting-api` — M005).
  */
 
 import { odata, SageOneClient, type TaxInvoice, toDecimal } from "../../src/index.js";

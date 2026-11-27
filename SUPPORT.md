@@ -17,7 +17,7 @@
 
 ## Issue template requirements
 
-- SDK version (`pnpm list @bytemoney/sage-one` or lockfile)
+- SDK version (`pnpm list @bytemoney/sage-one-accounting-api` or lockfile)
 - Node.js version and OS
 - Minimal reproduction using **synthetic data only**
 - Expected behaviour, referencing the Sage documentation URL if applicable

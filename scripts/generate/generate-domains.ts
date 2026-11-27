@@ -1165,7 +1165,9 @@ async function generateClientFile(): Promise<void> {
 
   const lines: string[] = [];
   lines.push("/**");
-  lines.push(" * Primary developer-facing client for `@bytemoney/sage-one` (spec §12, ADR-001).");
+  lines.push(
+    " * Primary developer-facing client for `@bytemoney/sage-one-accounting-api` (spec §12, ADR-001).",
+  );
   lines.push(
     " * Exposes all 162 catalogued Sage One Accounting API 2.0.0 services (622 operations).",
   );

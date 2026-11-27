@@ -25,7 +25,7 @@ pnpm add /path/to/sage-one-accounting-api
 ## Setup
 
 ```typescript
-import { SageOneClient } from "@bytemoney/sage-one";
+import { SageOneClient } from "@bytemoney/sage-one-accounting-api";
 
 const sage = new SageOneClient({
   credentials: {

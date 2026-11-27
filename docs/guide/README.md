@@ -20,7 +20,7 @@ architecture, API coverage, configuration, errors and development.
 
 | | |
 |---|---|
-| Package | `@bytemoney/sage-one` |
+| Package | `@bytemoney/sage-one-accounting-api` |
 | Target API | Sage One Accounting API 2.0.0 (South Africa) |
 | Language | TypeScript (strict), native ESM, Node.js ≥ 24 |
 | Surface | 162 services · 622 operations · 100% implemented, typed, validated, contract-tested |

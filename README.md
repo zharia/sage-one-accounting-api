@@ -3,7 +3,7 @@
   <img src="public/images/sage-one-logo-dark.png" alt="Sage One Accounting SDK by Byte Money" width="760" />
 </p>
 
-<h1 align="center">@bytemoney/sage-one</h1>
+<h1 align="center">@bytemoney/sage-one-accounting-api</h1>
 
 <p align="center">
   A strongly typed TypeScript SDK for the Sage One Accounting API in South Africa.
@@ -34,7 +34,7 @@
 
 ## What is it?
 
-**@bytemoney/sage-one** is a TypeScript SDK for the **Sage One Accounting API 2.0.0 (South Africa)**.
+**@bytemoney/sage-one-accounting-api** is a TypeScript SDK for the **Sage One Accounting API 2.0.0 (South Africa)**.
 
 It provides a typed, validated interface to Sage One's accounting and business-management services. Rather than making every integrating application hand-roll HTTP requests, interpret untyped JSON, manage authentication and reconstruct pagination, the SDK centralises those concerns behind a coherent client and domain-oriented API.
 
@@ -99,7 +99,7 @@ The API documentation itself is not uniformly complete: the coverage catalogue r
 The public client is designed around domain services and typed OData queries.
 
 ~~~typescript
-import { type Account, odata, SageOneClient } from "@bytemoney/sage-one";
+import { type Account, odata, SageOneClient } from "@bytemoney/sage-one-accounting-api";
 
 const sage = new SageOneClient({
   credentials: {

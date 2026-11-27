@@ -1,5 +1,5 @@
 /**
- * Customers & receivables workflow example for `@bytemoney/sage-one` (M004).
+ * Customers & receivables workflow example for `@bytemoney/sage-one-accounting-api` (M004).
  *
  * Demonstrates listing customers via async pagination, decimal-safe balance
  * summation, creating a customer category and customer record, and retrieving

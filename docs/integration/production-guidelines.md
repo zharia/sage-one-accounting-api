@@ -35,7 +35,7 @@
 ## Upgrades
 
 ```bash
-pnpm update @bytemoney/sage-one
+pnpm update @bytemoney/sage-one-accounting-api
 pnpm verify   # if you vendor/build; otherwise run your test suite
 ```
 

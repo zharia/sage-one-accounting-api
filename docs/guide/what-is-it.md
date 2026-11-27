@@ -1,6 +1,6 @@
 # What is it?
 
-**`@bytemoney/sage-one`** is a strongly typed TypeScript SDK for the
+**`@bytemoney/sage-one-accounting-api`** is a strongly typed TypeScript SDK for the
 **Sage One Accounting API 2.0.0 (South Africa)** — the REST interface Sage
 exposes for its South African cloud accounting product
 (`accounting.sageone.co.za`).
@@ -10,7 +10,7 @@ parsing untyped JSON, wiring up Basic authentication and re-implementing
 pagination, the SDK puts all of that behind one typed client:
 
 ```typescript
-import { type Account, odata, SageOneClient } from "@bytemoney/sage-one";
+import { type Account, odata, SageOneClient } from "@bytemoney/sage-one-accounting-api";
 
 const sage = new SageOneClient({
   credentials: { username: user, password: pass },

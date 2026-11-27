@@ -103,7 +103,7 @@ await sage.journalEntries.save({
 
 1. **No blind retries.** Every financial mutation (`save`, `saveBatch`, `delete`, `deleteBatch`, `email`) sets `isFinancialMutation: true` and is **never** automatically retried by the SDK transport. After a network timeout (`SageTimeoutError`), query for the record (e.g. via `list({ odata })` filtering by `Reference` or `DocumentNumber`) before re-submitting — a timeout does not prove Sage failed to commit the transaction.
 2. **Idempotency is your responsibility** — Sage One `2.0.0` does not support HTTP `Idempotency-Key` headers. Use unique document references (`Reference`) and reconcile before retrying.
-3. **No silent rounding.** Wire numbers are preserved verbatim (`ADR-012`). Use `toDecimal()` and `fromDecimal()` (`FixedDecimal`) from `@bytemoney/sage-one` for exact fixed-scale monetary math; never use floating-point addition on financial totals.
+3. **No silent rounding.** Wire numbers are preserved verbatim (`ADR-012`). Use `toDecimal()` and `fromDecimal()` (`FixedDecimal`) from `@bytemoney/sage-one-accounting-api` for exact fixed-scale monetary math; never use floating-point addition on financial totals.
 4. **Tax values are Sage's domain.** The SDK never computes or modifies statutory VAT/tax amounts; use `.calculate()` endpoints to let Sage compute tax.
 5. **Errors preserve Sage responses** — surface `SageApiError` details and correlation IDs to operators.
 6. **Least-privilege credentials** — isolate test vs production companies (`companyId`).
